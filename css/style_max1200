@@ -1,0 +1,8 @@
+ 
+ 
+  @media screen and (max-width: 1200px) and (min-width: 701px) {
+    /* Add your styles for medium screens here */
+    body {
+      font-size: 18px;
+    }
+  }
