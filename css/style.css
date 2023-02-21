@@ -1,9 +1,7 @@
-
-
 /* Styles for large screens (monitors) */
 @media screen and (min-width: 1201px) {
 
-/*BODY STYLE*/
+    /*BODY STYLE*/
     body {
         width: 100vw;
         height: 100vh;
@@ -15,17 +13,19 @@
         background: #4824e7;
         background: linear-gradient(45deg, #4824e7, #04f196);
     }
+
     header {
         margin-top: 0%;
         text-align: center;
         background-color: black;
         width: 100%;
     }
-    
+
     h1 {
         text-align: center;
         color: rgb(18, 206, 159);
     }
+
     h2 {
         color: black;
     }
@@ -37,84 +37,58 @@
         width: 100vw;
         background: black;
     }
+
     footer div {
         color: white;
         font-size: 3vh;
         margin-left: 10%;
     }
-/*----------------------------------------------------------------------------------*/
 
-/* FOR ALL PAGES */
-/*
+    /*----------------------------------------------------------------------------------*/
+
     .navbar {
         background-color: black;
         margin-top: 0%;
         text-align: center;
+        width: 100%;
     }
+
     .nav-item {
+        display: inline;
         text-decoration: none;
         text-align: center;
         font-size: 170%;
         overflow: hidden;
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
         font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     }
+
     .nav-item a {
+        width: auto;
+        display: block;
         transition: 0.8s;
         text-decoration: none;
         color: white;
         text-align: center;
     }
+
     .nav-item a:hover {
         background-color: rgb(18, 206, 159);
         color: black;
         text-decoration: none;
     }
+
     .active {
         background-color: rgb(44, 122, 185);
         color: black;
         text-decoration: none;
     }
-    
+
     .icon {
         display: none;
     }
-*/
-/*----------------------------------------------------------------------------------*/
-
-/*TEST*/
-
-.navbar {
-    background-color: black;
-    margin-top: 0%;
-    text-align: center;
-    text-decoration: none;
-    font-size: 170%;
-    overflow: hidden;
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-}
-.navbar a {
-    width: auto;
-    margin-left: 2vh;
-    margin-right: 2vh;
-    transition: 0.8s;
-    text-decoration: none;
-    color: white;
-    text-align: center;
-}
-.navbar a:hover {
-    background-color: rgb(18, 206, 159);
-    color: black;
-    text-decoration: none;
-}
-.navbar a:active {
-    background-color: rgb(44, 122, 185);
-    color: black;
-    text-decoration: none;
-}
-
-.icon {
-    display: none;
-}
 
 
 
@@ -122,67 +96,75 @@
 
 
 
-
-
-
-/* FOR HOME  */
+    /* FOR HOME  */
     .block_1 {
         display: flex;
     }
+
     .introduction {
         margin-left: 2%;
         display: inline;
     }
+
     .news {
         float: right;
         display: inline;
     }
 
-/*----------------------------------------------------------------------------------*/   
+    /*----------------------------------------------------------------------------------*/
 
-/* FOR AKTUALITY */
+    /* FOR AKTUALITY */
     .aktuality {
         margin-left: 10%;
         margin-right: 10%;
     }
+
     .aktuality img {
         max-width: 100%;
         height: auto;
         position: relative;
         text-align: center;
     }
+
     .aktuality .text {
         color: black;
         text-align: justify;
     }
+
     .aktuality span {
         font-size: 2vh;
     }
+
     .text h3 {
         color: black;
         text-decoration: underline;
     }
+
     .center {
         display: block;
         margin-left: auto;
         margin-right: auto;
         width: 50%;
     }
-    .Row{
+
+    .Row {
         display: table;
         width: 100%;
         table-layout: fixed;
         border-spacing: 10px;
     }
-    .Column{
+
+    .Column {
         display: table-cell;
     }
+
     .text span {
         font-size: 3.3vh;
         color: black;
     }
-  
-    /* Slideshow container */ .container2 {
+
+    /* Slideshow container */
+    .container2 {
         max-width: 80%;
         height: 1hv;
         max-height: 5%;
@@ -192,7 +174,8 @@
     }
 
     /* Next & previous buttons */
-    .prev, .next {
+    .prev,
+    .next {
         cursor: pointer;
         position: relative;
         top: 50%;
@@ -210,7 +193,7 @@
         font-family: "Book Antiqua";
         transition: all 0.5s;
     }
-    
+
     /* Position the "next button" to the right */
     .next {
         right: 0;
@@ -221,7 +204,7 @@
 
 
 
-/*----------------------------------------------------------------------------------*/
+    /*----------------------------------------------------------------------------------*/
 
 }
 
@@ -247,5 +230,3 @@
   {
     background-color: rgba(0,0,0,0.8);
   } */
-
-
