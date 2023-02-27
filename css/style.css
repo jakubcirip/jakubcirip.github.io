@@ -1,4 +1,3 @@
-/* Styles for large screens (monitors) */
 @media screen and (min-width: 1201px) {
 
     /*BODY STYLE*/
@@ -8,225 +7,313 @@
         margin: 0;
         padding: 0;
         background-repeat: no-repeat;
-        background-size: cover;
         font-family: Arial, Helvetica, sans-serif;
         background: #4824e7;
         background: linear-gradient(45deg, #4824e7, #04f196);
+        background-repeat: no-repeat;
     }
 
     header {
-        margin-top: 0%;
-        text-align: center;
-        background-color: black;
         width: 100%;
+        height: 10vh;
+        background-color: black;
     }
 
-    h1 {
+    header div h1 {
+        padding-top: 1%;
         text-align: center;
-        color: rgb(18, 206, 159);
+        color: #04f196;
     }
-
-    h2 {
-        color: black;
-    }
-
-    footer {
-        position: relative;
-        bottom: 0;
-        height: auto;
-        width: 100vw;
-        background: black;
-    }
-
-    footer div {
-        color: white;
-        font-size: 3vh;
-        margin-left: 10%;
-    }
-
-    /*----------------------------------------------------------------------------------*/
 
     .navbar {
-        background-color: black;
-        margin-top: 0%;
-        text-align: center;
         width: 100%;
+        height: 12vh;
+        background-color: black;
     }
 
-    .nav-item {
-        display: inline;
-        text-decoration: none;
+    .navbar ul {
         text-align: center;
-        font-size: 170%;
-        overflow: hidden;
         list-style-type: none;
         margin: 0;
-        padding: 0;
+        padding-left: 6%;
+        width: 100%;
+        overflow: hidden;
+        background-color: black;
         font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     }
 
-    .nav-item a {
-        width: auto;
-        display: block;
-        transition: 0.8s;
+    .navbar li {
+        float: left;
+    }
+
+    .navbar ul li a {
+        display: inline;
+
         text-decoration: none;
         color: white;
         text-align: center;
+        font-size: 170%;
+        padding: 0;
     }
 
-    .nav-item a:hover {
+    .navbar ul li a:hover {
         background-color: rgb(18, 206, 159);
         color: black;
         text-decoration: none;
+        transition: 0.6s;
     }
 
-    .active {
+    .navbar ul li a.active {
         background-color: rgb(44, 122, 185);
         color: black;
         text-decoration: none;
     }
 
-    .icon {
-        display: none;
-    }
-
-
-
-
-
-
-
-    /* FOR HOME  */
-    .block_1 {
-        display: flex;
-    }
-
-    .introduction {
-        margin-left: 2%;
-        display: inline;
-    }
-
-    .news {
-        float: right;
-        display: inline;
-    }
-
-    /*----------------------------------------------------------------------------------*/
-
-    /* FOR AKTUALITY */
-    .aktuality {
-        margin-left: 10%;
-        margin-right: 10%;
-    }
-
-    .aktuality img {
-        max-width: 100%;
-        height: auto;
+    footer {
+        width: 100%;
         position: relative;
-        text-align: center;
+        bottom: 0;
+        height: auto;
+        background-color: black;
+        font-size: 170%;
     }
 
-    .aktuality .text {
-        color: black;
-        text-align: justify;
+    footer div span {
+        color: white;
     }
 
-    .aktuality span {
-        font-size: 2vh;
+    footer div span.footer_span1 {
+        margin-left: 6%;
     }
 
-    .text h3 {
-        color: black;
+    footer div span.footer_span2 {
+        margin-left: 6%;
         text-decoration: underline;
     }
 
-    .center {
+    footer div span.footer_span3 {
+        margin-left: 6%;
+        text-decoration: underline;
+        float: right;
+        margin-right: 10%;
+    }
+
+
+
+    /*FOR OBEC*/
+    /*
+    div.obec {
         display: block;
-        margin-left: auto;
-        margin-right: auto;
-        width: 50%;
     }
-
-    .Row {
-        display: table;
-        width: 100%;
-        table-layout: fixed;
-        border-spacing: 10px;
-    }
-
-    .Column {
-        display: table-cell;
-    }
-
-    .text span {
-        font-size: 3.3vh;
+*/
+    div.obec_h2 {
+        padding-left: 4%;
+        padding-top: 4%;
+        font-weight: bold;
         color: black;
     }
 
-    /* Slideshow container */
-    .container2 {
-        max-width: 80%;
-        height: 1hv;
-        max-height: 5%;
-        position: relative;
-        margin: 80px 200px 80px 200px;
-        display: inline-block;
+    .obec_column {
+        float: left;
+        width: 50%;
+        margin-left: 2%;
     }
 
-    /* Next & previous buttons */
-    .prev,
-    .next {
-        cursor: pointer;
-        position: relative;
-        top: 50%;
-        width: auto;
-        padding: 20px;
-        margin-top: -22px;
+    .obec_text {
+        color: black;
+        font-size: 160%;
+        text-align: justify;
+        margin-left: 5%;
+    }
+
+    .obec_text2 {
+        color: black;
+        font-size: 160%;
+        text-align: justify;
+        margin-left: 5%;
+        width: 90%;
+    }
+
+    .obec_image {
+        margin-top: 0;
+        margin-left: 55%;
+    }
+
+    .obec_image img {
+        top: 0;
+        width: 90%;
+        height: auto;
+    }
+
+
+
+    /*FOR KONTAKT*/
+
+    .kontakt h2 {
+        color: black;
+        margin-top: 4%;
+        margin-left: 4%;
+    }
+
+    .kontakt span {
+        display: block;
+        padding-top: 1%;
+        padding-left: 5%;
+        color: black;
+        font-size: 140%;
+    }
+
+    .kontakt_fb {
+        color: black;
+        margin-top: 4%;
+        margin-left: 4%;
+    }
+
+    .kontakt_link {
+        display: block;
+        font-size: 160%;
+    }
+
+    .fb_link {
+        display: inline;
+        margin-right: 10%;
+        margin-left: 10%;
+    }
+
+    .fb_link a {
+        color: black;
+        text-decoration: none;
+        font-size: 130%;
+        transition: 0.2s;
+        text-decoration: underline;
+    }
+
+    .fb_link a:hover {
         color: white;
-        font-weight: bold;
-        font-size: 40px;
-        transition: 0.6s ease;
-        border-radius: 0 8px 8px 0;
-        user-select: none;
-        display: inline-block;
-        border: none;
-        font-family: "Book Antiqua";
-        transition: all 0.5s;
+        background-color: rgb(14, 49, 204);
+        text-decoration: none;
     }
 
-    /* Position the "next button" to the right */
-    .next {
-        right: 0;
-        border-radius: 3px 0 0 3px;
+    .ig_link {
+        display: inline;
+    }
+
+    .ig_link a {
+        color: black;
+        text-decoration: underline;
+        font-size: 130%;
+        transition: 0.2s;
+    }
+
+    .ig_link a:hover {
+        color: darkblue;
+        background: linear-gradient(45deg, #feda75, #fa7e1e, #d62976, #962fbf, #4f5bd5);
+        text-decoration: none;
+    }
+
+
+    .kontakt_formular h2 {
+        color: black;
+        margin-top: 5%;
+    }
+
+
+
+    /*FOR AKTUALITY*/
+    .aktuality h2 {
+        margin-top: 4%;
+        margin-left: 4%;
+        color: black;
+    }
+
+    .clanok1 h3 {
+        margin-top: 0%;
+        margin-left: 5%;
+        color: black;
+    }
+    .clanok2 h3 {
+        margin-top: 0%;
+        margin-left: 5%;
+        color: black;
+    }
+
+    .aktuality_button {
+        display: none;
+    }
+
+    .btn {
+        width: 40%;
+        height: 20%;
+        margin-left: 5%;
+        display: block;
+        margin-bottom: 2%;
+    }
+
+    .btn p {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: block;
+        margin-left: 5%;
+        font-size: 140%;
+    }
+    .btn img{
+        display: none;
+    }
+
+    .clanok1:hover {
+        background: linear-gradient(45deg, #2489e7, #04f196);
+    }
+    .clanok2:hover {
+        background: linear-gradient(45deg, #0473f1, #067fef);
+    }
+
+    .aktuality_button:checked+label {
+        width: 100%;
+        height: 30%;
+        margin-left: 0%;
+        font-size: 120%;
+        white-space: initial;
+        text-align: justify;
+        color: black;
+    }
+
+    .aktuality_button:checked+label p {
+        width: 90%;
+        margin-left: 2%;
+        margin-right: 2%;
+        font-size: 120%;
+        white-space: initial;
+        text-align: justify;
+        color: black;
+    }
+
+    .aktuality_button:checked+label img {
+        display: initial;
+        float: left;
+        margin-left: 30%;
+        width: 40%;
+        height: 10%;
     }
 
 
 
 
 
-    /*----------------------------------------------------------------------------------*/
+    /*
+    .aktuality_text_1 p {
+        margin-top: 3%;
+        margin-left: 3%;
+        border-radius: 3px;
+        border-width: 2px;
+        border-style: solid;
+        border-color: cyan;
+        overflow: hidden;
+        opacity: 1;
+        transform: translate3d(0, 500px, 0);
+        animation: arrive 500ms ease-in-out 0.9s forwards;
+        color: black;
+    }
+*/
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/* On hover, add a black background color with a little bit see-through */
-/* .prev:hover, .next:hover 
-  {
-    background-color: rgba(0,0,0,0.8);
-  } */
