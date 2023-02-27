@@ -225,7 +225,8 @@
         margin-left: 4%;
         color: black;
     }
-    .aktuality_sezona h3{
+
+    .aktuality_sezona h3 {
         text-align: center;
     }
 
@@ -234,6 +235,7 @@
         margin-left: 5%;
         color: black;
     }
+
     .clanok2 h3 {
         margin-top: 0%;
         margin-left: 5%;
@@ -260,15 +262,17 @@
         margin-left: 5%;
         font-size: 140%;
     }
-    .btn img{
+
+    .btn img {
         display: none;
     }
 
     .clanok1:hover {
         background: linear-gradient(45deg, #2489e7, #04f196);
     }
+
     .clanok2:hover {
-        background: linear-gradient(45deg, #0473f1, #067fef);
+        background: linear-gradient(45deg, #0473f1, #0b3fea);
     }
 
     .aktuality_button:checked+label {
@@ -300,6 +304,33 @@
     }
 
 
+    .aktuality_next_prev{
+        margin-left: 45%;
+        width: 10%;
+    }
+    .aktuality_next_prev a {
+        text-decoration: none;
+        display: inline-block;
+        padding: 8px 16px;
+    }
+
+    .aktuality_next_prev a:hover {
+        background-color: black;
+        color: white;
+    }
+
+    .previous{
+        background-color: grey;
+        color: white;
+    }
+    .next{
+        background-color: grey;
+        color: white;
+    }
+
+    .round {
+        border-radius: 50%;
+    }
 
 
 
