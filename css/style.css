@@ -29,21 +29,25 @@
         width: 100%;
         height: 12vh;
         background-color: black;
+        text-align: center;
     }
 
     .navbar ul {
-        text-align: center;
         list-style-type: none;
         margin: 0;
-        padding-left: 6%;
-        width: 100%;
-        overflow: hidden;
+        padding: 0;
+        text-align: center;
+        float: left;
+        position: relative;
+        left: 50%;
         background-color: black;
         font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     }
 
     .navbar li {
         float: left;
+        position: relative;
+        left: -50%;
     }
 
     .navbar ul li a {
@@ -221,8 +225,25 @@
 
     /*FOR AKTUALITY*/
     .aktuality h2 {
-        margin-top: 4%;
-        margin-left: 4%;
+        margin-top: 5%;
+        margin-left: 5%;
+        color: black;
+    }
+
+    .aktuality {
+        display: block;
+    }
+
+    .new {
+        width: 50%;
+        margin-left: 3%;
+    }
+
+    .clanok0:hover {
+        background: linear-gradient(45deg, #93e724, #04f196);
+    }
+
+    .clanok0 h3 {
         color: black;
     }
 
@@ -304,10 +325,11 @@
     }
 
 
-    .aktuality_next_prev{
+    .aktuality_next_prev {
         margin-left: 45%;
         width: 10%;
     }
+
     .aktuality_next_prev a {
         text-decoration: none;
         display: inline-block;
@@ -319,18 +341,17 @@
         color: white;
     }
 
-    .previous{
-        background-color: grey;
-        color: white;
-    }
-    .next{
+    .previous {
         background-color: grey;
         color: white;
     }
 
-    .round {
-        border-radius: 50%;
+    .next {
+        background-color: grey;
+        color: white;
     }
+
+
 
 
 
