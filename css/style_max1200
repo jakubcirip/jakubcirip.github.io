@@ -1,0 +1,13 @@
+ @media only screen and (min-width: 701px) and (max-width: 1200px) {
+
+
+
+
+
+
+
+  .responsive_galery {
+    width: 49.99999%;
+    margin: 6px 0;
+  }
+} 
