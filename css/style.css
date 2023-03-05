@@ -105,14 +105,17 @@
 
 
     /*FOR OBEC*/
-    /*
-    div.obec {
-        display: block;
-    }
-*/
-    div.obec_h2 {
+
+    .obec h2 {
         padding-left: 4%;
         padding-top: 4%;
+        font-weight: bold;
+        color: black;
+    }
+
+    .fenix_h2 h2 {
+        padding-left: 4%;
+        padding-top: 0;
         font-weight: bold;
         color: black;
     }
@@ -157,6 +160,7 @@
         color: black;
         margin-top: 4%;
         margin-left: 4%;
+        font-weight: bold;
     }
 
     .kontakt span {
@@ -293,7 +297,7 @@
     }
 
     .clanok2:hover {
-        background: linear-gradient(45deg, #0473f1, #2489e7);
+        background: linear-gradient(45deg, #04e9f1, #0943af);
     }
 
     .aktuality_button:checked+label {
@@ -350,6 +354,33 @@
         background-color: grey;
         color: white;
     }
+
+
+
+
+
+
+
+
+
+    /*FOR HISTORY*/
+    .historia h2 {
+        margin-left: 3%;
+        margin-top: 4%;
+        font-weight: bold;
+        color: black;
+    }
+
+    .historia p {
+        width: 80%;
+        margin-left: 4%;
+        margin-top: 2%;
+        color: black;
+        font-size: 4vh;
+    }
+
+
+
 
 
 
