@@ -34,31 +34,23 @@
 
     .navbar ul {
         list-style-type: none;
-        margin: 0;
-        padding: 0;
-        text-align: center;
-        float: left;
-        position: relative;
-        left: 50%;
+        display: flex;
+        justify-content: center;
+        position: relative; 
         background-color: black;
         font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     }
 
-    .navbar li {
-        float: left;
-        position: relative;
-        left: -50%;
-    }
-
-    .navbar ul li a {
-        display: inline;
-
+    .navbar ul li a{
+        display: list-item;
+        background: black;
         text-decoration: none;
         color: white;
         text-align: center;
         font-size: 170%;
         padding: 0;
-    }
+      }
+
 
     .navbar ul li a:hover {
         background-color: rgb(18, 206, 159);
@@ -408,7 +400,7 @@
 
 
     /* FOR GALERY*/
-    .gallery {
+    /* .gallery {
         border: 1px solid #ccc;
     }
 
@@ -430,7 +422,7 @@
         box-sizing: border-box;
     }
 
-    .responsive_galery {
+    .responsive_gallery {
         padding: 0 6px;
         float: left;
         width: 24.99999%;
@@ -440,6 +432,77 @@
         content: "";
         display: table;
         clear: both;
+    }
+
+    .hiden_images img {
+        margin-left: 5%;
+        margin-top: 3%;
+        width: 200px;
+    }
+
+    .hiden_images img:hover {
+        width: 230px;
+        cursor: pointer;
+    }
+
+    .images_group {
+        display: none;
+    } */
+
+
+
+    /* #galery ul {
+        float: left;
+        position: relative;
+        left: 50%;
+    } */
+
+    #galery li {
+        display: inline;
+        /* float: left;
+        position: relative;
+        left: -50%; */
+    }
+
+    #div_image2 {
+        display: inline;
+    }
+
+    #div_image2 img {
+        display: none;
+    }
+
+    #close_galery {
+        background-color: black;
+        color: white;
+        display: none;
+    }
+
+    #div_image1 {
+        display: inline;
+    }
+
+    #div_image1 img:hover {
+        border-style: ridge;
+        border-width: 3px;
+        border-color: white;
+        border-radius: 3px;
+    }
+
+    #div_image1 img {
+        margin-right: 3%;
+        width: 20%;
+        height: 250px;
+    }
+
+    #div_image1_description {
+        display: inline;
+        width: 20%;
+        margin-right: 3%;
+    }
+
+    #div_image1_description p {
+        display: inline;
     }
 
 }

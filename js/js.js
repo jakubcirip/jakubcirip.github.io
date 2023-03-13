@@ -59,3 +59,34 @@ function previous() {
     slider.src = images[num];
     document.getElementById("image").innerHTML = num+1 +"/8";
 }
+
+
+
+// function show_galery(){
+//     document.getElementById('image_from_galery').style.cssText = 'width:90%; height: 30%; margin-left:5%; font-size: 120%';
+// }
+
+
+// function setImageVisible(id, visible) {
+//     var img = document.getElementById(id);
+//     img.style.visibility = (visible ? 'visible' : 'hidden');
+// }
+
+
+function show_img(id_image1, id_image2){
+    document.getElementById(id_image2).style.display = 'inline';
+    document.getElementById('close_galery').style.display = 'inline';
+    document.getElementById('close_galery').style.marginLeft = '70%';
+    document.getElementById(id_image1).style.display = 'none';
+  //  document.body.style.backgroundColor = "black";
+    document.body.style.opacity = 1;
+    document.body.style.backgroundColor ="transparent";
+
+  //  document.getElementById('open_window').style.cssText = 'left:50%';
+}
+
+function hide_img(id_image1, id_image2){
+    document.getElementById(id_image2).style.display = 'none';
+    document.getElementById('close_galery').style.display = 'none';
+    document.getElementById(id_image1).style.display = 'inline';
+}
