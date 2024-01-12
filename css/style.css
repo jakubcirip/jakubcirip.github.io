@@ -4,6 +4,14 @@ body {
     padding: 0;
 }
 
+.container {
+    display: flex;
+}
+
+.language-section {
+    width: 50%;
+}
+
 header {
     background-color: #ffffff;
     color: #000000;
