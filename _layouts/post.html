@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{{ page.title }}</title>
+  <link rel="stylesheet" href="/style.css" />
+</head>
+<body>
+  <header>
+    <h1>{{ site.title }}</h1>
+    <p><a href="/">Home</a> | <a href="/blog.html">Blog</a></p>
+  </header>
+
+  <section>
+    <h2>{{ page.title }}</h2>
+    <small>{{ page.date | date: "%B %d, %Y" }}</small>
+    <article>
+      {{ content }}
+    </article>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 Jakub Cirip</p>
+  </footer>
+</body>
+</html>
