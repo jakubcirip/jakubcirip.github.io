@@ -50,6 +50,24 @@
     <p>Stay tuned for more updates!</p>
   </section>
 
+  <section id="blog-preview">
+  <h2>Latest Blog Posts</h2>
+  <div class="blog-posts">
+    {% for post in site.posts limit:2 %}
+      <div class="blog-card">
+        {% if post.image %}
+          <img src="{{ post.image }}" alt="Blog image for {{ post.title }}" class="blog-thumb">
+        {% endif %}
+        <div class="blog-content">
+          <h3><a href="{{ post.url }}">{{ post.title }}</a></h3>
+          <p>{{ post.excerpt | strip_html | truncatewords: 30 }}</p>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+  <a href="/blog.html" class="btn">View all blog posts</a>
+</section>
+
   <section id="projects">
     <h2>Projects</h2>
     <ul>
