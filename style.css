@@ -79,42 +79,45 @@ footer {
   margin-top: 2rem;
 }
 
-.blog-posts {
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
-}
-
-.blog-card {
+.blog-preview {
   display: flex;
   align-items: flex-start;
-  gap: 1rem;
-  padding: 1rem;
-  border: 1px solid #ddd;
-  border-radius: 10px;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 1.5rem;
 }
 
-.blog-thumb {
-  width: 150px;
+.blog-preview img {
+  width: 40%;
+  max-width: 250px;
   height: auto;
-  object-fit: cover;
   border-radius: 8px;
+  object-fit: cover;
 }
 
-.blog-content h3 {
+.blog-text {
+  flex: 1;
+}
+
+.blog-text h3 {
   margin-top: 0;
-  font-size: 1.3rem;
 }
 
-.btn {
-  display: inline-block;
-  margin-top: 1rem;
-  padding: 0.5rem 1rem;
-  background-color: #333;
-  color: #fff;
-  text-decoration: none;
-  border-radius: 5px;
+.blog-text p {
+  margin: 0.5rem 0 1rem;
 }
+
+.blog-text a {
+  color: #007acc;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.blog-text a:hover {
+  text-decoration: underline;
+}
+
 
 
 /* General Styles for mobile responsiveness */
