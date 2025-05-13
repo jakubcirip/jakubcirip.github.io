@@ -79,6 +79,42 @@ footer {
   margin-top: 2rem;
 }
 
+.blog-posts {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.blog-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  padding: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+}
+
+.blog-thumb {
+  width: 150px;
+  height: auto;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.blog-content h3 {
+  margin-top: 0;
+  font-size: 1.3rem;
+}
+
+.btn {
+  display: inline-block;
+  margin-top: 1rem;
+  padding: 0.5rem 1rem;
+  background-color: #333;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 5px;
+}
 
 
 /* General Styles for mobile responsiveness */
