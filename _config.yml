@@ -5,4 +5,4 @@ baseurl: ""
 url: "https://jakubcirip.github.io"
 
 markdown: kramdown
-theme: null
+theme: minima
