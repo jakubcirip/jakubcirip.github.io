@@ -118,6 +118,20 @@ footer {
   text-decoration: underline;
 }
 
+a:link,
+a:visited {
+  color: #007acc; /* alebo akúkoľvek inú farbu */
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+a:active {
+  color: #005f99; /* napr. tmavšia modrá pri kliknutí */
+}
+
 
 
 /* General Styles for mobile responsiveness */
