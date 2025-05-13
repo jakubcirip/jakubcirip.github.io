@@ -1,0 +1,8 @@
+title: Jakub Cirip
+description: Personal site and blog of a Linux admin and kernel developer
+author: Jakub Cirip
+baseurl: "" 
+url: "https://jakubcirip.github.io"
+
+markdown: kramdown
+theme: null
