@@ -1,42 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Linux Kernel Intro</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="../../style.css" />
 </head>
 <body>
   <header>
     <h1>Linux Kernel Intro</h1>
-    <nav><a href="index.html">Home</a> | <a href="blogs.html">All Blogs</a></nav>
   </header>
 
-  <main>
-    <article>
-      <img src="assets/images/linux-kernel-intro.jpg" alt="Linux Kernel Introduction" style="max-width:100%; height:auto;">
-      <p><strong>Published:</strong> May 2025</p>
-
-      <h2>What is the Linux Kernel?</h2>
-      <p>The Linux kernel is the core part of the Linux operating system, responsible for managing system resources and acting as a bridge between hardware and software.</p>
-
-      <h2>Why Learn About the Kernel?</h2>
-      <p>Understanding the kernel allows you to write device drivers, contribute to low-level performance optimizations, and gain a better grasp of how operating systems function.</p>
-
-      <h2>Where to Start</h2>
-      <ul>
-        <li>Explore the official kernel source at <code>https://kernel.org</code></li>
-        <li>Start with simple kernel modules (e.g. printing messages using <code>printk</code>)</li>
-        <li>Use QEMU or VirtualBox for testing safely</li>
-      </ul>
-
-      <h2>Conclusion</h2>
-      <p>Diving into the Linux kernel can be overwhelming, but starting small—like writing a basic module—will help you build confidence and skills over time.</p>
-    </article>
-  </main>
+  <section class="blog-post">
+    <img src="../images/linux-kernel-intro.jpg" alt="Linux Kernel" class="blog-image" />
+    <div class="blog-content">
+      <p>
+        The Linux kernel is the core component of the Linux operating system. It acts as a bridge between hardware and software, managing system resources, memory, processes, and hardware communication.
+      </p>
+      <p>
+        In this introductory article, we'll look at what the kernel does, the difference between user space and kernel space, and how developers can begin exploring kernel development.
+      </p>
+      <p>
+        You'll also get tips on setting up a development environment and writing your first kernel module.
+      </p>
+    </div>
+  </section>
 
   <footer>
-    <p>&copy; 2025 Jakub Cirip</p>
+    <p class="footer-nav">
+  <a href="../../index.html">← Back to Home</a>
+  <a href="../../blogs.html">Blogs Main page →</a>
+</p>
+
   </footer>
 </body>
 </html>
