@@ -161,6 +161,18 @@ section p {
 }
 
 
+/* Footer */
+.footer-nav a {
+  margin-right: 1.5rem;
+  text-decoration: none;
+  font-weight: bold;
+  color: #007acc;
+}
+
+.footer-nav a:last-child {
+  margin-right: 0;
+}
+
 
 
 /* General Styles for mobile responsiveness */
