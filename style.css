@@ -73,3 +73,143 @@ footer {
   font-size: 1rem;
   margin-top: 2rem;
 }
+
+section p {
+  text-align: justify;
+  line-height: 1.6;
+}
+
+
+/* for blog */
+
+.blog-posts {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.blog-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  padding: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+}
+
+.blog-thumb {
+  width: 150px;
+  height: auto;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.blog-content h3 {
+  margin-top: 0;
+  font-size: 1.3rem;
+}
+
+.btn {
+  display: inline-block;
+  margin-top: 1rem;
+  padding: 0.5rem 1rem;
+  background-color: #333;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 5px;
+}
+
+/* more for blogs */
+
+.blog-preview {
+  display: flex;
+  align-items: flex-start;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 1.5rem;
+}
+
+.blog-preview img {
+  width: 40%;
+  max-width: 250px;
+  height: auto;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+.blog-text {
+  flex: 1;
+}
+
+.blog-text h3 {
+  margin-top: 0;
+}
+
+.blog-text p {
+  margin: 0.5rem 0 1rem;
+}
+
+.blog-text a {
+  color: #007acc;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.blog-text a:hover {
+  text-decoration: underline;
+}
+
+
+
+
+/* General Styles for mobile responsiveness */
+@media (max-width: 768px) {
+  body {
+    font-size: 14px;
+  }
+
+  header h1 {
+    font-size: 2rem;
+  }
+
+  header p {
+    font-size: 1rem;
+  }
+
+  section {
+    padding: 1rem;
+  }
+
+  footer {
+    font-size: 0.9rem;
+  }
+
+  ul li {
+    font-size: 0.9rem;
+  }
+
+  ul li a {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  header h1 {
+    font-size: 1.8rem;
+  }
+
+  header p {
+    font-size: 0.9rem;
+  }
+
+  section {
+    padding: 0.8rem;
+  }
+
+  footer {
+    font-size: 0.8rem;
+  }
+}
+
+
