@@ -138,6 +138,10 @@ section p {
   object-fit: cover;
 }
 
+.blog-preview h2 {
+  color: #007acc;
+}
+
 .blog-text {
   flex: 1;
 }
