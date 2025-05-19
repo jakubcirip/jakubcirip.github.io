@@ -141,16 +141,13 @@ section p {
 .blog-preview h2 {
   color: #007acc;
 }
-.blog-text h3{
-  color: #007acc;
-}
-
 
 .blog-text {
   flex: 1;
 }
 
 .blog-text h3 {
+  color: #007acc;
   margin-top: 0;
 }
 
