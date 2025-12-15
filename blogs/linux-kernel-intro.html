@@ -23,7 +23,7 @@
       </p><br>
       <p>
         In this introductory article, we'll look at what the kernel does, the difference between user space and kernel space, and how developers can begin exploring kernel development.
-      </p><br>
+      </p>
       <p>
         You'll also get tips on setting up a development environment and writing your first kernel module.
       </p><br>
@@ -37,13 +37,13 @@
     <div class="blog-content">
       <h3>Basic Operating System (OS) concepts</h3>
       <ul style="list-style-type:disc; padding-left: 1rem; list-style-position: inside;">
-        <li><h4>Kernel</h4><br><p>Part of the OS that runs with elevated privileges.</p></li>
-        <li><h4>User</h4><br><p>Applications run with lower privileges.</p></li>
-        <li><h4>Kernel Mode</h4><br><p>A processor execution mode in which code can fully control the CPU (for example: deny/allow local CPU interrupts).</p></li>
-        <li><h4>User Mode</h4><br><p>An execution mode in which the code has a certain limitation.<br>An attempt at a privileged operation will generate an exception and the kernel will take control.</p></li>
-        <li><h4>Kernel Space</h4><br><p>A memory area reserved for the kernel that is protected from direct access by user applications.<br>Kernel mode code can directly access user space.</p></li>
-        <li><h4>User Space</h4><br><p>A memory area reserved for a specific user process.</p></li>
-        <li><h4>System Calls</h4><br><p>A set of APIs that applications expose. They represent the boundary where the execution mode switches from user mode to kernel mode.<br>They are rarely changed in Linux to maintain application compatibility.</p></li>
+        <li><h4>Kernel</h4><p>Part of the OS that runs with elevated privileges.</p></li>
+        <li><h4>User</h4><p>Applications run with lower privileges.</p></li>
+        <li><h4>Kernel Mode</h4><p>A processor execution mode in which code can fully control the CPU (for example: deny/allow local CPU interrupts).</p></li>
+        <li><h4>User Mode</h4><p>An execution mode in which the code has a certain limitation.<br>An attempt at a privileged operation will generate an exception and the kernel will take control.</p></li>
+        <li><h4>Kernel Space</h4><p>A memory area reserved for the kernel that is protected from direct access by user applications.<br>Kernel mode code can directly access user space.</p></li>
+        <li><h4>User Space</h4><p>A memory area reserved for a specific user process.</p></li>
+        <li><h4>System Calls</h4><p>A set of APIs that applications expose. They represent the boundary where the execution mode switches from user mode to kernel mode.<br>They are rarely changed in Linux to maintain application compatibility.</p></li>
       </ul>
     </div>
   </section>
@@ -52,7 +52,7 @@
     <div class="blog-content">
       <h3>Kernel Architectres</h3>
       <ul style="list-style-type:disc; padding-left: 1rem; list-style-position: inside;">
-        <li><h4>Monolithic Kernel</h4><br><p></p></li>
+        <li><h4>Monolithic Kernel</h4><p></p></li>
       </ul>
     </div>
   </section>
