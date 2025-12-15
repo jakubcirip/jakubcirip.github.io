@@ -50,12 +50,33 @@
 
   <section class="blog-post">
     <div class="blog-content">
-      <h3>Kernel Architectres</h3>
+      <h3>Kernel Architectures</h3>
       <ul style="list-style-type:disc; padding-left: 1rem; list-style-position: inside;">
-        <li><h4 class="li-inline">Monolithic Kernel</h4><p></p></li>
+        <li><h4 class="li-inline">Monolithic Kernel</h4><p>A kernel where there is no access protection between different kernel subsystems and where functions are called directly. Even monolithic kernels can be modular (e.g. support for runtime-loadable kernel modules).</p></li>
+        <li><h4 class="li-inline">Micro-kernel:</h4><p>Large parts of the kernel run as protected services in user space. The remaining code in kernel mode is smaller. It only implements the scheduler, the IPC (Inter Process Communication) mechanism, and basic memory management.</p>
+          <ul style="list-style-type:disc; padding-left: 1rem; list-style-position: inside;">
+            <li><h4 class="li-inline">Advantages of Micro-kernel:</h4><p>Services are isolated, errors in one service will not affect others.</p></li>
+            <li><h4 class="li-inline">Disadvantages of Micro-kernel:</h4><p>Performance penalty because a simple function call in a monolithic kernel requires going through IPC and scheduling in microkernels.</p></li>
+          </ul>
+        </li>
+        <li><h4 class="li-inline">Hybrid Kernels:</h4><p>A term (e.g. used for Windows, Mac OS X) that is often dismissed as marketing, because in them typical monolithic services still run in kernel mode.</p></li>
       </ul>
     </div>
   </section>
+
+  <section class="blog-post">
+    <div class="blog-content">
+      <h3>Memory management and Address space</h3>
+      <ul style="list-style-type:disc; padding-left: 1rem; list-style-position: inside;">
+        <li><h4 class="li-inline">Physical address space:</h4><p></p></li>
+        <li><h4 class="li-inline">Virtual address space:</h4><p></p></li>
+        <li><h4 class="li-inline">Virtual address space sharing:</h4><p></p></li>
+      </ul>
+    </div>
+  </section>
+
+
+
   
 
   <footer>
