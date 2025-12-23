@@ -78,6 +78,7 @@
     }
 
     .blog-gallery__track img {
-        height: 300px;
+        height: auto;
+        object-fit: contain;
     }
 }
