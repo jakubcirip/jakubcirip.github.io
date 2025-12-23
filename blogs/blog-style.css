@@ -1,0 +1,28 @@
+@media (max-width: 768px) {
+    .blog-media {
+        flex-direction: column;
+    }
+}
+
+.blog-media {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+/* text */
+.blog-media__text {
+    flex: 1;
+}
+
+/* img */
+.blog-media__image {
+    flex: 1;
+}
+
+.blog-media__image img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
