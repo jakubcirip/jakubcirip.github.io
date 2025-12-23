@@ -8,6 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function updateGallery() {
         track.style.transform = `translateX(-${index * 100}%)`;
+        caption.textContent = images[index].dataset.caption;
     }
 
     nextBtn.addEventListener('click', () => {
