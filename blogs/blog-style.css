@@ -58,6 +58,14 @@
     right: 5px;
 }
 
+.blog-gallery__caption {
+    margin-top: 10px;
+    font-size: 14px;
+    color: #666;
+    text-align: center;
+    line-height: 1.4;
+}
+
 
 @media (max-width: 768px) {
     .blog-media {
