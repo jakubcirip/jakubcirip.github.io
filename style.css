@@ -9,13 +9,13 @@ body {
   font-family: Arial, sans-serif;
   line-height: 1.6;
   background-color: #f4f4f4;
-  color: #000000;
+  color: #333;
   margin: 0;
   padding: 0;
 }
 
 header {
-  background: #333;
+  background: #000000;
   color: #fff;
   text-align: center;
   padding: 2rem 0;
@@ -68,7 +68,7 @@ ul li a:hover {
 footer {
   text-align: center;
   padding: 1rem;
-  background-color: #333;
+  background-color: #000000;
   color: #fff;
   font-size: 1rem;
   margin-top: 2rem;
