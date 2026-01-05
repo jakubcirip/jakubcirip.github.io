@@ -71,6 +71,10 @@
     max-width: 90%;
 }
 
+h3 {
+    text-decoration: underline;
+}
+
 
 /* for img center */
 .img-wrapper {
