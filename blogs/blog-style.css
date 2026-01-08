@@ -81,16 +81,20 @@ h3 {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    /* limit wrapper height so the image isn't full viewport */
+    max-height: 50vh;
+    padding: 1rem;
+    box-sizing: border-box;
 }
 
 .img-wrapper img {
-    max-width: 100%;
+    max-width: 60%;
+    max-height: 50vh;
     height: auto;
     display: block;
 }
 img {
-    max-height: 100vh;
+    max-height: 80vh;
     width: auto;
 }
 
@@ -104,5 +108,15 @@ img {
     .blog-gallery__track img {
         height: auto;
         object-fit: contain;
+    }
+
+    /* make inner-wall image use most of small screens but still constrained */
+    .img-wrapper {
+        max-height: 40vh;
+    }
+
+    .img-wrapper img {
+        max-width: 95%;
+        max-height: 40vh;
     }
 }
