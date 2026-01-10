@@ -134,10 +134,33 @@
                 </ul><br>
                 <h4>Buffer manufacturing</h4>
                 <p>
-                    Buffer components: J201 transistor, capacitor, 2x resistor, PCB board <br>
-                    
+                    Buffer components: J201 transistor, 2x capacitor, 3x resistor, PCB board <br>
                 </p>
+                <h4>Schematic buffer</h4>
+                <p>In this phase, the first step was design of buffer and scheme drawing. The testing program also
+                    helped me with simulation odf buffer and measurement the values of voltige. For JFET 'follower'
+                    beffer is really important to set up the right operating point of JFET transistor.<br>
+                    The DC operating point is the voltage and current in transistor without input signal.<br>
+                    It defines transistor behaviour during signal processing.<br>
+                    If the operating point is set up incorrectly it can cause, <br> that transistor will be 'close' ->
+                    means doesn't work, <br> or will be overloaded -> which leads to signal distortion, noise or
+                    overheating<br> On the first picture we can see the simple buffer with voltage divider for
+                    transistor Gate (this voltage help us to set the right operating point). The buffer is without input
+                    and output signals and capacitors.</p><br>
+                <div class="img-wrapper">
+                    <img src="images/3-kombo/kombo8-buffer1.png" alt="8">
+                </div>
+                <p>On the second picture I added an input source (AC) (which represents the source from the guitar)
+                    trought a 1uF input capacitor and an output signal from a transistor Source going trought 4,7uF
+                    output capacitor. Using simulation mode we can see the voltage readings on the voltmeters.</p><br>
+                <div class="img-wrapper">
+                    <img src="images/3-kombo/kombo9-buffer2.png" alt="9">
+                </div>
+
             </div>
+
+            <br>
+            <br>
             <div>
                 <div>
                     <h3>More coming soon :)</h3>
