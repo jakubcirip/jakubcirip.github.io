@@ -1,0 +1,60 @@
+/* Floating "scroll to top" button */
+.scroll-top {
+  position: fixed;
+  right: 24px;
+  bottom: 24px;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: #007bff; /* blue */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 6px 14px rgba(0,0,0,0.18);
+  border: none;
+  cursor: pointer;
+  z-index: 9999;
+  color: #000; /* arrow color fallback */
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity .24s ease, transform .24s ease;
+  pointer-events: none; /* disabled when hidden */
+}
+
+/* visible state */
+.scroll-top.visible {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+/* svg in button */
+.scroll-top svg {
+  width: 18px;
+  height: 18px;
+  display: block;
+}
+
+/* focus and accessibility */
+.scroll-top:focus {
+  outline: 2px solid rgba(0,0,0,0.35);
+  outline-offset: 2px;
+}
+
+/* Respect reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  .scroll-top,
+  .scroll-top.visible {
+    transition: none;
+  }
+}
+
+/* Optional smaller on very small screens */
+@media (max-width: 420px) {
+  .scroll-top {
+    right: 14px;
+    bottom: 14px;
+    width: 44px;
+    height: 44px;
+  }
+}

@@ -5,10 +5,12 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Kubo Kombo</title>
-    <link rel="stylesheet" href="../../style.css" />
-    <link rel="stylesheet" href="blog-style.css">
-    <link rel="icon" type="image/png" href="images/3-kombo/kombo-intro.png">
+    <link rel="stylesheet" href="../css/style.css"/>
+    <link rel="stylesheet" href="blog-style.css"/>
+    <link rel="icon" type="image/png" href="images/3-kombo/kombo-intro.png"/>
     <script src="js/kombo-gallery.js" defer></script>
+    <link rel="stylesheet" href="css/float-button.css"/>
+    <script src="/js/scroll-top.js" defer></script>
 </head>
 
 <body>
@@ -160,10 +162,9 @@
                 <div class="img-wrapper">
                     <img src="images/3-kombo/kombo9-buffer2.png" alt="9">
                 </div>
-                <p class="img-comment"
-                        style="text-align:center; font-style:italic; color:#000000; margin-top:0.5rem">
-                        Buffer schematic — with AC input and input/output capacitors
-                    </p>
+                <p class="img-comment" style="text-align:center; font-style:italic; color:#000000; margin-top:0.5rem">
+                    Buffer schematic — with AC input and input/output capacitors
+                </p>
 
                 <h4>Calculation of operating point</h4>
                 <br>
@@ -191,6 +192,14 @@
         </p>
 
     </footer>
+
+    <!-- Scroll-to-top button (add before </body>) -->
+    <button id="scrollTopBtn" class="scroll-top" aria-label="Scroll to top" title="Back to top">
+        <!-- Black arrow inside (SVG) -->
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+            <path fill="black" d="M12 4l-8 8h5v8h6v-8h5z" />
+        </svg>
+    </button>
 
 </body>
 
