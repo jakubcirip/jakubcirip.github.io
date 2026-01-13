@@ -1,4 +1,4 @@
-.blog-media {
+ .blog-media {
     display: flex;
     align-items: center;
     gap: 20px;
@@ -76,23 +76,28 @@ h3 {
 }
 
 
-/* for img center */
+/* for img center - single images */
 .img-wrapper {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    /* limit wrapper height so the image isn't full viewport */
-    max-height: 50vh;
+    /* constrain wrapper to half the content width and center it */
+    width: 50%;
+    max-width: 50%;
+    margin-left: auto;
+    margin-right: auto;
     padding: 1rem;
     box-sizing: border-box;
+    /* ensure the wrapper behaves like a block-level centered container */
+    display: block;
 }
 
 .img-wrapper img {
-    max-width: 60%;
-    max-height: 50vh;
+    /* make the image fill the wrapper */
+    width: 100%;
     height: auto;
     display: block;
+    max-height: 50vh; /* keep reasonable height */
 }
+
+/* keep a general img rule for other images */
 img {
     max-height: 80vh;
     width: auto;
@@ -110,13 +115,16 @@ img {
         object-fit: contain;
     }
 
-    /* make inner-wall image use most of small screens but still constrained */
+    /* make single images use most of small screens but still constrained */
     .img-wrapper {
-        max-height: 40vh;
+        width: 95%;
+        max-width: 95%;
+        padding: 0.5rem;
     }
 
     .img-wrapper img {
-        max-width: 95%;
+        width: 100%;
+        max-width: 100%;
         max-height: 40vh;
     }
 }
