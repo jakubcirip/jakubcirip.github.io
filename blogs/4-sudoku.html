@@ -5,9 +5,9 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Understanding Linux Kernel</title>
-  <link rel="stylesheet" href="../css/style.css"/>
-  <link rel="stylesheet" href="blog-style.css"/>
-  <link rel="stylesheet" href="css/float-button.css"/>
+  <link rel="stylesheet" href="../css/style.css" />
+  <link rel="stylesheet" href="blog-style.css" />
+  <link rel="stylesheet" href="css/float-button.css" />
   <script src="/js/scroll-top.js" defer></script>
   <!-- <link rel="icon" type="image/png" href="images/4-sudoku/sudoku-intro.png"> --->
 </head>
@@ -23,9 +23,73 @@
 
   <section class="blog-post">
     <div class="blog-content">
-      <h3>In preparation ;)</h3>
-      <p></p>
-    </div>
+      <div>
+
+
+        <div>
+          <h3>Background story</h3>
+          <p>A few years ago... one beautiful sunny day... I woke up from bed and then it hit me...
+            The idea to program a Sudoku game. It was like a bolt from the blue.
+            I didn't hesitate for a second and immediately started writing code:) <br>
+            I designed the struct 'sudoku' and some other functions to provide the full game function. All it was in one
+            main.c file.
+            It was very nice project however, made by an inexperienced young programmer. That's why it "worked" well.
+            The
+            game was full of bugs and became unplayable after a few moves.
+            That was the end of the day and I never tried to fix it again after that... until now.</p>
+          <br>
+        </div>
+
+        <div>
+          <h3>From the past to the present</h3>
+          <p>At this time I decided to completely rebuild this project and make it professional. <br> When reworking, I
+            was based on the original code.
+          </p> <br>
+        </div>
+
+        <div>
+          <h3>Modules</h3>
+          <p>I divided the entire project into files according to
+            the method of use:
+          <ul style="list-style-type:disc; padding-left: 1rem; list-style-position: inside;">
+            <li><b>board.h & board.c</b>
+              <p>Including typedef struct Sudoku, define the SIZE dimension for sudoku and contain functions for board
+                operations: init, clear, copy initial, is cell free, is board full, get and set value</p>
+            </li>
+            <li><b>validation.h & validation.c</b>
+              <p>Module for validation of sudoku row's, sudoku column's, sudoku block's (3x3), full board validation and
+                player move validation.</p>
+            </li>
+            <li><b>render.h & render.c</b>
+              <p>The basic function is to draw the playing field in a loop using the printf() and board_get() functions
+                in render_board().
+                The second function is render_message() - basically the same like printf. Perhaps other features will
+                be:render_cell(), render_prompt(), render_error()
+              </p>
+            </li>
+            <li><b>game.h & game.c</b>
+              <ul style="margin-left: 2rem; padding: 0;">
+                <li style="margin: 0; padding: 0;"><b>game_init()</b> - </li>
+                <li style="margin: 0; padding: 0;"><b>game_loop()</b> - </li>
+                <li style="margin: 0; padding: 0;"><b>game_input()</b> - </li>
+                <li style="margin: 0; padding: 0;"><b>game_is_initial()</b> - </li>
+                <li style="margin: 0; padding: 0;"><b>game_apply_move()</b> - </li>
+                <li style="margin: 0; padding: 0;"><b>game_is_finished()</b> - </li>
+              </ul>
+            </li>
+            <li><b>main.c</b></li>
+            <li><b>Makefile</b></li>
+          </ul>
+          </p>
+        </div>
+
+        <div>
+          <h4>...</h4>
+          <p>
+          </p>
+        </div>
+
+      </div>
   </section>
 
 
