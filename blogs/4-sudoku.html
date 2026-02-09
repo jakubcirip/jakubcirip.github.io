@@ -54,7 +54,7 @@
           <ul style="list-style-type:disc; padding-left: 1rem; list-style-position: inside;">
             <li><b>board.h & board.c</b>
               <p>Including typedef struct Sudoku, define the SIZE dimension for sudoku and contain functions for board
-                operations: init, clear, copy initial, is cell free, is board full, get and set value</p>
+                operations: board_init(), board_clear(), board_copy_initial(), board_is_cell_free, board_is_full(), board_get() and board_set() value.</p>
             </li>
             <li><b>validation.h & validation.c</b>
               <p>Module for validation of sudoku row's, sudoku column's, sudoku block's (3x3), full board validation and
@@ -64,21 +64,21 @@
               <p>The basic function is to draw the playing field in a loop using the printf() and board_get() functions
                 in render_board().
                 The second function is render_message() - basically the same like printf. Perhaps other features will
-                be:render_cell(), render_prompt(), render_error()
+                be: render_cell(), render_prompt(), render_error().
               </p>
             </li>
             <li><b>game.h & game.c</b>
               <ul style="margin-left: 2rem; padding: 0;">
-                <li style="margin: 0; padding: 0;"><b>game_init()</b> - </li>
-                <li style="margin: 0; padding: 0;"><b>game_loop()</b> - </li>
-                <li style="margin: 0; padding: 0;"><b>game_input()</b> - </li>
-                <li style="margin: 0; padding: 0;"><b>game_is_initial()</b> - </li>
-                <li style="margin: 0; padding: 0;"><b>game_apply_move()</b> - </li>
-                <li style="margin: 0; padding: 0;"><b>game_is_finished()</b> - </li>
+                <li style="margin: 0; padding: 0;"><b>game_init()</b> - Initialization of Sudoku board</li>
+                <li style="margin: 0; padding: 0;"><b>game_loop()</b> - Main game loop</li>
+                <li style="margin: 0; padding: 0;"><b>game_input()</b> - Get input from player</li>
+                <li style="margin: 0; padding: 0;"><b>game_is_initial()</b> - Check if the value in cell is initial or not</li>
+                <li style="margin: 0; padding: 0;"><b>game_apply_move()</b> - board_set()</li>
+                <li style="margin: 0; padding: 0;"><b>game_is_finished()</b> - Checking board_is_full() and validate_board()</li>
               </ul>
             </li>
-            <li><b>main.c</b></li>
-            <li><b>Makefile</b></li>
+            <li><b>main.c</b> - where it all comes together into one whole.</li>
+            <li><b>Makefile</b> - ./sudoku_game</li>
           </ul>
           </p>
         </div>
