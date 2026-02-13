@@ -9,11 +9,14 @@ This is a personal website hosted via GitHub Pages.
 - **Projects** – Highlighted GitHub repositories.
 - **Skills** - Overview of my IT skills
 - **Coding challanges**
+- **Hobbies**
 - **Contact** – GitHub, LinkedIn, and Email.
 
 ## Blog Posts
 
 - `Linux Kernel Intro`
 - `Understanding the Linux Kernel`
+- `Kubo Kombo`
+- `Sudoku game recovery`
 
 The blog HTML files are located in `blogs/` and referenced from `index.html` and `blogs.html`.
