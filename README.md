@@ -14,9 +14,10 @@ This is a personal website hosted via GitHub Pages.
 
 ## Blog Posts
 
-- `Linux Kernel Intro`
-- `Understanding the Linux Kernel`
-- `Kubo Kombo`
+- `Medjugorie ITM 2026 Edition`
 - `Sudoku game recovery`
+- `Kubo Kombo`
+- `Understanding the Linux Kernel`
+- `Linux Kernel Intro`
 
 The blog HTML files are located in `blogs/` and referenced from `index.html` and `blogs.html`.
