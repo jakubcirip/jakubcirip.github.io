@@ -20,64 +20,197 @@
   </header>
 
   <section class="blog-post">
-    <div class="blog-content">
-      <h3>Content</h3><br>
-      <p>
-        The Linux kernel is the core component of the Linux operating system. It acts as a bridge between hardware and software, managing system resources, memory, processes, and hardware communication.
-      </p><br>
-      <p>
-        In this introductory article, we'll look at what the kernel does, the difference between user space and kernel space, and how developers can begin exploring kernel development.
-      </p>
-      <p>
-        You'll also get tips on setting up a development environment and writing your first kernel module.
-      </p><br>
-    </div>
-    <div class="blog-preview">
-      <img src="images/2-kernel-intro/kernel-intro.jpg" alt="Kernel Intro">
-    </div>
-  </section>
+  <div class="blog-content">
+    <h3>Content</h3><br>
+    <p>
+      The Linux kernel is the core component of the Linux operating system. It acts as the bridge between hardware and
+      software, managing system resources such as CPU time, memory, storage devices, networking, and hardware
+      communication. Every application running on a Linux system ultimately relies on the kernel to perform operations
+      that require direct interaction with the hardware.
+    </p><br>
+    <p>
+      Unlike regular applications, the kernel operates with the highest level of privileges on the processor. This
+      allows it to safely coordinate multiple processes, enforce security boundaries, and ensure that applications
+      cannot interfere with one another or damage the operating system.
+    </p><br>
+    <p>
+      In this introductory article, we'll explore the role of the Linux kernel, explain the difference between
+      user space and kernel space, and introduce some of the most important operating system concepts that every Linux
+      developer should understand.
+    </p>
+    <p>
+      We'll also look at different kernel architectures, how memory is organized, and provide guidance for anyone
+      interested in starting their journey into Linux kernel development.
+    </p><br>
+  </div>
+  <div class="blog-preview">
+    <img src="images/2-kernel-intro/kernel-intro.jpg" alt="Kernel Intro">
+  </div>
+</section>
 
-  <section class="blog-post">
-    <div class="blog-content">
-      <h3>Basic Operating System (OS) concepts</h3><br>
-      <ul style="list-style-type:disc; padding-left: 1rem; list-style-position: inside;">
-        <li><h4 class="li-inline">Kernel</h4><p>Part of the OS that runs with elevated privileges.</p></li>
-        <li><h4 class="li-inline">User</h4><p>Applications run with lower privileges.</p></li>
-        <li><h4 class="li-inline">Kernel Mode</h4><p>A processor execution mode in which code can fully control the CPU (for example: deny/allow local CPU interrupts).</p></li>
-        <li><h4 class="li-inline">User Mode</h4><p>An execution mode in which the code has a certain limitation.<br>An attempt at a privileged operation will generate an exception and the kernel will take control.</p></li>
-        <li><h4 class="li-inline">Kernel Space</h4><p>A memory area reserved for the kernel that is protected from direct access by user applications.<br>Kernel mode code can directly access user space.</p></li>
-        <li><h4 class="li-inline">User Space</h4><p>A memory area reserved for a specific user process.</p></li>
-        <li><h4 class="li-inline">System Calls</h4><p>A set of APIs that applications expose. They represent the boundary where the execution mode switches from user mode to kernel mode.<br>They are rarely changed in Linux to maintain application compatibility.</p></li>
-      </ul>
-    </div>
-  </section>
+<section class="blog-post">
+  <div class="blog-content">
+    <h3>Basic Operating System (OS) Concepts</h3><br>
+    <p>
+      Before diving into kernel programming, it's important to understand several core concepts used throughout modern
+      operating systems. These terms appear frequently in Linux documentation and source code.
+    </p><br>
+    <ul style="list-style-type:disc; padding-left:1rem; list-style-position:inside;">
+      <li>
+        <h4 class="li-inline">Kernel</h4>
+        <p>
+          The kernel is the privileged part of the operating system responsible for managing hardware resources,
+          scheduling processes, handling interrupts, managing memory, and providing services to user applications
+          through system calls.
+        </p>
+      </li>
+      <li>
+        <h4 class="li-inline">User</h4>
+        <p>
+          User applications run with limited privileges. They cannot directly access hardware or protected memory,
+          making the system more secure and stable.
+        </p>
+      </li>
+      <li>
+        <h4 class="li-inline">Kernel Mode</h4>
+        <p>
+          Kernel mode is a privileged CPU execution mode that gives code unrestricted access to hardware resources.
+          Operations such as configuring devices, managing page tables, or disabling interrupts can only be performed
+          while running in kernel mode.
+        </p>
+      </li>
+      <li>
+        <h4 class="li-inline">User Mode</h4>
+        <p>
+          Most software executes in user mode, where access to hardware and critical system resources is restricted.
+          Whenever an application attempts to perform a privileged operation, control is transferred to the kernel
+          through a system call or an exception.
+        </p>
+      </li>
+      <li>
+        <h4 class="li-inline">Kernel Space</h4>
+        <p>
+          Kernel space is the protected region of virtual memory where the kernel and device drivers execute.
+          Applications cannot directly read or modify this memory, preventing accidental or malicious corruption of the
+          operating system.
+        </p>
+      </li>
+      <li>
+        <h4 class="li-inline">User Space</h4>
+        <p>
+          User space contains the memory allocated to individual processes. Every process has its own isolated virtual
+          address space, allowing multiple applications to run simultaneously without affecting one another.
+        </p>
+      </li>
+      <li>
+        <h4 class="li-inline">System Calls</h4>
+        <p>
+          System calls provide the interface between user applications and the kernel. Functions such as
+          <code>open()</code>, <code>read()</code>, <code>write()</code>, and <code>fork()</code> allow programs to
+          request services from the operating system while maintaining system security. Linux maintains a stable system
+          call interface to preserve compatibility across kernel versions.
+        </p>
+      </li>
+    </ul>
+  </div>
+</section>
 
-  <section class="blog-post">
-    <div class="blog-content">
-      <h3>Kernel Architectures</h3><br>
-      <ul style="list-style-type:disc; padding-left: 1rem; list-style-position: inside;">
-        <li><h4 class="li-inline">Monolithic Kernel</h4><p>A kernel where there is no access protection between different kernel subsystems and where functions are called directly. Even monolithic kernels can be modular (e.g. support for runtime-loadable kernel modules).</p></li>
-        <li><h4 class="li-inline">Micro-kernel</h4><p>Large parts of the kernel run as protected services in user space. The remaining code in kernel mode is smaller. It only implements the scheduler, the IPC (Inter Process Communication) mechanism, and basic memory management.</p>
-          <ul style="list-style-type:disc; padding-left: 1rem; list-style-position: inside;">
-            <li><h4 class="li-inline">Advantages of Micro-kernel</h4><p>Services are isolated, errors in one service will not affect others.</p></li>
-            <li><h4 class="li-inline">Disadvantages of Micro-kernel</h4><p>Performance penalty because a simple function call in a monolithic kernel requires going through IPC and scheduling in microkernels.</p></li>
-          </ul>
-        </li>
-        <li><h4 class="li-inline">Hybrid Kernels</h4><p>A term (e.g. used for Windows, Mac OS X) that is often dismissed as marketing, because in them typical monolithic services still run in kernel mode.</p></li>
-      </ul>
-    </div>
-  </section>
+<section class="blog-post">
+  <div class="blog-content">
+    <h3>Kernel Architectures</h3><br>
+    <p>
+      Not every operating system organizes its kernel in the same way. Different kernel architectures prioritize
+      performance, security, maintainability, or fault isolation depending on their design goals.
+    </p><br>
+    <ul style="list-style-type:disc; padding-left:1rem; list-style-position:inside;">
+      <li>
+        <h4 class="li-inline">Monolithic Kernel</h4>
+        <p>
+          Linux uses a monolithic kernel architecture. Most operating system services—including memory management,
+          process scheduling, networking, and device drivers—run together in kernel space and communicate through
+          direct function calls.
+        </p>
+        <p>
+          Although Linux is considered monolithic, it supports dynamically loadable kernel modules, allowing many
+          drivers and subsystems to be loaded or unloaded at runtime without recompiling the kernel.
+        </p>
+      </li>
+      <li>
+        <h4 class="li-inline">Microkernel</h4>
+        <p>
+          A microkernel keeps only the most fundamental functionality inside kernel mode, typically the scheduler,
+          basic memory management, and inter-process communication (IPC). Services such as file systems, networking,
+          and drivers execute as separate user-space processes.
+        </p>
+        <ul style="list-style-type:disc; padding-left:1rem; list-style-position:inside;">
+          <li>
+            <h4 class="li-inline">Advantages</h4>
+            <p>
+              Because services are isolated, a crash in one component usually does not bring down the entire operating
+              system. This architecture also improves security and maintainability.
+            </p>
+          </li>
+          <li>
+            <h4 class="li-inline">Disadvantages</h4>
+            <p>
+              Communication between services requires IPC instead of direct function calls. This introduces additional
+              context switches and generally results in lower performance compared to monolithic kernels.
+            </p>
+          </li>
+        </ul>
+      </li>
+      <li>
+        <h4 class="li-inline">Hybrid Kernels</h4>
+        <p>
+          Hybrid kernels attempt to combine aspects of both architectures. Operating systems such as Windows NT and
+          Apple's XNU kernel are commonly described as hybrid because they incorporate microkernel concepts while still
+          executing many traditional operating system services in kernel mode for performance reasons.
+        </p>
+      </li>
+    </ul>
+  </div>
+</section>
 
-  <section class="blog-post">
-    <div class="blog-content">
-      <h3>Memory management and Address space</h3><br>
-      <ul style="list-style-type:disc; padding-left: 1rem; list-style-position: inside;">
-        <li><h4 class="li-inline">Physical address space</h4><p></p></li>
-        <li><h4 class="li-inline">Virtual address space</h4><p></p></li>
-        <li><h4 class="li-inline">Virtual address space sharing</h4><p></p></li>
-      </ul>
-    </div>
-  </section>
+<section class="blog-post">
+  <div class="blog-content">
+    <h3>Memory Management and Address Space</h3><br>
+    <p>
+      One of the kernel's primary responsibilities is memory management. Modern operating systems use virtual memory
+      to provide each process with its own isolated address space while efficiently utilizing the available physical
+      RAM.
+    </p><br>
+    <ul style="list-style-type:disc; padding-left:1rem; list-style-position:inside;">
+      <li>
+        <h4 class="li-inline">Physical Address Space</h4>
+        <p>
+          Physical memory refers to the actual RAM installed in the computer. Every memory location has a unique
+          physical address that the processor can access. The kernel manages which portions of physical memory are
+          allocated to different processes and kernel subsystems.
+        </p>
+      </li>
+      <li>
+        <h4 class="li-inline">Virtual Address Space</h4>
+        <p>
+          Applications do not normally work with physical addresses. Instead, each process receives its own virtual
+          address space, giving the illusion that it owns a continuous block of memory. The Memory Management Unit
+          (MMU) translates virtual addresses into physical addresses using page tables maintained by the kernel.
+        </p>
+      </li>
+      <li>
+        <h4 class="li-inline">Virtual Address Space Sharing</h4>
+        <p>
+          Although processes have separate address spaces, the kernel can intentionally share selected memory regions.
+          Shared libraries, shared memory segments, and memory-mapped files allow multiple processes to access the same
+          physical memory while still maintaining isolation for the rest of their address space.
+        </p>
+        <p>
+          This mechanism improves performance by reducing memory usage and enabling efficient communication between
+          processes.
+        </p>
+      </li>
+    </ul>
+  </div>
+</section>
   
   <footer>
     <nav class="footer-nav">
