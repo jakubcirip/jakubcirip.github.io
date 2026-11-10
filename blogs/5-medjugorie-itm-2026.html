@@ -1,194 +1,281 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="sk" class="scroll-smooth">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Medjugorie ITM 2026 Edition</title>
-  <link rel="stylesheet" href="../css/style.css" />
-  <link rel="stylesheet" href="blog-style.css" />
-  <link rel="stylesheet" href="../css/float-button.css" />
-  <script src="js/scroll-top.js" defer></script>
-  <link rel="icon" type="image/jpeg" href="../icon1.jpg">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/jpeg" href="../icon2.jpg">
+    <title>Medjugorje ITM 2026 Edition - Jakub Čirip</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: { 
+                extend: { 
+                    colors: { 
+                        darkBg: '#0b0f19', 
+                        cardBgDark: '#111827', 
+                        cardBgLight: '#ffffff' 
+                    } 
+                } 
+            }
+        }
+    </script>
+    <!-- Okamžité aplikovanie triedy dark na html, aby sa zabránilo prebliknutiu -->
+    <script>
+        const savedTheme = localStorage.getItem('theme');
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+        }
+    </script>
+    <style>
+        body { 
+            font-family: ui-sans-serif, system-ui, sans-serif; 
+        }
+    </style>
 </head>
+<body class="min-h-screen flex flex-col justify-between bg-[#f8fafc] text-[#0f172a] dark:bg-[#0b0f19] dark:text-[#f3f4f6] selection:bg-purple-600 selection:text-white transition-colors duration-300">
 
-<body>
-  <header>
-    <h1>Medjugorie ITM 2026 Edition</h1>
-    <nav class="footer-nav">
-      <a href="../../index.html">← Back to Main Page</a>
-      <a href="../../blogs.html">Blogs Home →</a>
-    </nav>
-  </header>
+    <!-- HEADER / NAVIGATION -->
+    <header class="sticky top-0 z-50 bg-white/80 dark:bg-[#0b0f19]/80 backdrop-blur-md border-b border-gray-200 dark:border-gray-800 transition-colors">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <div class="font-bold text-lg tracking-wide">
+                <a href="../index.html" class="hover:text-purple-600 dark:hover:text-purple-400 transition">Jakub Čirip</a>
+            </div>
+            <nav class="hidden md:flex items-center space-x-2 text-sm">
+                <a href="../index.html#about" class="px-3 py-1.5 rounded-lg transition text-gray-600 dark:text-gray-300 hover:text-purple-600 dark:hover:text-white">ABOUT</a>
+                <a href="../blogs.html" class="px-3 py-1.5 rounded-lg transition bg-purple-100 dark:bg-purple-900/50 text-purple-800 dark:text-white border border-purple-300 dark:border-purple-700/50">BLOG</a>
+                <a href="../projects.html" class="px-3 py-1.5 rounded-lg transition text-gray-600 dark:text-gray-300 hover:text-purple-600 dark:hover:text-white">PROJECTS</a>
+                <a href="../index.html#skills" class="px-3 py-1.5 rounded-lg transition text-gray-600 dark:text-gray-300 hover:text-purple-600 dark:hover:text-white">SKILLS</a>
+                <a href="../index.html#hobbies-section" class="px-3 py-1.5 rounded-lg transition text-gray-600 dark:text-gray-300 hover:text-purple-600 dark:hover:text-white">HOBBIES</a>
+                <a href="../index.html#contact" class="px-3 py-1.5 rounded-lg transition text-gray-600 dark:text-gray-300 hover:text-purple-600 dark:hover:text-white">CONTACT</a>
+            </nav>
+            <div class="flex items-center space-x-3">
+                <button onclick="toggleTheme()" id="themeToggleBtn" aria-label="Toggle Theme" class="p-2 rounded-xl bg-slate-100 dark:bg-gray-800 text-purple-700 dark:text-purple-300 hover:bg-slate-200 dark:hover:bg-gray-700 transition flex items-center space-x-2 text-xs font-semibold shadow-sm">
+                    <svg id="sunIcon" class="w-4 h-4 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
+                    <svg id="moonIcon" class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg>
+                    <span id="themeBtnText">Dark Mode</span>
+                </button>
+                <!-- Mobile Menu Button -->
+                <button onclick="toggleMobileMenu()" aria-label="Mobile Menu" class="md:hidden p-2 rounded-xl bg-slate-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+                </button>
+            </div>
+        </div>
+    </header>
 
-  <section class="blog-post">
-    <div class="blog-content">
-      <div>
-        <div>
-          <h4 style="text-align: justify;">"ITM 2026 - The Fusion of Technology and Spirituality in Medjugorje
-            <br>ITM is a conference born from a call to use technology for evangelization. It brings together experts,
-            clergy, and innovators to explore how AI and digital tools can support human dignity and spiritual growth.
-            Set in the spiritual environment of Medjugorje, the event blends lectures, workshops, testimonies, and
-            prayer, fostering ethical use of technology rooted in Christian values.
-            <br>
-            ITM has grown into an international community of 50+ members from 25+ countries, offering a safe and
-            inspiring space for dialogue, collaboration, and creative engagement at the intersection of faith and
-            technology."
-          </h4>
-          <br>
+    <!-- MOBILE FULLSCREEN MENU -->
+    <div id="mobile-menu" class="fixed inset-0 z-50 bg-[#0b0f19] text-[#f3f4f6] flex-col justify-start items-center pt-24 space-y-6 text-xl hidden">
+        <button onclick="toggleMobileMenu()" aria-label="Close Menu" class="absolute top-6 right-6 p-2 text-gray-400 hover:text-white transition">
+            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+        </button>
+        <a href="../index.html#about" onclick="toggleMobileMenu()" class="transition text-gray-300 hover:text-white">ABOUT</a>
+        <a href="../blogs.html" onclick="toggleMobileMenu()" class="transition text-purple-400 font-semibold">BLOG</a>
+        <a href="../projects.html" onclick="toggleMobileMenu()" class="transition text-gray-300 hover:text-white">PROJECTS</a>
+        <a href="../index.html#skills" onclick="toggleMobileMenu()" class="transition text-gray-300 hover:text-white">SKILLS</a>
+        <a href="../index.html#hobbies-section" onclick="toggleMobileMenu()" class="transition text-gray-300 hover:text-white">HOBBIES</a>
+        <a href="../index.html#contact" onclick="toggleMobileMenu()" class="transition text-gray-300 hover:text-white">CONTACT</a>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <main class="flex-grow max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 w-full space-y-8">
+        
+        <!-- Article Header -->
+        <div class="space-y-3 bg-white dark:bg-[#111827] border border-slate-200 dark:border-gray-800 p-6 sm:p-8 rounded-2xl shadow-sm transition-colors">
+            <p class="text-xs text-purple-600 dark:text-purple-400 font-semibold uppercase tracking-wider">March 8, 2026</p>
+            <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight text-gray-900 dark:text-white">Medjugorje ITM 2026 Edition</h1>
         </div>
 
-        <div>
-          <h3>ITM - Catholic IT Conference | Where Faith Meets Technology - My Story</h3>
-          <p>The ITM 2026 conference took place March 5-8 in Medjugorje. <br>
-            I first heard about this conference last summer. Since then, I have kept it in my mind and after New Year's
-            Eve I started following the upcoming event. I tried to invite some of my friends from the IT field, but no
-            one had time to go with me. Then I decided to go alone because I really wanted to participate in this event.
-            So I signed up:)
-            <br>
-            I think that in this era of modern technology, technology has already penetrated deeply into the living of
-            our faith and therefore it is important for a believer (especially an IT person) to know how it is
-            developing, where the moral boundaries are and how to approach it in accordance with God's law. That was the
-            reason why I wanted to take part in something like this and of course gain new experiences.
-            <br>
-            Later I offered the possibility of a trip for my parents, that I could take them with me by car and they
-            could make their own program in Medjugorje while I was at the conference and they agreed. It was a pleasant
-            time for them too.
-          </p>
-          <br>
+        <!-- Article Sections as Cards -->
+        <div class="space-y-6">
+            
+            <!-- Intro Quote Card -->
+            <section class="bg-purple-50 dark:bg-purple-950/30 border border-purple-200 dark:border-purple-900/50 p-6 sm:p-8 rounded-2xl shadow-sm transition-colors">
+                <blockquote class="text-gray-700 dark:text-gray-300 text-sm sm:text-base leading-relaxed italic text-justify">
+                    "ITM 2026 - The Fusion of Technology and Spirituality in Medjugorje<br><br>
+                    ITM is a conference born from a call to use technology for evangelization. It brings together experts, clergy, and innovators to explore how AI and digital tools can support human dignity and spiritual growth. Set in the spiritual environment of Medjugorje, the event blends lectures, workshops, testimonies, and prayer, fostering ethical use of technology rooted in Christian values.<br><br>
+                    ITM has grown into an international community of 50+ members from 25+ countries, offering a safe and inspiring space for dialogue, collaboration, and creative engagement at the intersection of faith and technology."
+                </blockquote>
+            </section>
 
-          <div class="img-wrapper img-wrapper--auto">
-            <img src="images/5-itm-2026/itm1.png" alt="1">
-          </div>
-          <p class="img-comment" style="text-align:center; font-style:italic; color:#000000; margin-top:0.5rem">
-            ITM 2026
-          </p><br>
+            <!-- My Story -->
+            <section class="bg-white dark:bg-[#111827] border border-slate-200 dark:border-gray-800 p-6 sm:p-8 rounded-2xl space-y-4 shadow-sm transition-colors">
+                <h3 class="text-xl sm:text-2xl font-bold text-purple-700 dark:text-purple-300">ITM - Catholic IT Conference | Where Faith Meets Technology - My Story</h3>
+                <p class="text-gray-700 dark:text-gray-300 text-sm sm:text-base leading-relaxed text-justify">
+                    The ITM 2026 conference took place March 5-8 in Medjugorje.<br>
+                    I first heard about this conference last summer. Since then, I have kept it in my mind and after New Year's Eve I started following the upcoming event. I tried to invite some of my friends from the IT field, but no one had time to go with me. Then I decided to go alone because I really wanted to participate in this event. So I signed up:)
+                </p>
+                <p class="text-gray-700 dark:text-gray-300 text-sm sm:text-base leading-relaxed text-justify">
+                    I think that in this era of modern technology, technology has already penetrated deeply into the living of our faith and therefore it is important for a believer (especially an IT person) to know how it is developing, where the moral boundaries are and how to approach it in accordance with God's law. That was the reason why I wanted to take part in something like this and of course gain new experiences.
+                </p>
+                <p class="text-gray-700 dark:text-gray-300 text-sm sm:text-base leading-relaxed text-justify">
+                    Later I offered the possibility of a trip for my parents, that I could take them with me by car and they could make their own program in Medjugorje while I was at the conference and they agreed. It was a pleasant time for them too.
+                </p>
+
+                <div class="space-y-2 pt-4">
+                    <div class="overflow-hidden rounded-xl bg-gray-900 border border-gray-800 max-w-xl mx-auto">
+                        <img src="images/5-itm-2026/itm1.png" alt="ITM 2026" class="w-full h-auto object-cover">
+                    </div>
+                    <p class="text-center italic text-xs text-gray-500 dark:text-gray-400">ITM 2026</p>
+                </div>
+            </section>
+
+            <!-- Conference Program & Experiences -->
+            <section class="bg-white dark:bg-[#111827] border border-slate-200 dark:border-gray-800 p-6 sm:p-8 rounded-2xl space-y-6 shadow-sm transition-colors">
+                <h3 class="text-xl sm:text-2xl font-bold text-purple-700 dark:text-purple-300">Conference program and experiences</h3>
+                
+                <!-- Day 1 -->
+                <div class="space-y-2">
+                    <h4 class="font-bold text-gray-900 dark:text-white text-lg">Day 1.</h4>
+                    <p class="text-gray-700 dark:text-gray-300 text-sm sm:text-base leading-relaxed text-justify">
+                        I was a little nervous when I arrived, but from the first moment I knew it would be an interesting time. Right at the registration I met my friend Thomas, who was very, very nice and we later spent a lot of time together during the conference. Many thanks for being able to meet and get to know him:)
+                    </p>
+                    <p class="text-gray-700 dark:text-gray-300 text-sm sm:text-base leading-relaxed text-justify">
+                        On the first day of the conference, there were several points on the program: Registration, Parish tour (I didn't even need that, since I've been to Medjugorje many times, but the local priest, Fr. Zvonimir, addressed very nice and interesting words to us at the time). The next point was the welcome to the conference and the opening prayer. Each block of the conference (morning or afternoon) began with a prayer - because it is right to surrender everything to God and ask him for sanctification;) During these blocks, presentations were held by experts in their fields, who brought different perspectives to various issues, mostly with the use of AI and faith. The evening program continued with Holy Mass and adoration. After that, there was dinner and networking.
+                    </p>
+                </div>
+
+                <!-- Day 2 -->
+                <div class="space-y-2 pt-4 border-t border-slate-100 dark:border-gray-800">
+                    <h4 class="font-bold text-gray-900 dark:text-white text-lg">Day 2.</h4>
+                    <p class="text-gray-700 dark:text-gray-300 text-sm sm:text-base leading-relaxed text-justify">
+                        The next day (Friday) I got up early in the morning and went to pray on the mountain Krizevac (Mountain of the Way of the Cross). And on the way down I met and greeted Nancy :) - it was very nice, Nancy shines like the Sun even though she is not the youngest anymore.
+                    </p>
+                    <p class="text-gray-700 dark:text-gray-300 text-sm sm:text-base leading-relaxed text-justify">
+                        The morning program began again with a short prayer and then continued with presentations. One of the presentations was by Oliver M. Tuazon, who spoke about the sanctification of the AI work. He said that we as humans can sanctify our work (God constantly gives us opportunities to do so), but AI cannot sanctify its own work. The work of AI can only be sanctified by the hands of a man. This gives me a new different perspective on our work and the “work of AI”.
+                    </p>
+                    <p class="text-gray-700 dark:text-gray-300 text-sm sm:text-base leading-relaxed text-justify">
+                        After three presentations, there was a breakout session where we all divided into 3 groups (each group was led by a presenter) and everyone joined a group of their choice. In these groups, an open discussion continued on the topics that were presented. I joined the group lead by Oliver. It was a great conversation in this group.
+                    </p>
+                    <p class="text-gray-700 dark:text-gray-300 text-sm sm:text-base leading-relaxed text-justify">
+                        The next item on the agenda was lunch. During lunch, Oliver joined me and introduced himself to me. I must say that he radiates wisdom and humility at the same time. He was interested in where I was from and what I do. Later, during the entire conference program, we were already friends and I believe that one day he will come to see our Kosice (since I learned that he had already visited Bratislava) :)
+                    </p>
+                    <p class="text-gray-700 dark:text-gray-300 text-sm sm:text-base leading-relaxed text-justify">
+                        The afternoon program had a similar character and interesting presentations followed. In the evening there was a holy mass followed by the Way of the Cross. So it was the first time I participated in the Way of the Cross in Medjugorje in the Croatian language and I must say that it is similar to ours, although there are many differences. Then there was dinner and during it there was again a space to meet new people;)
+                    </p>
+                </div>
+
+                <!-- Day 3 -->
+                <div class="space-y-2 pt-4 border-t border-slate-100 dark:border-gray-800">
+                    <h4 class="font-bold text-gray-900 dark:text-white text-lg">Day 3.</h4>
+                    <p class="text-gray-700 dark:text-gray-300 text-sm sm:text-base leading-relaxed text-justify">
+                        The third day began at Podbrdo - the place where the Virgin Mary first appeared in Medjugorje. The whole group from the conference joined together in praying the joyful and painful rosary, which was a very powerful experience for me when I realized that professional people - IT workers, professors, young people but also older people, with capacities in their fields, are coming together and taking responsibility for their work and wanting to be guided by God and Mary.
+                    </p>
+                    <p class="text-gray-700 dark:text-gray-300 text-sm sm:text-base leading-relaxed text-justify">
+                        The rest of the day continued in a similar spirit as the previous day, presentations, lunch. In the afternoon session, interactive workshops focused on communication, getting to know each other, teamwork and sharing experiences were also held. In the evening, we prayed the rosary in the church, followed by mass and a beautiful adoration at the end.
+                    </p>
+
+                    <div class="space-y-2 pt-2">
+                        <div class="overflow-hidden rounded-xl bg-gray-900 border border-gray-800 max-w-xl mx-auto">
+                            <img src="images/5-itm-2026/itm2.jpg" alt="Adoration Medjugorje" class="w-full h-auto object-cover">
+                        </div>
+                        <p class="text-center italic text-xs text-gray-500 dark:text-gray-400">Adoration Medjugorje</p>
+                    </div>
+
+                    <p class="text-gray-700 dark:text-gray-300 text-sm sm:text-base leading-relaxed text-justify pt-2">
+                        In the evening we had dinner at Radio Mir Medjugorje, where we had the opportunity to tour the entire radio station. It was interesting to see where the live translation of the Holy Mass and all the Medjugorje program into many languages ​​is made. We also saw the recording studios and there was also a dinner with great food.
+                    </p>
+                </div>
+
+                <!-- Day 4 -->
+                <div class="space-y-2 pt-4 border-t border-slate-100 dark:border-gray-800">
+                    <h4 class="font-bold text-gray-900 dark:text-white text-lg">Day 4.</h4>
+                    <p class="text-gray-700 dark:text-gray-300 text-sm sm:text-base leading-relaxed text-justify">
+                        First thing in the morning was the prayer of the rosary at the statue of the risen Christ, followed by a closing speech and sharing our feelings from the conference. At the very end, Thomas and other friends joined us in a joint celebration of Holy Mass, followed by a return home.
+                    </p>
+                </div>
+            </section>
+
+            <!-- Feelings -->
+            <section class="bg-white dark:bg-[#111827] border border-slate-200 dark:border-gray-800 p-6 sm:p-8 rounded-2xl space-y-4 shadow-sm transition-colors">
+                <h3 class="text-xl sm:text-2xl font-bold text-purple-700 dark:text-purple-300">Feelings</h3>
+                <p class="text-gray-700 dark:text-gray-300 text-sm sm:text-base leading-relaxed text-justify">
+                    Personally, I am very pleased that I was able to participate in such an event (even though I was not invited by anyone, it seems to me as if it were according to the scripture: Luke 1:39). It was very enriching for me and I am happy for every person I had the opportunity to meet there. These people are a great encouragement to me in both hard work and faith.
+                </p>
+                <p class="text-gray-700 dark:text-gray-300 text-sm sm:text-base leading-relaxed text-justify">
+                    Finally, I would like to express my heartfelt gratitude to the Virgin Mary, who has brought me to this place many times and also for being with us and helping us when our car broke down on the way home.
+                </p>
+                <p class="text-gray-700 dark:text-gray-300 text-sm sm:text-base leading-relaxed text-justify">
+                    I believe that I will be able to participate again next year.
+                </p>
+            </section>
+
+            <!-- Thanks -->
+            <section class="bg-white dark:bg-[#111827] border border-slate-200 dark:border-gray-800 p-6 sm:p-8 rounded-2xl text-center space-y-4 shadow-sm transition-colors">
+                <h4 class="text-lg font-bold text-purple-700 dark:text-purple-300">Thanks for reading, God bless you.</h4>
+                <div class="space-y-2 pt-2">
+                    <div class="overflow-hidden rounded-xl bg-gray-900 border border-gray-800 max-w-xl mx-auto">
+                        <img src="images/5-itm-2026/itm3.jpg" alt="Church of St. James" class="w-full h-auto object-cover">
+                    </div>
+                    <p class="text-center italic text-xs text-gray-500 dark:text-gray-400">Church of St. James</p>
+                </div>
+            </section>
+
         </div>
 
-        <div>
-          <h3>Conference program and experiences</h3>
-          <h4>Day 1.</h4>
-          <p>I was a little nervous when I arrived, but from the first moment I knew it would be an interesting time.
-            Right at the registration I met my friend Thomas, who was very, very nice and we later spent a lot of time
-            together during the conference. Many thanks for being able to meet and get to know him:)
-            <br>
-            On the first day of the conference, there were several points on the program: Registration, Parish tour (I
-            didn't even need that, since I've been to Medjugorje many times, but the local priest, Fr. Zvonimir,
-            addressed very nice and interesting words to us at the time). The next point was the welcome to the
-            conference and the opening prayer. Each block of the conference (morning or afternoon) began with a prayer -
-            because it is right to surrender everything to God and ask him for sanctification;)
-            During these blocks, presentations were held by experts in their fields, who brought different perspectives
-            to various issues, mostly with the use of AI and faith.
-            The evening program continued with Holy Mass and adoration. After that, there was dinner and networking.
-          </p>
-          <br>
-          <h4>Day 2.</h4>
-          <p>The next day (Friday) I got up early in the morning and went to pray on the mountain Krizevac (Mountain of
-            the Way of the Cross). And on the way down I met and greeted Nancy :) - it was very nice, Nancy shines
-            like the Sun even though she is not the youngest anymore.
-            <br><br>
-            The morning program began again with a short prayer and then continued with presentations.
-            One of the presentations was by Oliver M. Tuazon, who spoke about the sanctification of the AI work.
-            He said that we as humans can sanctify our work (God constantly gives us opportunities to do so), but
-            AI cannot sanctify its own work. The work of AI can only be
-            sanctified by the hands of a man.
-            This gives me a new different perspective on our work and the “work of AI”.
-            <br>
-            After three presentations, there was a breakout session where we all divided into 3 groups (each group was
-            led by a presenter) and everyone joined a group of their choice. In these groups, an open discussion
-            continued on the topics that were presented. I joined the group lead by Oliver. It was a great conversation
-            in this group.
-            <br>
-            The next item on the agenda was lunch. During lunch, Oliver joined me and introduced himself to me. I must
-            say that he radiates wisdom and humility at the same time. He was interested in where I was from and what I
-            do. Later, during the entire conference program, we were already friends and I believe that one day he will
-            come to see our Kosice (since I learned that he had already visited Bratislava) :)
-            <br>
-            The afternoon program had a similar character and interesting presentations followed. In the evening there
-            was a holy mass followed by the Way of the Cross. So it was the first time I participated in the Way of the
-            Cross in Medjugorje in the Croatian language and I must say that it is similar to ours, although there are
-            many differences. Then there was dinner and during it there was again a space to meet new people;)
-          </p>
-          <br>
-          <h4>Day 3.</h4>
-          <p>The third day began at Podbrdo - the place where the Virgin Mary first appeared in Medjugorje. The whole
-            group from the conference joined together in praying the joyful and painful rosary, which was a very
-            powerful experience for me when I realized that professional people - IT workers, professors, young people
-            but also older people, with capacities in their fields, are coming together and taking responsibility for
-            their work and wanting to be guided by God and Mary.
-            <br>
-            The rest of the day continued in a similar spirit as the previous day, presentations, lunch. In the
-            afternoon session, interactive workshops focused on communication, getting to know each other, teamwork and
-            sharing experiences were also held. In the evening, we prayed the rosary in the church, followed by mass and
-            a beautiful adoration at the end.
-            <br>
-          </p>
-          <div class="img-wrapper img-wrapper--auto">
-            <img src="images/5-itm-2026/itm2.jpg" alt="2">
-          </div>
-          <p class="img-comment" style="text-align:center; font-style:italic; color:#000000; margin-top:0.5rem">
-            Adoration Medjugorie
-          </p><br>
-          <p>
-            In the evening we had dinner at Radio Mir Medjugorje, where we had the opportunity to tour the entire radio
-            station. It was interesting to see where the live translation of the Holy Mass and all the Medjugorje
-            program
-            into many languages ​​is made. We also saw the recording studios and there was also a dinner with great
-            food.
-          </p>
-          <br>
-          <h4>Day 4.</h4>
-          <p>First thing in the morning was the prayer of the rosary at the statue of the risen Christ, followed by a
-            closing speech and sharing our feelings from the conference. At the very end, Thomas and other friends
-            joined us in a joint celebration of Holy Mass, followed by a return home.
-          </p>
-          <br>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="border-t border-slate-200 dark:border-gray-800 bg-slate-50 dark:bg-[#070a12] py-8 text-center text-sm text-gray-500 mt-20 transition-colors">
+        <div class="max-w-4xl mx-auto px-4 space-y-3">
+            <p>&copy; 2026 Jakub Čirip</p>
         </div>
+    </footer>
 
-        <div>
-          <h3>Feelings</h3>
-          <p>
-            Personally, I am very pleased that I was able to participate in such an event (even though I was not invited
-            by anyone, it seems to me as if it were according to the scripture: Luke 1:39). It was very enriching for me
-            and I am happy for every person I had the opportunity to meet there. These people are a great encouragement
-            to me in both hard work and faith.
-            <br>
-            Finally, I would like to express my heartfelt gratitude to the Virgin Mary, who has brought me to this place
-            many times and also for being with us and helping us when our car broke down on the way home.
-            <br>
-            I believe that I will be able to participate again next year.
-          </p>
-          <br>
-        </div>
+    <!-- BACK TO TOP BUTTON -->
+    <button id="backToTopBtn" onclick="scrollToTop()" aria-label="Back to top" class="fixed bottom-6 right-6 z-50 bg-purple-600 text-white p-3 rounded-full shadow-lg opacity-0 pointer-events-none transition-all duration-300 hover:bg-purple-700">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"></path></svg>
+    </button>
 
-        <div>
-          <h4>Thanks for reading, God bless you.</h4>
-          <br>
-          <div class="img-wrapper img-wrapper--auto">
-            <img src="images/5-itm-2026/itm3.jpg" alt="3">
-          </div>
-          <p class="img-comment" style="text-align:center; font-style:italic; color:#000000; margin-top:0.5rem">
-            Church of St. James
-          </p><br>
-        </div>
+    <!-- SCRIPT FOR THEME & SCROLL -->
+    <script>
+        function updateThemeUI() {
+            const isDark = document.documentElement.classList.contains('dark');
+            const sunIcon = document.getElementById('sunIcon');
+            const moonIcon = document.getElementById('moonIcon');
+            const themeBtnText = document.getElementById('themeBtnText');
+            if (isDark) {
+                if (sunIcon) sunIcon.classList.remove('hidden');
+                if (moonIcon) moonIcon.classList.add('hidden');
+                if (themeBtnText) themeBtnText.innerText = 'Light Mode';
+            } else {
+                if (sunIcon) sunIcon.classList.add('hidden');
+                if (moonIcon) moonIcon.classList.remove('hidden');
+                if (themeBtnText) themeBtnText.innerText = 'Dark Mode';
+            }
+        }
 
-      </div>
-  </section>
+        function toggleTheme() {
+            const isDark = document.documentElement.classList.toggle('dark');
+            localStorage.setItem('theme', isDark ? 'dark' : 'light');
+            updateThemeUI();
+        }
 
-  <footer>
-    <nav class="footer-nav">
-      <a href="../../index.html">← Back to Main Page</a>
-      <a href="../../blogs.html">Blogs Home →</a>
-    </nav><br>
-    <p>&copy; 2025 Jakub Cirip</p>
-  </footer>
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            if (menu.classList.contains('hidden')) {
+                menu.classList.remove('hidden');
+                menu.classList.add('flex');
+            } else {
+                menu.classList.remove('flex');
+                menu.classList.add('hidden');
+            }
+        }
 
-  <!-- Scroll-to-top button -->
-  <button id="scrollTopBtn" class="scroll-top" aria-label="Scroll to top" title="Back to top">
-    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
-      <path fill="white" d="M12 4l-8 8h5v8h6v-8h5z" />
-    </svg>
-  </button>
+        window.addEventListener('scroll', () => {
+            const btn = document.getElementById('backToTopBtn');
+            if (window.scrollY > 400) {
+                btn.classList.remove('opacity-0', 'pointer-events-none'); btn.classList.add('opacity-100');
+            } else {
+                btn.classList.add('opacity-0', 'pointer-events-none'); btn.classList.remove('opacity-100');
+            }
+        });
+        function scrollToTop() { window.scrollTo({ top: 0, behavior: 'smooth' }); }
 
+        document.addEventListener('DOMContentLoaded', updateThemeUI);
+    </script>
 </body>
 </html>

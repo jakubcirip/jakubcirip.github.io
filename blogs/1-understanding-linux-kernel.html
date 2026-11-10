@@ -1,180 +1,249 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="sk" class="scroll-smooth">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Understanding Linux Kernel</title>
-  <link rel="stylesheet" href="../css/style.css"/>
-  <link rel="stylesheet" href="blog-style.css"/>
-  <link rel="stylesheet" href="../css/float-button.css"/>
-  <script src="js/scroll-top.js" defer></script>
-  <link rel="icon" type="image/jpeg" href="../icon1.jpg">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/jpeg" href="../icon2.jpg">
+    <title>Understanding Linux Kernel - Jakub Čirip</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: { 
+                extend: { 
+                    colors: { 
+                        darkBg: '#0b0f19', 
+                        cardBgDark: '#111827', 
+                        cardBgLight: '#ffffff' 
+                    } 
+                } 
+            }
+        }
+    </script>
+    <!-- Okamžité aplikovanie triedy dark na html, aby sa zabránilo prebliknutiu -->
+    <script>
+        const savedTheme = localStorage.getItem('theme');
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+        }
+    </script>
+    <style>
+        body { 
+            font-family: ui-sans-serif, system-ui, sans-serif; 
+        }
+    </style>
 </head>
+<body class="min-h-screen flex flex-col justify-between bg-[#f8fafc] text-[#0f172a] dark:bg-[#0b0f19] dark:text-[#f3f4f6] selection:bg-purple-600 selection:text-white transition-colors duration-300">
 
-<body>
-  <header>
-    <h1>Understanding Linux Kernel Giude</h1>
-    <nav class="footer-nav">
-      <a href="../../index.html">← Back to Main Page</a>
-      <a href="../../blogs.html">Blogs Home →</a>
-    </nav>
-  </header>
+    <!-- HEADER / NAVIGATION -->
+    <header class="sticky top-0 z-50 bg-white/80 dark:bg-[#0b0f19]/80 backdrop-blur-md border-b border-gray-200 dark:border-gray-800 transition-colors">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <div class="font-bold text-lg tracking-wide">
+                <a href="../index.html" class="hover:text-purple-600 dark:hover:text-purple-400 transition">Jakub Čirip</a>
+            </div>
+            <nav class="hidden md:flex items-center space-x-2 text-sm">
+                <a href="../index.html#about" class="px-3 py-1.5 rounded-lg transition text-gray-600 dark:text-gray-300 hover:text-purple-600 dark:hover:text-white">ABOUT</a>
+                <a href="../blogs.html" class="px-3 py-1.5 rounded-lg transition bg-purple-100 dark:bg-purple-900/50 text-purple-800 dark:text-white border border-purple-300 dark:border-purple-700/50">BLOG</a>
+                <a href="../projects.html" class="px-3 py-1.5 rounded-lg transition text-gray-600 dark:text-gray-300 hover:text-purple-600 dark:hover:text-white">PROJECTS</a>
+                <a href="../index.html#skills" class="px-3 py-1.5 rounded-lg transition text-gray-600 dark:text-gray-300 hover:text-purple-600 dark:hover:text-white">SKILLS</a>
+                <a href="../index.html#hobbies-section" class="px-3 py-1.5 rounded-lg transition text-gray-600 dark:text-gray-300 hover:text-purple-600 dark:hover:text-white">HOBBIES</a>
+                <a href="../index.html#contact" class="px-3 py-1.5 rounded-lg transition text-gray-600 dark:text-gray-300 hover:text-purple-600 dark:hover:text-white">CONTACT</a>
+            </nav>
+            <div class="flex items-center space-x-3">
+                <button onclick="toggleTheme()" id="themeToggleBtn" aria-label="Toggle Theme" class="p-2 rounded-xl bg-slate-100 dark:bg-gray-800 text-purple-700 dark:text-purple-300 hover:bg-slate-200 dark:hover:bg-gray-700 transition flex items-center space-x-2 text-xs font-semibold shadow-sm">
+                    <svg id="sunIcon" class="w-4 h-4 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
+                    <svg id="moonIcon" class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg>
+                    <span id="themeBtnText" class="hidden sm:inline">Dark Mode</span>
+                </button>
+                <!-- Mobile Menu Button -->
+                <button onclick="toggleMobileMenu()" aria-label="Mobile Menu" class="md:hidden p-2 rounded-xl bg-slate-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+                </button>
+            </div>
+        </div>
+    </header>
 
-  <section class="blog-post">
-  <div class="blog-content">
-    <h3>Why the Kernel Matters</h3>
-    <p>
-      The Linux kernel is the core component of the operating system and acts as the bridge between hardware and user
-      applications. Every program you execute ultimately relies on the kernel to communicate with the CPU, memory,
-      storage devices, and peripherals. Without it, applications would have no standardized way of interacting with
-      the underlying hardware.
-    </p>
-    <p>
-      The kernel is responsible for managing system resources efficiently, ensuring that multiple processes can run
-      simultaneously without interfering with one another. It provides security, stability, and hardware abstraction,
-      making Linux suitable for everything from personal computers to enterprise servers, embedded systems, and
-      supercomputers.
-    </p>
-    <p>
-      Whether you're interested in systems programming, cybersecurity, cloud infrastructure, or embedded development,
-      understanding how the kernel works provides valuable insight into how modern operating systems function behind
-      the scenes.
-    </p>
-  </div>
-</section>
+    <!-- MOBILE FULLSCREEN MENU -->
+    <div id="mobile-menu" class="fixed inset-0 z-50 bg-[#0b0f19] text-[#f3f4f6] flex-col justify-start items-center pt-24 space-y-6 text-xl hidden">
+        <button onclick="toggleMobileMenu()" aria-label="Close Menu" class="absolute top-6 right-6 p-2 text-gray-400 hover:text-white transition">
+            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+        </button>
+        <a href="../index.html#about" onclick="toggleMobileMenu()" class="transition text-gray-300 hover:text-white">ABOUT</a>
+        <a href="../blogs.html" onclick="toggleMobileMenu()" class="transition text-purple-400 font-semibold">BLOG</a>
+        <a href="../projects.html" onclick="toggleMobileMenu()" class="transition text-gray-300 hover:text-white">PROJECTS</a>
+        <a href="../index.html#skills" onclick="toggleMobileMenu()" class="transition text-gray-300 hover:text-white">SKILLS</a>
+        <a href="../index.html#hobbies-section" onclick="toggleMobileMenu()" class="transition text-gray-300 hover:text-white">HOBBIES</a>
+        <a href="../index.html#contact" onclick="toggleMobileMenu()" class="transition text-gray-300 hover:text-white">CONTACT</a>
+    </div>
 
-<section class="blog-post">
-  <div class="blog-content">
-    <h3>Core Responsibilities of the Linux Kernel</h3>
-    <ul>
-      <li>
-        <strong>Process Management</strong> – Controls the creation, execution, scheduling, and termination of
-        processes. The scheduler determines which process gets CPU time and helps maximize overall system performance.
-      </li>
-      <li>
-        <strong>Memory Management</strong> – Manages physical and virtual memory, handles paging and swapping,
-        allocates memory to applications, and protects processes from accessing each other's memory space.
-      </li>
-      <li>
-        <strong>File Systems</strong> – Provides a unified interface for interacting with storage devices while
-        supporting numerous file systems such as ext4, XFS, Btrfs, and FAT. It also manages permissions, caching,
-        and file metadata.
-      </li>
-      <li>
-        <strong>Device Drivers</strong> – Acts as the communication layer between hardware devices and the operating
-        system. Drivers allow Linux to support thousands of different devices without applications needing to know
-        hardware-specific details.
-      </li>
-      <li>
-        <strong>Networking</strong> – Implements the complete networking stack, including TCP/IP, routing, packet
-        filtering, sockets, and network interfaces. Nearly all internet communication on Linux passes through
-        the kernel.
-      </li>
-      <li>
-        <strong>System Calls</strong> – Exposes a secure interface that allows user-space programs to request kernel
-        services such as opening files, creating processes, allocating memory, or communicating over the network.
-      </li>
-      <li>
-        <strong>Security</strong> – Enforces process isolation, user permissions, access controls, namespaces,
-        capabilities, and integrates security frameworks like SELinux and AppArmor to help protect the system.
-      </li>
-    </ul>
-  </div>
-</section>
+    <!-- MAIN CONTENT -->
+    <main class="flex-grow max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 w-full space-y-8">
+        
+        <!-- Article Header -->
+        <div class="space-y-3 bg-white dark:bg-[#111827] border border-slate-200 dark:border-gray-800 p-6 sm:p-8 rounded-2xl shadow-sm transition-colors">
+            <p class="text-xs text-purple-600 dark:text-purple-400 font-semibold uppercase tracking-wider">April 25, 2025</p>
+            <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight text-gray-900 dark:text-white">Understanding Linux Kernel Guide</h1>
+        </div>
 
-<section class="blog-post">
-  <div class="blog-content">
-    <h3>How to Learn Linux Kernel Development</h3>
-    <p>
-      Learning kernel development can seem intimidating at first because it differs significantly from regular
-      application programming. Unlike user-space applications, kernel code has direct access to hardware and runs with
-      elevated privileges, meaning even small mistakes can crash the operating system.
-    </p>
-    <p>
-      A good starting point is understanding how user-space applications communicate with the kernel through
-      <strong>system calls</strong>. Commands like <code>man 2 open</code>, <code>man 2 read</code>, and
-      <code>man 2 fork</code> explain the API exposed by the kernel and demonstrate how common operations are
-      performed internally.
-    </p>
-    <p>
-      Once you're comfortable with the basics, explore the Linux kernel source code itself. Begin with simpler
-      subsystems such as character device drivers or the Virtual File System (VFS) before diving into more complex
-      areas like memory management or process scheduling.
-    </p>
-    <p>
-      Building a custom kernel, enabling debugging options, and experimenting inside a virtual machine are excellent
-      ways to learn safely without risking your primary operating system.
-    </p>
-  </div>
-</section>
+        <!-- Article Sections as Cards -->
+        <div class="space-y-6">
+            <section class="bg-white dark:bg-[#111827] border border-slate-200 dark:border-gray-800 p-6 sm:p-8 rounded-2xl space-y-4 shadow-sm transition-colors">
+                <h3 class="text-xl sm:text-2xl font-bold text-purple-700 dark:text-purple-300">Why the Kernel Matters</h3>
+                <p class="text-gray-700 dark:text-gray-300 text-sm sm:text-base leading-relaxed text-justify">
+                    The Linux kernel is the core component of the operating system and acts as the bridge between hardware and user applications. Every program you execute ultimately relies on the kernel to communicate with the CPU, memory, storage devices, and peripherals. Without it, applications would have no standardized way of interacting with the underlying hardware.
+                </p>
+                <p class="text-gray-700 dark:text-gray-300 text-sm sm:text-base leading-relaxed text-justify">
+                    The kernel is responsible for managing system resources efficiently, ensuring that multiple processes can run simultaneously without interfering with one another. It provides security, stability, and hardware abstraction, making Linux suitable for everything from personal computers to enterprise servers, embedded systems, and supercomputers.
+                </p>
+                <p class="text-gray-700 dark:text-gray-300 text-sm sm:text-base leading-relaxed text-justify">
+                    Whether you're interested in systems programming, cybersecurity, cloud infrastructure, or embedded development, understanding how the kernel works provides valuable insight into how modern operating systems function behind the scenes.
+                </p>
+            </section>
 
-<section class="blog-post">
-  <div class="blog-content">
-    <h3>Recommended Resources</h3>
-    <ul>
-      <li>
-        <strong>Linux Kernel Development</strong> by Robert Love – One of the best introductions to Linux kernel
-        architecture and development concepts.
-      </li>
-      <li>
-        <strong>Linux Device Drivers</strong> by Jonathan Corbet, Alessandro Rubini, and Greg Kroah-Hartman –
-        Although older, it remains a valuable resource for understanding kernel modules and driver development.
-      </li>
-      <li>
-        <strong>The Linux Foundation Training</strong> – Offers official courses covering Linux internals,
-        administration, and kernel-related technologies.
-      </li>
-      <li>
-        <strong>Kernel Documentation</strong> – The documentation included within the Linux source tree contains
-        detailed explanations of kernel APIs, subsystems, and coding standards.
-      </li>
-      <li>
-        <strong>Linux Source Code</strong> – Studying the official source repository is one of the best ways to
-        understand how real kernel components are implemented.
-        <br>
-        <code>https://github.com/torvalds/linux</code>
-      </li>
-    </ul>
-  </div>
-</section>
+            <section class="bg-white dark:bg-[#111827] border border-slate-200 dark:border-gray-800 p-6 sm:p-8 rounded-2xl space-y-4 shadow-sm transition-colors">
+                <h3 class="text-xl sm:text-2xl font-bold text-purple-700 dark:text-purple-300">Core Responsibilities of the Linux Kernel</h3>
+                <ul class="list-disc list-inside space-y-3 text-gray-700 dark:text-gray-300 text-sm sm:text-base leading-relaxed pl-2">
+                    <li>
+                        <strong class="text-gray-900 dark:text-white">Process Management</strong> – Controls the creation, execution, scheduling, and termination of processes. The scheduler determines which process gets CPU time and helps maximize overall system performance.
+                    </li>
+                    <li>
+                        <strong class="text-gray-900 dark:text-white">Memory Management</strong> – Manages physical and virtual memory, handles paging and swapping, allocates memory to applications, and protects processes from accessing each other's memory space.
+                    </li>
+                    <li>
+                        <strong class="text-gray-900 dark:text-white">File Systems</strong> – Provides a unified interface for interacting with storage devices while supporting numerous file systems such as ext4, XFS, Btrfs, and FAT. It also manages permissions, caching, and file metadata.
+                    </li>
+                    <li>
+                        <strong class="text-gray-900 dark:text-white">Device Drivers</strong> – Acts as the communication layer between hardware devices and the operating system. Drivers allow Linux to support thousands of different devices without applications needing to know hardware-specific details.
+                    </li>
+                    <li>
+                        <strong class="text-gray-900 dark:text-white">Networking</strong> – Implements the complete networking stack, including TCP/IP, routing, packet filtering, sockets, and network interfaces. Nearly all internet communication on Linux passes through the kernel.
+                    </li>
+                    <li>
+                        <strong class="text-gray-900 dark:text-white">System Calls</strong> – Exposes a secure interface that allows user-space programs to request kernel services such as opening files, creating processes, allocating memory, or communicating over the network.
+                    </li>
+                    <li>
+                        <strong class="text-gray-900 dark:text-white">Security</strong> – Enforces process isolation, user permissions, access controls, namespaces, capabilities, and integrates security frameworks like SELinux and AppArmor to help protect the system.
+                    </li>
+                </ul>
+            </section>
 
-<section class="blog-post">
-  <div class="blog-content">
-    <h3>Final Thoughts</h3>
-    <p>
-      Mastering the Linux kernel is a long-term investment that requires patience, curiosity, and consistent practice.
-      While the learning curve can be steep, the knowledge gained provides a deep understanding of how operating
-      systems manage hardware, processes, memory, and networking.
-    </p>
-    <p>
-      Kernel development skills are highly valuable in fields such as operating systems, embedded Linux, cloud
-      infrastructure, cybersecurity, virtualization, and performance engineering. Even if you never contribute
-      directly to the Linux kernel, understanding its architecture will make you a significantly stronger software
-      engineer.
-    </p>
-    <p>
-      Start with the fundamentals, experiment in virtual machines, read real kernel code, and gradually build your
-      knowledge one subsystem at a time. Every experienced kernel developer began by exploring the same source code
-      that is freely available today.
-    </p>
-  </div>
-</section>
+            <section class="bg-white dark:bg-[#111827] border border-slate-200 dark:border-gray-800 p-6 sm:p-8 rounded-2xl space-y-4 shadow-sm transition-colors">
+                <h3 class="text-xl sm:text-2xl font-bold text-purple-700 dark:text-purple-300">How to Learn Linux Kernel Development</h3>
+                <p class="text-gray-700 dark:text-gray-300 text-sm sm:text-base leading-relaxed text-justify">
+                    Learning kernel development can seem intimidating at first because it differs significantly from regular application programming. Unlike user-space applications, kernel code has direct access to hardware and runs with elevated privileges, meaning even small mistakes can crash the operating system.
+                </p>
+                <p class="text-gray-700 dark:text-gray-300 text-sm sm:text-base leading-relaxed text-justify">
+                    A good starting point is understanding how user-space applications communicate with the kernel through <strong class="text-gray-900 dark:text-white">system calls</strong>. Commands like <code class="bg-slate-100 dark:bg-gray-800 px-1.5 py-0.5 rounded text-purple-600 dark:text-purple-300">man 2 open</code>, <code class="bg-slate-100 dark:bg-gray-800 px-1.5 py-0.5 rounded text-purple-600 dark:text-purple-300">man 2 read</code>, and <code class="bg-slate-100 dark:bg-gray-800 px-1.5 py-0.5 rounded text-purple-600 dark:text-purple-300">man 2 fork</code> explain the API exposed by the kernel and demonstrate how common operations are performed internally.
+                </p>
+                <p class="text-gray-700 dark:text-gray-300 text-sm sm:text-base leading-relaxed text-justify">
+                    Once you're comfortable with the basics, explore the Linux kernel source code itself. Begin with simpler subsystems such as character device drivers or the Virtual File System (VFS) before diving into more complex areas like memory management or process scheduling.
+                </p>
+                <p class="text-gray-700 dark:text-gray-300 text-sm sm:text-base leading-relaxed text-justify">
+                    Building a custom kernel, enabling debugging options, and experimenting inside a virtual machine are excellent ways to learn safely without risking your primary operating system.
+                </p>
+            </section>
 
-  <footer>
-    <nav class="footer-nav">
-      <a href="../../index.html">← Back to Main Page</a>
-      <a href="../../blogs.html">Blogs Home →</a>
-    </nav><br>
-    <p>&copy; 2025 Jakub Cirip</p>
-  </footer>
+            <section class="bg-white dark:bg-[#111827] border border-slate-200 dark:border-gray-800 p-6 sm:p-8 rounded-2xl space-y-4 shadow-sm transition-colors">
+                <h3 class="text-xl sm:text-2xl font-bold text-purple-700 dark:text-purple-300">Recommended Resources</h3>
+                <ul class="list-disc list-inside space-y-3 text-gray-700 dark:text-gray-300 text-sm sm:text-base leading-relaxed pl-2">
+                    <li>
+                        <strong class="text-gray-900 dark:text-white">Linux Kernel Development</strong> by Robert Love – One of the best introductions to Linux kernel architecture and development concepts.
+                    </li>
+                    <li>
+                        <strong class="text-gray-900 dark:text-white">Linux Device Drivers</strong> by Jonathan Corbet, Alessandro Rubini, and Greg Kroah-Hartman – Although older, it remains a valuable resource for understanding kernel modules and driver development.
+                    </li>
+                    <li>
+                        <strong class="text-gray-900 dark:text-white">The Linux Foundation Training</strong> – Offers official courses covering Linux internals, administration, and kernel-related technologies.
+                    </li>
+                    <li>
+                        <strong class="text-gray-900 dark:text-white">Kernel Documentation</strong> – The documentation included within the Linux source tree contains detailed explanations of kernel APIs, subsystems, and coding standards.
+                    </li>
+                    <li>
+                        <strong class="text-gray-900 dark:text-white">Linux Source Code</strong> – Studying the official source repository is one of the best ways to understand how real kernel components are implemented.
+                        <br>
+                        <code class="bg-slate-100 dark:bg-gray-800 px-2 py-1 rounded text-xs text-purple-600 dark:text-purple-300 mt-1 inline-block">https://github.com/torvalds/linux</code>
+                    </li>
+                </ul>
+            </section>
 
-  <!-- Scroll-to-top button -->
-  <button id="scrollTopBtn" class="scroll-top" aria-label="Scroll to top" title="Back to top">
-    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
-      <path fill="white" d="M12 4l-8 8h5v8h6v-8h5z" />
-    </svg>
-  </button>
+            <section class="bg-white dark:bg-[#111827] border border-slate-200 dark:border-gray-800 p-6 sm:p-8 rounded-2xl space-y-4 shadow-sm transition-colors">
+                <h3 class="text-xl sm:text-2xl font-bold text-purple-700 dark:text-purple-300">Final Thoughts</h3>
+                <p class="text-gray-700 dark:text-gray-300 text-sm sm:text-base leading-relaxed text-justify">
+                    Mastering the Linux kernel is a long-term investment that requires patience, curiosity, and consistent practice. While the learning curve can be steep, the knowledge gained provides a deep understanding of how operating systems manage hardware, processes, memory, and networking.
+                </p>
+                <p class="text-gray-700 dark:text-gray-300 text-sm sm:text-base leading-relaxed text-justify">
+                    Kernel development skills are highly valuable in fields such as operating systems, embedded Linux, cloud infrastructure, cybersecurity, virtualization, and performance engineering. Even if you never contribute directly to the Linux kernel, understanding its architecture will make you a significantly stronger software engineer.
+                </p>
+                <p class="text-gray-700 dark:text-gray-300 text-sm sm:text-base leading-relaxed text-justify">
+                    Start with the fundamentals, experiment in virtual machines, read real kernel code, and gradually build your knowledge one subsystem at a time. Every experienced kernel developer began by exploring the same source code that is freely available today.
+                </p>
+            </section>
+        </div>
 
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="border-t border-slate-200 dark:border-gray-800 bg-slate-50 dark:bg-[#070a12] py-8 text-center text-sm text-gray-500 mt-20 transition-colors">
+        <div class="max-w-4xl mx-auto px-4 space-y-3">
+            <p>&copy; 2026 Jakub Čirip</p>
+        </div>
+    </footer>
+
+    <!-- BACK TO TOP BUTTON -->
+    <button id="backToTopBtn" onclick="scrollToTop()" aria-label="Back to top" class="fixed bottom-6 right-6 z-50 bg-purple-600 text-white p-3 rounded-full shadow-lg opacity-0 pointer-events-none transition-all duration-300 hover:bg-purple-700">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"></path></svg>
+    </button>
+
+    <!-- SCRIPT FOR THEME & SCROLL -->
+    <script>
+        function updateThemeUI() {
+            const isDark = document.documentElement.classList.contains('dark');
+            const sunIcon = document.getElementById('sunIcon');
+            const moonIcon = document.getElementById('moonIcon');
+            const themeBtnText = document.getElementById('themeBtnText');
+            if (isDark) {
+                if (sunIcon) sunIcon.classList.remove('hidden');
+                if (moonIcon) moonIcon.classList.add('hidden');
+                if (themeBtnText) themeBtnText.innerText = 'Light Mode';
+            } else {
+                if (sunIcon) sunIcon.classList.add('hidden');
+                if (moonIcon) moonIcon.classList.remove('hidden');
+                if (themeBtnText) themeBtnText.innerText = 'Dark Mode';
+            }
+        }
+
+        function toggleTheme() {
+            const isDark = document.documentElement.classList.toggle('dark');
+            localStorage.setItem('theme', isDark ? 'dark' : 'light');
+            updateThemeUI();
+        }
+
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            if (menu.classList.contains('hidden')) {
+                menu.classList.remove('hidden');
+                menu.classList.add('flex');
+            } else {
+                menu.classList.remove('flex');
+                menu.classList.add('hidden');
+            }
+        }
+
+        window.addEventListener('scroll', () => {
+            const btn = document.getElementById('backToTopBtn');
+            if (window.scrollY > 400) {
+                btn.classList.remove('opacity-0', 'pointer-events-none'); btn.classList.add('opacity-100');
+            } else {
+                btn.classList.add('opacity-0', 'pointer-events-none'); btn.classList.remove('opacity-100');
+            }
+        });
+        function scrollToTop() { window.scrollTo({ top: 0, behavior: 'smooth' }); }
+
+        document.addEventListener('DOMContentLoaded', updateThemeUI);
+    </script>
 </body>
 </html>

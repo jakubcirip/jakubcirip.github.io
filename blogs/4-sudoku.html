@@ -1,143 +1,267 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="sk" class="scroll-smooth">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Sudoku recovery</title>
-  <link rel="stylesheet" href="../css/style.css" />
-  <link rel="stylesheet" href="blog-style.css" />
-  <link rel="stylesheet" href="../css/float-button.css" />
-  <script src="js/scroll-top.js" defer></script>
-  <link rel="icon" type="image/jpeg" href="../icon1.jpg">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/jpeg" href="../icon2.jpg">
+    <title>Sudoku game code recovery - Jakub Čirip</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: { 
+                extend: { 
+                    colors: { 
+                        darkBg: '#0b0f19', 
+                        cardBgDark: '#111827', 
+                        cardBgLight: '#ffffff' 
+                    } 
+                } 
+            }
+        }
+    </script>
+    <!-- Okamžité aplikovanie triedy dark na html, aby sa zabránilo prebliknutiu -->
+    <script>
+        const savedTheme = localStorage.getItem('theme');
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+        }
+    </script>
+    <style>
+        body { 
+            font-family: ui-sans-serif, system-ui, sans-serif; 
+        }
+    </style>
 </head>
+<body class="min-h-screen flex flex-col justify-between bg-[#f8fafc] text-[#0f172a] dark:bg-[#0b0f19] dark:text-[#f3f4f6] selection:bg-purple-600 selection:text-white transition-colors duration-300">
 
-<body>
-  <header>
-    <h1>Sudoku game code recovery</h1>
-    <nav class="footer-nav">
-      <a href="../../index.html">← Back to Main Page</a>
-      <a href="../../blogs.html">Blogs Home →</a>
-    </nav>
-  </header>
+    <!-- HEADER / NAVIGATION -->
+    <header class="sticky top-0 z-50 bg-white/80 dark:bg-[#0b0f19]/80 backdrop-blur-md border-b border-gray-200 dark:border-gray-800 transition-colors">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <div class="font-bold text-lg tracking-wide">
+                <a href="../index.html" class="hover:text-purple-600 dark:hover:text-purple-400 transition">Jakub Čirip</a>
+            </div>
+            <nav class="hidden md:flex items-center space-x-2 text-sm">
+                <a href="../index.html#about" class="px-3 py-1.5 rounded-lg transition text-gray-600 dark:text-gray-300 hover:text-purple-600 dark:hover:text-white">ABOUT</a>
+                <a href="../blogs.html" class="px-3 py-1.5 rounded-lg transition bg-purple-100 dark:bg-purple-900/50 text-purple-800 dark:text-white border border-purple-300 dark:border-purple-700/50">BLOG</a>
+                <a href="../projects.html" class="px-3 py-1.5 rounded-lg transition text-gray-600 dark:text-gray-300 hover:text-purple-600 dark:hover:text-white">PROJECTS</a>
+                <a href="../index.html#skills" class="px-3 py-1.5 rounded-lg transition text-gray-600 dark:text-gray-300 hover:text-purple-600 dark:hover:text-white">SKILLS</a>
+                <a href="../index.html#hobbies-section" class="px-3 py-1.5 rounded-lg transition text-gray-600 dark:text-gray-300 hover:text-purple-600 dark:hover:text-white">HOBBIES</a>
+                <a href="../index.html#contact" class="px-3 py-1.5 rounded-lg transition text-gray-600 dark:text-gray-300 hover:text-purple-600 dark:hover:text-white">CONTACT</a>
+            </nav>
+            <div class="flex items-center space-x-3">
+                <button onclick="toggleTheme()" id="themeToggleBtn" aria-label="Toggle Theme" class="p-2 rounded-xl bg-slate-100 dark:bg-gray-800 text-purple-700 dark:text-purple-300 hover:bg-slate-200 dark:hover:bg-gray-700 transition flex items-center space-x-2 text-xs font-semibold shadow-sm">
+                    <svg id="sunIcon" class="w-4 h-4 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
+                    <svg id="moonIcon" class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg>
+                    <span id="themeBtnText">Dark Mode</span>
+                </button>
+                <!-- Mobile Menu Button -->
+                <button onclick="toggleMobileMenu()" aria-label="Mobile Menu" class="md:hidden p-2 rounded-xl bg-slate-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+                </button>
+            </div>
+        </div>
+    </header>
 
-  <section class="blog-post">
-    <div class="blog-content">
-      <div>
-        <div>
-          <h3>Background story</h3>
-          <p>A few years ago... one beautiful sunny day... I woke up from bed and then it hit me...
-            The idea to program a Sudoku game. It was like a bolt from the blue.
-            I didn't hesitate for a second and immediately started writing code:) <br>
-            I designed the struct 'sudoku' and some other functions to provide the full game function. All it was in one
-            main.c file.
-            It was very nice project however, made by an inexperienced young programmer. That's why it "worked" well.
-            The
-            game was full of bugs and became unplayable after a few moves.
-            That was the end of the day and I never tried to fix it again after that... until now.</p>
-          <br>
+    <!-- MOBILE FULLSCREEN MENU -->
+    <div id="mobile-menu" class="fixed inset-0 z-50 bg-[#0b0f19] text-[#f3f4f6] flex-col justify-start items-center pt-24 space-y-6 text-xl hidden">
+        <button onclick="toggleMobileMenu()" aria-label="Close Menu" class="absolute top-6 right-6 p-2 text-gray-400 hover:text-white transition">
+            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+        </button>
+        <a href="../index.html#about" onclick="toggleMobileMenu()" class="transition text-gray-300 hover:text-white">ABOUT</a>
+        <a href="../blogs.html" onclick="toggleMobileMenu()" class="transition text-purple-400 font-semibold">BLOG</a>
+        <a href="../projects.html" onclick="toggleMobileMenu()" class="transition text-gray-300 hover:text-white">PROJECTS</a>
+        <a href="../index.html#skills" onclick="toggleMobileMenu()" class="transition text-gray-300 hover:text-white">SKILLS</a>
+        <a href="../index.html#hobbies-section" onclick="toggleMobileMenu()" class="transition text-gray-300 hover:text-white">HOBBIES</a>
+        <a href="../index.html#contact" onclick="toggleMobileMenu()" class="transition text-gray-300 hover:text-white">CONTACT</a>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <main class="flex-grow max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 w-full space-y-8">
+        
+        <!-- Article Header -->
+        <div class="space-y-3 bg-white dark:bg-[#111827] border border-slate-200 dark:border-gray-800 p-6 sm:p-8 rounded-2xl shadow-sm transition-colors">
+            <p class="text-xs text-purple-600 dark:text-purple-400 font-semibold uppercase tracking-wider">February 10, 2026</p>
+            <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight text-gray-900 dark:text-white">Sudoku game code recovery</h1>
         </div>
 
-        <div>
-          <h3>From the past to the present</h3>
-          <p>At this time I decided to completely rebuild this project and make it professional. <br> When reworking, I
-            was based on the original code. <br> (January 2026)
-          </p> <br>
+        <!-- Article Sections as Cards -->
+        <div class="space-y-6">
+            
+            <!-- Background Story -->
+            <section class="bg-white dark:bg-[#111827] border border-slate-200 dark:border-gray-800 p-6 sm:p-8 rounded-2xl space-y-4 shadow-sm transition-colors">
+                <h3 class="text-xl sm:text-2xl font-bold text-purple-700 dark:text-purple-300">Background story</h3>
+                <p class="text-gray-700 dark:text-gray-300 text-sm sm:text-base leading-relaxed text-justify">
+                    A few years ago... one beautiful sunny day... I woke up from bed and then it hit me... The idea to program a Sudoku game. It was like a bolt from the blue. I didn't hesitate for a second and immediately started writing code:)
+                </p>
+                <p class="text-gray-700 dark:text-gray-300 text-sm sm:text-base leading-relaxed text-justify">
+                    I designed the struct <code>sudoku</code> and some other functions to provide the full game function. All it was in one main.c file. It was very nice project however, made by an inexperienced young programmer. That's why it "worked" well. The game was full of bugs and became unplayable after a few moves. That was the end of the day and I never tried to fix it again after that... until now.
+                </p>
+            </section>
+
+            <!-- From the past to the present -->
+            <section class="bg-white dark:bg-[#111827] border border-slate-200 dark:border-gray-800 p-6 sm:p-8 rounded-2xl space-y-4 shadow-sm transition-colors">
+                <h3 class="text-xl sm:text-2xl font-bold text-purple-700 dark:text-purple-300">From the past to the present</h3>
+                <p class="text-gray-700 dark:text-gray-300 text-sm sm:text-base leading-relaxed">
+                    At this time I decided to completely rebuild this project and make it professional. <br> 
+                    When reworking, I was based on the original code. <br>
+                    <span class="text-xs text-purple-600 dark:text-purple-400 font-semibold mt-1 inline-block">(January 2026)</span>
+                </p>
+            </section>
+
+            <!-- Modules -->
+            <section class="bg-white dark:bg-[#111827] border border-slate-200 dark:border-gray-800 p-6 sm:p-8 rounded-2xl space-y-4 shadow-sm transition-colors">
+                <h3 class="text-xl sm:text-2xl font-bold text-purple-700 dark:text-purple-300">Modules</h3>
+                <p class="text-gray-700 dark:text-gray-300 text-sm sm:text-base mb-4">
+                    I divided the entire project into files according to the method of use:
+                </p>
+                <ul class="space-y-4 text-gray-700 dark:text-gray-300 text-sm sm:text-base pl-2">
+                    <li class="border-b border-slate-100 dark:border-gray-800 pb-3">
+                        <strong class="text-gray-900 dark:text-white">board.h & board.c</strong>
+                        <p class="text-gray-600 dark:text-gray-400 text-xs sm:text-sm mt-1">Including typedef struct Sudoku, define the SIZE dimension for sudoku and contain functions for board operations: <code>board_init()</code>, <code>board_clear()</code>, <code>board_copy_initial()</code>, <code>board_is_cell_free</code>, <code>board_is_full()</code>, <code>board_get()</code> and <code>board_set()</code> value.</p>
+                    </li>
+                    <li class="border-b border-slate-100 dark:border-gray-800 pb-3">
+                        <strong class="text-gray-900 dark:text-white">validation.h & validation.c</strong>
+                        <p class="text-gray-600 dark:text-gray-400 text-xs sm:text-sm mt-1">Module for validation of sudoku row's, sudoku column's, sudoku block's (3x3), full board validation and player move validation.</p>
+                    </li>
+                    <li class="border-b border-slate-100 dark:border-gray-800 pb-3">
+                        <strong class="text-gray-900 dark:text-white">render.h & render.c</strong>
+                        <p class="text-gray-600 dark:text-gray-400 text-xs sm:text-sm mt-1">The basic function is to draw the playing field in a loop using the <code>printf()</code> and <code>board_get()</code> functions in <code>render_board()</code>. The second function is <code>render_message()</code> - basically the same like printf. Perhaps other features will be: <code>render_cell()</code>, <code>render_prompt()</code>, <code>render_error()</code>.</p>
+                    </li>
+                    <li class="border-b border-slate-100 dark:border-gray-800 pb-3">
+                        <strong class="text-gray-900 dark:text-white">game.h & game.c</strong>
+                        <ul class="list-disc list-inside space-y-1 mt-2 pl-2 text-xs sm:text-sm text-gray-600 dark:text-gray-400">
+                            <li><strong>game_init()</strong> - Initialization of Sudoku board</li>
+                            <li><strong>game_loop()</strong> - Main game loop</li>
+                            <li><strong>game_input()</strong> - Get input from player</li>
+                            <li><strong>game_is_initial()</strong> - Check if the value in cell is initial or not</li>
+                            <li><strong>game_apply_move()</strong> - board_set()</li>
+                            <li><strong>game_is_finished()</strong> - Checking board_is_full() and validate_board()</li>
+                        </ul>
+                    </li>
+                    <li class="border-b border-slate-100 dark:border-gray-800 pb-3">
+                        <strong class="text-gray-900 dark:text-white">main.c</strong> - where it all comes together into one whole.
+                    </li>
+                    <li>
+                        <strong class="text-gray-900 dark:text-white">Makefile</strong> - <code>./sudoku_game</code>
+                    </li>
+                </ul>
+            </section>
+
+            <!-- Gameplay -->
+            <section class="bg-white dark:bg-[#111827] border border-slate-200 dark:border-gray-800 p-6 sm:p-8 rounded-2xl space-y-6 shadow-sm transition-colors">
+                <h3 class="text-xl sm:text-2xl font-bold text-purple-700 dark:text-purple-300">Gameplay</h3>
+                
+                <div class="space-y-2">
+                    <div class="overflow-hidden rounded-xl bg-gray-900 border border-gray-800 max-w-xl mx-auto">
+                        <img src="images/4-sudoku/sudoku1.png" alt="Sudoku compilation" class="w-full h-auto object-cover">
+                    </div>
+                    <p class="text-center italic text-xs text-gray-500 dark:text-gray-400">Sudoku compilation</p>
+                </div>
+
+                <div class="space-y-2 pt-4">
+                    <div class="overflow-hidden rounded-xl bg-gray-900 border border-gray-800 max-w-xl mx-auto">
+                        <img src="images/4-sudoku/sudoku2.png" alt="Starting sudoku game" class="w-full h-auto object-cover">
+                    </div>
+                    <p class="text-center italic text-xs text-gray-500 dark:text-gray-400">Starting sudoku game</p>
+                </div>
+            </section>
+
+            <!-- Project repository -->
+            <section class="bg-white dark:bg-[#111827] border border-slate-200 dark:border-gray-800 p-6 sm:p-8 rounded-2xl space-y-4 shadow-sm transition-colors">
+                <h3 class="text-xl sm:text-2xl font-bold text-purple-700 dark:text-purple-300">Project repository</h3>
+                <p class="text-gray-700 dark:text-gray-300 text-sm sm:text-base">
+                    You can find and try the whole project here:
+                    <br>
+                    <a href="https://github.com/jakubcirip/sudoku" target="_blank" class="inline-flex items-center space-x-1 text-purple-600 dark:text-purple-400 font-semibold hover:underline mt-2">
+                        <span>Sudoku repository →</span>
+                    </a>
+                </p>
+            </section>
+
+            <!-- Improvements -->
+            <section class="bg-white dark:bg-[#111827] border border-slate-200 dark:border-gray-800 p-6 sm:p-8 rounded-2xl space-y-4 shadow-sm transition-colors">
+                <h3 class="text-xl sm:text-2xl font-bold text-purple-700 dark:text-purple-300">Improvements</h3>
+                <p class="text-gray-700 dark:text-gray-300 text-sm sm:text-base mb-2">The next steps can be:</p>
+                <ul class="list-disc list-inside space-y-1 text-gray-600 dark:text-gray-400 text-sm pl-2">
+                    <li><strong>generate_random_sudoku</strong></li>
+                    <li><strong>set_game_level</strong></li>
+                    <li><strong>init_sudoku_level</strong></li>
+                    <li><strong>GUI</strong></li>
+                </ul>
+            </section>
+
+            <!-- Thanks -->
+            <section class="bg-white dark:bg-[#111827] border border-slate-200 dark:border-gray-800 p-6 sm:p-8 rounded-2xl text-center shadow-sm transition-colors">
+                <h4 class="text-lg font-bold text-purple-700 dark:text-purple-300">Thanks for reading.</h4>
+            </section>
+
         </div>
 
-        <div>
-          <h3>Modules</h3>
-          <p>I divided the entire project into files according to
-            the method of use:
-          <ul style="list-style-type:disc; padding-left: 1rem; list-style-position: inside;">
-            <li><b>board.h & board.c</b>
-              <p>Including typedef struct Sudoku, define the SIZE dimension for sudoku and contain functions for board
-                operations: board_init(), board_clear(), board_copy_initial(), board_is_cell_free, board_is_full(), board_get() and board_set() value.</p>
-            </li>
-            <li><b>validation.h & validation.c</b>
-              <p>Module for validation of sudoku row's, sudoku column's, sudoku block's (3x3), full board validation and
-                player move validation.</p>
-            </li>
-            <li><b>render.h & render.c</b>
-              <p>The basic function is to draw the playing field in a loop using the printf() and board_get() functions
-                in render_board().
-                The second function is render_message() - basically the same like printf. Perhaps other features will
-                be: render_cell(), render_prompt(), render_error().
-              </p>
-            </li>
-            <li><b>game.h & game.c</b>
-              <ul style="margin-left: 2rem; padding: 0;">
-                <li style="margin: 0; padding: 0;"><b>game_init()</b> - Initialization of Sudoku board</li>
-                <li style="margin: 0; padding: 0;"><b>game_loop()</b> - Main game loop</li>
-                <li style="margin: 0; padding: 0;"><b>game_input()</b> - Get input from player</li>
-                <li style="margin: 0; padding: 0;"><b>game_is_initial()</b> - Check if the value in cell is initial or not</li>
-                <li style="margin: 0; padding: 0;"><b>game_apply_move()</b> - board_set()</li>
-                <li style="margin: 0; padding: 0;"><b>game_is_finished()</b> - Checking board_is_full() and validate_board()</li>
-              </ul>
-            </li>
-            <li><b>main.c</b> - where it all comes together into one whole.</li>
-            <li><b>Makefile</b> - ./sudoku_game</li>
-          </ul>
-          </p>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="border-t border-slate-200 dark:border-gray-800 bg-slate-50 dark:bg-[#070a12] py-8 text-center text-sm text-gray-500 mt-20 transition-colors">
+        <div class="max-w-4xl mx-auto px-4 space-y-3">
+            <p>&copy; 2026 Jakub Čirip</p>
         </div>
+    </footer>
 
-        <div>
-          <h3>Gameplay</h3>
-          <div class="img-wrapper img-wrapper--auto">
-            <img src="images/4-sudoku/sudoku1.png" alt="1">
-          </div>
-          <p class="img-comment" style="text-align:center; font-style:italic; color:#000000; margin-top:0.5rem">
-            Sudoku compilation
-          </p><br>
-          <div class="img-wrapper img-wrapper--fixed">
-            <img src="images/4-sudoku/sudoku2.png" alt="2">
-          </div>
-          <p class="img-comment" style="text-align:center; font-style:italic; color:#000000; margin-top:0.5rem">
-            Starting sudoku game
-          </p><br>
-        </div>
+    <!-- BACK TO TOP BUTTON -->
+    <button id="backToTopBtn" onclick="scrollToTop()" aria-label="Back to top" class="fixed bottom-6 right-6 z-50 bg-purple-600 text-white p-3 rounded-full shadow-lg opacity-0 pointer-events-none transition-all duration-300 hover:bg-purple-700">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"></path></svg>
+    </button>
 
-        <div>
-          <h3>Project repository</h3>
-          <p>You can find and try the whole project here:
-            <br>
-            <a href="https://github.com/jakubcirip/sudoku">Sudoku repository</a>
-          </p> <br>
-        </div>
+    <!-- SCRIPT FOR THEME & SCROLL -->
+    <script>
+        function updateThemeUI() {
+            const isDark = document.documentElement.classList.contains('dark');
+            const sunIcon = document.getElementById('sunIcon');
+            const moonIcon = document.getElementById('moonIcon');
+            const themeBtnText = document.getElementById('themeBtnText');
+            if (isDark) {
+                if (sunIcon) sunIcon.classList.remove('hidden');
+                if (moonIcon) moonIcon.classList.add('hidden');
+                if (themeBtnText) themeBtnText.innerText = 'Light Mode';
+            } else {
+                if (sunIcon) sunIcon.classList.add('hidden');
+                if (moonIcon) moonIcon.classList.remove('hidden');
+                if (themeBtnText) themeBtnText.innerText = 'Dark Mode';
+            }
+        }
 
-        <div>
-          <h3>Improvements</h3>
-          <p>The next steps can be:
-            <ul style="margin-left: 2rem; padding: 0;">
-              <li style="margin: 0; padding: 0;"><b>generate_random_sudoku</b></li>
-              <li style="margin: 0; padding: 0;"><b>set_game_level</b></li>
-              <li style="margin: 0; padding: 0;"><b>init_sudoku_level</b></li>
-              <li style="margin: 0; padding: 0;"><b>GUI</b></li>
-            </ul>
-          </p><br>
-        </div>
+        function toggleTheme() {
+            const isDark = document.documentElement.classList.toggle('dark');
+            localStorage.setItem('theme', isDark ? 'dark' : 'light');
+            updateThemeUI();
+        }
 
-        <div>
-          <h4>Thanks for reading.</h4>
-        </div>
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            if (menu.classList.contains('hidden')) {
+                menu.classList.remove('hidden');
+                menu.classList.add('flex');
+            } else {
+                menu.classList.remove('flex');
+                menu.classList.add('hidden');
+            }
+        }
 
-      </div>
-  </section>
+        window.addEventListener('scroll', () => {
+            const btn = document.getElementById('backToTopBtn');
+            if (window.scrollY > 400) {
+                btn.classList.remove('opacity-0', 'pointer-events-none'); btn.classList.add('opacity-100');
+            } else {
+                btn.classList.add('opacity-0', 'pointer-events-none'); btn.classList.remove('opacity-100');
+            }
+        });
+        function scrollToTop() { window.scrollTo({ top: 0, behavior: 'smooth' }); }
 
-  <footer>
-    <nav class="footer-nav">
-      <a href="../../index.html">← Back to Main Page</a>
-      <a href="../../blogs.html">Blogs Home →</a>
-    </nav><br>
-    <p>&copy; 2025 Jakub Cirip</p>
-  </footer>
-
-  <!-- Scroll-to-top button -->
-  <button id="scrollTopBtn" class="scroll-top" aria-label="Scroll to top" title="Back to top">
-    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
-      <path fill="white" d="M12 4l-8 8h5v8h6v-8h5z" />
-    </svg>
-  </button>
-
+        document.addEventListener('DOMContentLoaded', updateThemeUI);
+    </script>
 </body>
 </html>

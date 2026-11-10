@@ -1,174 +1,421 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="sk" class="scroll-smooth">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Jakub Cirip | Personal page</title>
-  <link rel="stylesheet" href="css/style.css" />
-  <link rel="stylesheet" href="css/float-button.css" />
-  <link rel="icon" type="image/jpeg" href="icon1.jpg">
-  <script src="blogs/js/scroll-top.js" defer></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/jpeg" href="icon2.jpg">
+    <title>Jakub Čirip - Portfolio</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        darkBg: '#0b0f19',
+                        cardBgDark: '#111827',
+                        cardBgLight: '#ffffff',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #f8fafc;
+            color: #0f172a;
+            font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        body.dark {
+            background-color: #0b0f19 !important;
+            color: #f3f4f6 !important;
+        }
+        section[id], div[id] {
+            scroll-margin-top: 5rem;
+        }
+    </style>
 </head>
+<body class="min-h-screen flex flex-col justify-between selection:bg-purple-600 selection:text-white">
 
-<body>
-  <header>
-    <h1>Jakub Cirip - personal page</h1>
-    <p>Application Administrator | Linux | C/C++ | Bash</p>
-  </header>
+    <!-- Okamžité načítanie témy pre body (predchádza bliknutiu a fixuje farby) -->
+    <script>
+        const savedTheme = localStorage.getItem('theme');
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
+            document.body.classList.add('dark');
+            document.documentElement.classList.add('dark');
+        } else {
+            document.body.classList.remove('dark');
+            document.documentElement.classList.remove('dark');
+        }
+    </script>
 
-  <section id="about">
-    <h2>About Me</h2>
-    <p>Hi all, <br>
-      I am an Application administrator with a strong interest in low-level software development and embedded systems.
-      Professionally, I work with Linux and Windows servers, production environments, and application infrastructure. In my spare
-      time, I focus on embedded development using STM32 microcontrollers, Arduino uno, and Orange Pi, and continuously improve my skills in C
-      programming, debugging, and software architecture.
-    </p>
-    <br>
-    <p>
-      I hold a Bachelor's degree in Computer Networks from the Faculty of Electrical Engineering and Informatics at the
-      Technical University of Košice (FEI TUKE), followed by a Master's degree in Mechatronics from the Faculty of
-      Mechanical Engineering at the Technical University of Košice.
-    </p>
-    <br>
-    <p>
-      Since February 2024, I have been working as an Application Administrator at Deutsche Telekom IT Solutions Slovakia, where
-      I manage Windows and Linux servers, provide support to customers and users, maintain production environments, troubleshoot issues, and automate tasks
-      using Bash.
-    </p>
-    <br>
-    <p>
-      Outside of work, I develop embedded applications for STM32 microcontrollers and continue expanding my knowledge of
-      embedded software engineering, C programming, Linux internals, Git, debugging techniques, Linux for embedded systems and modern development
-      workflows.
-    </p>
-  </section>
+    <!-- HEADER / NAVIGATION -->
+    <header class="sticky top-0 z-50 bg-white/80 dark:bg-[#0b0f19]/80 backdrop-blur-md border-b border-gray-200 dark:border-gray-800 transition-colors">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <div class="font-bold text-lg tracking-wide">
+                <a href="#about" onclick="navigateToSection('about', event)" class="hover:text-purple-600 dark:hover:text-purple-400 transition">Jakub Čirip</a>
+            </div>
+            <!-- Desktop Nav -->
+            <nav class="hidden md:flex items-center space-x-1 sm:space-x-2 text-sm">
+                <a href="#about" id="nav-about" onclick="navigateToSection('about', event)" class="px-3 py-1.5 rounded-lg transition text-gray-600 dark:text-gray-300 hover:text-purple-600 dark:hover:text-white">ABOUT</a>
+                <a href="blogs.html" id="nav-blogs" class="px-3 py-1.5 rounded-lg transition text-gray-600 dark:text-gray-300 hover:text-purple-600 dark:hover:text-white">BLOG</a>
+                <a href="projects.html" id="nav-projects" class="px-3 py-1.5 rounded-lg transition text-gray-600 dark:text-gray-300 hover:text-purple-600 dark:hover:text-white">PROJECTS</a>
+                <a href="#skills" id="nav-skills" onclick="navigateToSection('skills', event)" class="px-3 py-1.5 rounded-lg transition text-gray-600 dark:text-gray-300 hover:text-purple-600 dark:hover:text-white">SKILLS</a>
+                <a href="#hobbies-section" id="nav-hobbies" onclick="navigateToSection('hobbies-section', event)" class="px-3 py-1.5 rounded-lg transition text-gray-600 dark:text-gray-300 hover:text-purple-600 dark:hover:text-white">HOBBIES</a>
+                <a href="#contact" id="nav-contact" onclick="navigateToSection('contact', event)" class="px-3 py-1.5 rounded-lg transition text-gray-600 dark:text-gray-300 hover:text-purple-600 dark:hover:text-white">CONTACT</a>
+            </nav>
+            <div class="flex items-center space-x-3">
+                <!-- Theme Switcher Button -->
+                <button onclick="toggleTheme()" id="themeToggleBtn" aria-label="Toggle Theme" class="p-2 rounded-xl bg-slate-100 dark:bg-gray-800 text-purple-700 dark:text-purple-300 hover:bg-slate-200 dark:hover:bg-gray-700 transition flex items-center space-x-2 text-xs font-semibold shadow-sm">
+                    <svg id="sunIcon" class="w-4 h-4 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
+                    <svg id="moonIcon" class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg>
+                    <span id="themeBtnText" class="hidden sm:inline">Dark Mode</span>
+                </button>
+                <button onclick="toggleMobileMenu()" aria-label="Mobile Menu" class="md:hidden p-2 rounded-xl bg-slate-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+                </button>
+            </div>
+        </div>
+    </header>
 
-  <section id="blog">
-    <h2>Latest Blog Posts</h2>
-
-    <div class="blog-preview">
-      <img src="blogs/images/5-itm-2026/itm-intro.png" alt="ITM 2026">
-      <div class="blog-text">
-        <h2>Medjugorie ITM 2026 Edition</h2>
-        <p>ITM - Catholic IT Conference | Where Faith Meets Technology</p>
-        <h3><a href="blogs/5-medjugorie-itm-2026.html">Read more →</a></h3>
-      </div>
+    <!-- MOBILE FULLSCREEN MENU (Minimalistický štýl bez rámčeka) -->
+    <div id="mobile-menu" class="fixed inset-0 z-50 bg-[#0b0f19] text-[#f3f4f6] flex-col justify-start items-center pt-24 space-y-6 text-xl hidden">
+        <button onclick="toggleMobileMenu()" aria-label="Close Menu" class="absolute top-6 right-6 p-2 text-gray-400 hover:text-white transition">
+            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+        </button>
+        <a href="#about" id="m-nav-about" onclick="navigateToSection('about', event)" class="transition text-gray-300 hover:text-white">ABOUT</a>
+        <a href="blogs.html" id="m-nav-blogs" class="transition text-gray-300 hover:text-white">BLOG</a>
+        <a href="projects.html" id="m-nav-projects" class="transition text-gray-300 hover:text-white">PROJECTS</a>
+        <a href="#skills" id="m-nav-skills" onclick="navigateToSection('skills', event)" class="transition text-gray-300 hover:text-white">SKILLS</a>
+        <a href="#hobbies-section" id="m-nav-hobbies" onclick="navigateToSection('hobbies-section', event)" class="transition text-gray-300 hover:text-white">HOBBIES</a>
+        <a href="#contact" id="m-nav-contact" onclick="navigateToSection('contact', event)" class="transition text-gray-300 hover:text-white">CONTACT</a>
     </div>
 
-    <div class="blog-preview">
-      <img src="blogs/images/4-sudoku/sudoku-intro.png" alt="Sudoku Game">
-      <div class="blog-text">
-        <h2>Sudoku game recovery</h2>
-        <p>Restoration of old Sudoku game code</p>
-        <h3><a href="blogs/4-sudoku.html">Read more →</a></h3>
-      </div>
-    </div>
+    <!-- MAIN CONTAINER -->
+    <main class="flex-grow max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full space-y-16">
+        
+        <!-- ABOUT ME -->
+        <section id="about" class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center bg-white dark:bg-[#111827] border border-slate-200 dark:border-gray-800 rounded-2xl p-6 sm:p-10 shadow-lg transition-colors">
+            <div class="lg:col-span-7 space-y-4">
+                <span class="text-purple-600 dark:text-purple-400 text-xs sm:text-sm font-bold tracking-wider uppercase">— ABOUT ME</span>
+                <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight">Jakub Čirip</h1>
+                <h2 class="text-lg sm:text-xl font-medium text-purple-700 dark:text-purple-300">Application Administrator & Embedded Developer</h2>
+                
+                <div class="text-gray-700 dark:text-gray-300 text-sm sm:text-base leading-relaxed space-y-3 text-justify pt-2">
+                    <p>Hi all, I am an Application administrator with a strong interest in low-level software development and embedded systems.</p>
+                    <p>Professionally, I work with Linux and Windows servers, production environments, and application infrastructure. In my spare time, I focus on embedded development using STM32 microcontrollers, Arduino Uno, and Orange Pi, and continuously improve my skills in C programming, debugging, and software architecture.</p>
+                    <p>I hold a Bachelor's degree in Computer Networks from FEI TUKE and a Master's degree in Mechatronics from the Faculty of Mechanical Engineering TUKE.</p>
+                    <p>Since February 2024, I have been working as an Application Administrator at Deutsche Telekom IT Solutions Slovakia, managing servers, supporting customers, and automating tasks using Bash.</p>
+                </div>
 
-    <div class="blog-preview">
-      <img src="blogs/images/3-kombo/kombo-intro.png" alt="Kubo Kombo">
-      <div class="blog-text">
-        <h2>Kubo Kombo release!</h2>
-        <p>A roadmap to build own guitar combo.</p>
-        <h3><a href="blogs/3-kubo-kombo.html">Read more →</a></h3>
-      </div>
-    </div>
+                <div class="flex items-center space-x-2 pt-4 text-sm text-gray-500 dark:text-gray-400 font-medium">
+                    <svg class="w-4 h-4 text-purple-600 dark:text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                    <span>Kosice, Slovakia</span>
+                </div>
+            </div>
 
+            <div class="lg:col-span-5 bg-slate-900 dark:bg-[#090d16] border border-gray-800 rounded-xl p-4 overflow-x-auto shadow-inner text-xs sm:text-sm font-mono text-gray-200">
+                <div class="flex items-center justify-between pb-3 mb-3 border-b border-gray-800 text-gray-500">
+                    <div class="flex space-x-1.5">
+                        <div class="w-3 h-3 rounded-full bg-red-500/80"></div>
+                        <div class="w-3 h-3 rounded-full bg-yellow-500/80"></div>
+                        <div class="w-3 h-3 rounded-full bg-green-500/80"></div>
+                    </div>
+                    <span>main.c</span>
+                </div>
+                <pre class="text-purple-300"><code><span class="text-blue-400">#include</span> <span class="text-green-300">&lt;stdio.h&gt;</span>
+
+<span class="text-blue-400">int</span> <span class="text-yellow-400">main</span>() {
+    <span class="text-blue-400">const char</span>* name = <span class="text-green-300">"Jakub Čirip"</span>;
+    <span class="text-blue-400">const char</span>* role = <span class="text-green-300">"C/C++"</span>;
     
-    <!-- Older blog posts – only the 3 newest are displayed on the page -->
-    
-    <!--
-    <div class="blog-preview">
-      <img src="blogs/images/2-kernel-intro/kernel-intro.jpg" alt="Linux Kernel Intro">
-      <div class="blog-text">
-        <h2>Linux Kernel Intro</h2>
-        <p>A short walkthrough of what the Linux kernel is, how it operates, and where to begin as a kernel developer.
-        </p>
-        <h3><a href="blogs/2-linux-kernel-intro.html">Read more →</a></h3>
-      </div>
-    </div>
-    
-    <!--
-    <div class="blog-preview">
-      <img src="blogs/images/1-kernel-guide/kernel-guide.jpg" alt="Linux Kernel Guide">
-      <div class="blog-text">
-        <h2>Understanding the Linux Kernel</h2>
-        <p>Dive deep into how the Linux kernel works, its architecture, memory management, and key components.</p>
-        <h3><a href="blogs/1-understanding-linux-kernel.html">Read more →</a></h3>
-      </div>
-    </div> --->
+    printf(<span class="text-green-300">"Developer: %s\nRole: %s\n"</span>, name, role);
+    <span class="text-blue-400">return</span> <span class="text-orange-400">0</span>;
+}</code></pre>
+            </div>
+        </section>
 
-    <h3>
-      <p><a href="blogs.html">View all blog posts →</a></p>
-    </h3>
-  </section>
+        <!-- LATEST BLOG POSTS -->
+        <section id="blogs-section" class="space-y-6">
+            <div class="flex items-center justify-between">
+                <h2 class="text-2xl sm:text-3xl font-bold tracking-tight">Latest Blog Posts</h2>
+                <a href="blogs.html" class="text-base sm:text-lg font-semibold text-purple-600 dark:text-purple-400 hover:underline transition">View all posts →</a>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <a href="blogs/5-medjugorie-itm-2026.html" class="group bg-white dark:bg-[#111827] border border-slate-200 dark:border-gray-800 rounded-2xl overflow-hidden hover:border-purple-500/50 transition flex flex-col justify-between shadow-sm hover:shadow-lg">
+                    <div>
+                        <div class="h-48 overflow-hidden bg-gray-900 relative">
+                            <img src="blogs/images/5-itm-2026/itm-intro.png" alt="Medjugorje ITM" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
+                        </div>
+                        <div class="p-5 space-y-2">
+                            <p class="text-xs text-purple-600 dark:text-purple-400 font-semibold">March 8, 2026</p>
+                            <h3 class="font-bold text-lg group-hover:text-purple-600 dark:group-hover:text-purple-300 transition">Medjugorje ITM 2026 Edition</h3>
+                            <p class="text-sm text-gray-600 dark:text-gray-400 line-clamp-2">My experience from the ITM 2026 edition in Medjugorje...</p>
+                        </div>
+                    </div>
+                    <div class="px-5 pb-5 pt-0 flex items-center justify-end text-purple-600 dark:text-purple-400 text-sm font-medium">
+                        <span>Read article →</span>
+                    </div>
+                </a>
+                <a href="blogs/4-sudoku.html" class="group bg-white dark:bg-[#111827] border border-slate-200 dark:border-gray-800 rounded-2xl overflow-hidden hover:border-purple-500/50 transition flex flex-col justify-between shadow-sm hover:shadow-lg">
+                    <div>
+                        <div class="h-48 overflow-hidden bg-gray-900 relative">
+                            <img src="blogs/images/4-sudoku/sudoku-intro.png" alt="Sudoku" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
+                        </div>
+                        <div class="p-5 space-y-2">
+                            <p class="text-xs text-purple-600 dark:text-purple-400 font-semibold">February 10, 2026</p>
+                            <h3 class="font-bold text-lg group-hover:text-purple-600 dark:group-hover:text-purple-300 transition">Sudoku game recovery</h3>
+                            <p class="text-sm text-gray-600 dark:text-gray-400 line-clamp-2">How I implemented a recovery system for my Sudoku game and what I learned...</p>
+                        </div>
+                    </div>
+                    <div class="px-5 pb-5 pt-0 flex items-center justify-end text-purple-600 dark:text-purple-400 text-sm font-medium">
+                        <span>Read article →</span>
+                    </div>
+                </a>
+                <a href="blogs/3-kubo-kombo.html" class="group bg-white dark:bg-[#111827] border border-slate-200 dark:border-gray-800 rounded-2xl overflow-hidden hover:border-purple-500/50 transition flex flex-col justify-between shadow-sm hover:shadow-lg">
+                    <div>
+                        <div class="h-48 overflow-hidden bg-gray-900 relative">
+                            <img src="blogs/images/3-kombo/kombo-intro.png" alt="Kubo Kombo" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
+                        </div>
+                        <div class="p-5 space-y-2">
+                            <p class="text-xs text-purple-600 dark:text-purple-400 font-semibold">January 7, 2026</p>
+                            <h3 class="font-bold text-lg group-hover:text-purple-600 dark:group-hover:text-purple-300 transition">Kube Kombo release!</h3>
+                            <p class="text-sm text-gray-600 dark:text-gray-400 line-clamp-2">Finally, the Kube Kombo tool is out! A simple and useful guitar combo project...</p>
+                        </div>
+                    </div>
+                    <div class="px-5 pb-5 pt-0 flex items-center justify-end text-purple-600 dark:text-purple-400 text-sm font-medium">
+                        <span>Read article →</span>
+                    </div>
+                </a>
+            </div>
+        </section>
 
-  <section id="projects">
-    <h2>Projects</h2>
-    <ul>
-      <li><a href="https://github.com/jakubcirip/sudoku.git">Sudoku game</a></li>
-      <li><a href="https://github.com/jakubcirip/linux-c-projects.git">Some programs for Linux</a></li>
-      <li><a href="https://github.com/jakubcirip/math_game.git">Simple math game</a></li>
-    </ul>
-  </section>
+        <!-- PROJECTS -->
+        <section id="projects-section" class="space-y-6">
+            <div class="flex items-center justify-between">
+                <h2 class="text-2xl sm:text-3xl font-bold tracking-tight">Projects</h2>
+                <a href="projects.html" class="text-base sm:text-lg font-semibold text-purple-600 dark:text-purple-400 hover:underline transition">View all projects →</a>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <a href="projects/portfolio-website.html" class="group bg-white dark:bg-[#111827] border border-slate-200 dark:border-gray-800 rounded-2xl p-6 hover:border-purple-500/50 transition flex flex-col justify-between shadow-sm hover:shadow-lg">
+                    <div class="space-y-4">
+                        <div class="w-12 h-12 rounded-xl bg-purple-50 dark:bg-purple-600/20 text-purple-600 dark:text-purple-400 flex items-center justify-center font-bold">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                        </div>
+                        <h3 class="font-bold text-lg group-hover:text-purple-600 dark:group-hover:text-purple-300 transition">Portfolio Website</h3>
+                        <p class="text-sm text-gray-600 dark:text-gray-400">My personal portfolio website built with HTML, Tailwind CSS and JavaScript.</p>
+                    </div>
+                    <div class="pt-6 flex items-center justify-end text-purple-600 dark:text-purple-400 text-sm font-medium">
+                        <span>View project →</span>
+                    </div>
+                </a>
+            </div>
+        </section>
 
+        <!-- SKILLS -->
+        <section id="skills" class="space-y-6">
+            <h2 class="text-2xl sm:text-3xl font-bold tracking-tight">Skills</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                <div class="bg-white dark:bg-[#111827] border border-slate-200 dark:border-gray-800 p-5 rounded-xl space-y-2 shadow-sm">
+                    <h3 class="font-bold text-purple-700 dark:text-purple-300">Linux Administration</h3>
+                    <p class="text-xs sm:text-sm text-gray-600 dark:text-gray-400">System management, performance tuning, security, automation, bash scripting</p>
+                </div>
+                <div class="bg-white dark:bg-[#111827] border border-slate-200 dark:border-gray-800 p-5 rounded-xl space-y-2 shadow-sm">
+                    <h3 class="font-bold text-purple-700 dark:text-purple-300">Programming</h3>
+                    <p class="text-xs sm:text-sm text-gray-600 dark:text-gray-400">C, C++, Bash</p>
+                </div>
+                <div class="bg-white dark:bg-[#111827] border border-slate-200 dark:border-gray-800 p-5 rounded-xl space-y-2 shadow-sm">
+                    <h3 class="font-bold text-purple-700 dark:text-purple-300">Linux Kernel Development</h3>
+                    <p class="text-xs sm:text-sm text-gray-600 dark:text-gray-400">Kernel modules, device drivers</p>
+                </div>
+                <div class="bg-white dark:bg-[#111827] border border-slate-200 dark:border-gray-800 p-5 rounded-xl space-y-2 shadow-sm">
+                    <h3 class="font-bold text-purple-700 dark:text-purple-300">Networking</h3>
+                    <p class="text-xs sm:text-sm text-gray-600 dark:text-gray-400">TCP/IP, DNS, SNMP, HTTP/S, firewalls</p>
+                </div>
+                <div class="bg-white dark:bg-[#111827] border border-slate-200 dark:border-gray-800 p-5 rounded-xl space-y-2 shadow-sm">
+                    <h3 class="font-bold text-purple-700 dark:text-purple-300">Version Control</h3>
+                    <p class="text-xs sm:text-sm text-gray-600 dark:text-gray-400">Git, GitHub</p>
+                </div>
+                <div class="bg-white dark:bg-[#111827] border border-slate-200 dark:border-gray-800 p-5 rounded-xl space-y-2 shadow-sm">
+                    <h3 class="font-bold text-purple-700 dark:text-purple-300">Databases</h3>
+                    <p class="text-xs sm:text-sm text-gray-600 dark:text-gray-400">MySQL</p>
+                </div>
+            </div>
+        </section>
 
-  <section id="skills">
-    <h2>Skills</h2>
-    <ul>
-      <li><strong>Linux Administration:</strong> System management, performance tuning, security, automation, bash
-        scripting</li>
-      <li><strong>Programming:</strong> C, C++, Bash</li>
-      <li><strong>Linux Kernel Development:</strong> Kernel modules, device drivers</li>
-      <li><strong>Networking:</strong> TCP/IP, DNS, SNMP, HTTP/S, firewalls</li>
-      <li><strong>Version Control:</strong> Git, GitHub</li>
-      <li><strong>Databases:</strong> MySQL</li>
-    </ul>
-  </section>
+        <!-- HOBBIES -->
+        <section id="hobbies-section" class="bg-white dark:bg-[#111827] border border-slate-200 dark:border-gray-800 p-6 sm:p-8 rounded-2xl space-y-6 shadow-sm">
+            <h2 class="text-2xl sm:text-3xl font-bold tracking-tight">Hobbies & Coding Challenges</h2>
+            <div class="space-y-4 text-gray-700 dark:text-gray-300 text-sm sm:text-base leading-relaxed">
+                <p>As a believer, I want to put God first in my life — prayer, holy mass, adoration, worship, etc.</p>
+                <div>
+                    <p class="font-semibold text-gray-900 dark:text-white mb-2">Other hobbies include:</p>
+                    <ul class="list-disc list-inside space-y-1 text-gray-600 dark:text-gray-400 pl-2">
+                        <li><strong class="text-gray-800 dark:text-gray-300">Sports:</strong> football, running, cycling, ice skating, ...</li>
+                        <li><strong class="text-gray-800 dark:text-gray-300">Music & Art:</strong> guitar playing and listening to music</li>
+                        <li><strong class="text-gray-800 dark:text-gray-300">Tech hobbies:</strong> exploring embedded tech & reading my blogs</li>
+                        <li><strong class="text-gray-800 dark:text-gray-300">Community:</strong> service with young people and pilgrimages</li>
+                    </ul>
+                </div>
+                <div class="pt-4 border-t border-slate-200 dark:border-gray-800 space-y-2">
+                    <p class="text-gray-600 dark:text-gray-400">Check out my Hackerrank profile for coding challenges and solutions:</p>
+                    <a href="https://www.hackerrank.com" target="_blank" class="inline-flex items-center space-x-2 text-purple-600 dark:text-purple-400 font-medium hover:underline transition">
+                        <span>Jakub Cirip on Hackerrank</span>
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
 
-  <section id="coding-challenges">
-    <h2>Coding Challenges</h2>
-    <p>Check out my Hackerrank profile for coding challenges and solutions:</p>
-    <p><a href="https://www.hackerrank.com/profile/Mooz7">Jakub Cirip on Hackerrank</a></p>
-  </section>
+    <!-- CONTACT & FOOTER -->
+    <footer id="contact" class="border-t border-slate-200 dark:border-gray-800 bg-slate-50 dark:bg-[#070a12] mt-20 transition-colors">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+            <h2 class="text-2xl sm:text-3xl font-bold tracking-tight mb-10 text-center">Contact</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16 pb-12 border-b border-slate-200 dark:border-gray-800/80 items-start">
+                <div class="space-y-3 text-center md:text-left bg-white dark:bg-[#111827] border border-slate-200 dark:border-gray-800 p-6 rounded-2xl shadow-sm">
+                    <h4 class="font-extrabold text-gray-900 dark:text-white text-lg">Ing. Jakub Čirip</h4>
+                    <p class="text-sm text-gray-600 dark:text-gray-400 flex items-center justify-center md:justify-start space-x-2">
+                        <svg class="w-4 h-4 text-purple-600 dark:text-purple-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                        <span>Kosice, Slovakia</span>
+                    </p>
+                    <p class="text-sm font-medium pt-1">
+                        <span class="text-gray-500 dark:text-gray-400">Email:</span> 
+                        <a href="mailto:jakub.cirip@gmail.com" class="text-purple-600 dark:text-purple-400 hover:underline transition">jakub.cirip@gmail.com</a>
+                    </p>
+                </div>
+                <div class="space-y-3 text-center md:text-left bg-white dark:bg-[#111827] border border-slate-200 dark:border-gray-800 p-6 rounded-2xl shadow-sm">
+                    <h4 class="font-extrabold text-gray-900 dark:text-white text-lg">Profiles & Socials</h4>
+                    <p class="text-sm"><span class="text-gray-500 dark:text-gray-400">GitHub:</span> <a href="https://github.com/jakubcirip" target="_blank" class="text-purple-600 dark:text-purple-400 font-semibold hover:underline transition">jakubcirip</a></p>
+                    <p class="text-sm"><span class="text-gray-500 dark:text-gray-400">LinkedIn:</span> <a href="https://linkedin.com/in/jakubcirip" target="_blank" class="text-purple-600 dark:text-purple-400 font-semibold hover:underline transition">linkedin.com/in/jakubcirip</a></p>
+                    <p class="text-sm"><span class="text-gray-500 dark:text-gray-400">HackerRank:</span> <a href="https://hackerrank.com" target="_blank" class="text-purple-600 dark:text-purple-400 font-semibold hover:underline transition">hackerrank.com/jakubcirip</a></p>
+                </div>
+            </div>
+            <div class="pt-8 text-center text-sm text-gray-500 font-medium">© 2026 Jakub Čirip</div>
+        </div>
+    </footer>
 
-  <section id="hobbies">
-    <h2>Hobbies</h2>
-    <p>I've many hobbies, but as a believer, I want to put God first in my life -> prayer, holy mass, adoration,
-      worship, etc.<br>
-      Other hobbies are: sports (football, running, cycling, ice skating,...), music and guitar playing, tech hobbies
-      (check out my blogs), service with young people, pilgrimages.</p>
-  </section>
+    <!-- BACK TO TOP BUTTON -->
+    <button id="backToTopBtn" onclick="scrollToTop()" aria-label="Back to top" class="fixed bottom-6 right-6 z-50 bg-purple-600 text-white p-3 rounded-full shadow-lg opacity-0 pointer-events-none transition-all duration-300 hover:bg-purple-700">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"></path></svg>
+    </button>
 
-  <!-- For future certifications
-  <section id="certifications">
-  <h2>Certifications</h2>
-  <ul>
-    <li><a href="#">Linux...</a></li>
-  </ul>
-</section>
-  -->
+    <script>
+        function updateThemeUI() {
+            const isDark = document.body.classList.contains('dark');
+            const sunIcon = document.getElementById('sunIcon');
+            const moonIcon = document.getElementById('moonIcon');
+            const themeBtnText = document.getElementById('themeBtnText');
+            if (isDark) {
+                if (sunIcon) sunIcon.classList.remove('hidden');
+                if (moonIcon) moonIcon.classList.add('hidden');
+                if (themeBtnText) themeBtnText.innerText = 'Light Mode';
+            } else {
+                if (sunIcon) sunIcon.classList.add('hidden');
+                if (moonIcon) moonIcon.classList.remove('hidden');
+                if (themeBtnText) themeBtnText.innerText = 'Dark Mode';
+            }
+        }
 
-  <section id="contact">
-    <h2>Contact</h2>
-    <p>Email: jakub.cirip@gmail.com</p>
-    <p>GitHub: <a href="https://github.com/jakubcirip">jakubcirip</a></p>
-    <p>LinkedIn: <a href="https://www.linkedin.com/in/jakub-cirip-530216309/">linkedin.com/in/jakubcirip</a></p>
-  </section>
+        function toggleTheme() {
+            const isDark = document.body.classList.toggle('dark');
+            document.documentElement.classList.toggle('dark', isDark);
+            localStorage.setItem('theme', isDark ? 'dark' : 'light');
+            updateThemeUI();
+        }
 
-  <footer>
-    <p>&copy; 2025 Jakub Cirip</p>
-  </footer>
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            if (menu.classList.contains('hidden')) {
+                menu.classList.remove('hidden');
+                menu.classList.add('flex');
+            } else {
+                menu.classList.remove('flex');
+                menu.classList.add('hidden');
+            }
+        }
 
-  <!-- Scroll-to-top button -->
-  <button id="scrollTopBtn" class="scroll-top" aria-label="Scroll to top" title="Back to top">
-    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
-      <path fill="white" d="M12 4l-8 8h5v8h6v-8h5z" />
-    </svg>
-  </button>
+        function navigateToSection(sectionId, event) {
+            if (event) event.preventDefault();
+            const targetElement = document.getElementById(sectionId);
+            if (targetElement) {
+                targetElement.scrollIntoView({ behavior: 'smooth' });
+            }
+            const mobileMenu = document.getElementById('mobile-menu');
+            if (mobileMenu && !mobileMenu.classList.contains('hidden')) {
+                mobileMenu.classList.remove('flex');
+                mobileMenu.classList.add('hidden');
+            }
+        }
 
+        // ScrollSpy Intersection Observer
+        const observerOptions = { root: null, rootMargin: '-20% 0px -60% 0px', threshold: 0 };
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const id = entry.target.id;
+                    let navId = 'nav-about';
+                    let mNavId = 'm-nav-about';
+                    if (id === 'blogs-section') { navId = 'nav-blogs'; mNavId = 'm-nav-blogs'; }
+                    else if (id === 'projects-section') { navId = 'nav-projects'; mNavId = 'm-nav-projects'; }
+                    else if (id === 'skills') { navId = 'nav-skills'; mNavId = 'm-nav-skills'; }
+                    else if (id === 'hobbies-section') { navId = 'nav-hobbies'; mNavId = 'm-nav-hobbies'; }
+                    else if (id === 'contact') { navId = 'nav-contact'; mNavId = 'm-nav-contact'; }
+                    else if (id === 'about') { navId = 'nav-about'; mNavId = 'm-nav-about'; }
+                    setActiveNav(navId, mNavId);
+                }
+            });
+        }, observerOptions);
 
+        ['about', 'blogs-section', 'projects-section', 'skills', 'hobbies-section', 'contact'].forEach(secId => {
+            const el = document.getElementById(secId);
+            if (el) observer.observe(el);
+        });
+
+        function setActiveNav(navId, mNavId) {
+            // Desktop update (ponecháva rámček pre desktop, ak chceš)
+            ['nav-about', 'nav-blogs', 'nav-projects', 'nav-skills', 'nav-hobbies', 'nav-contact'].forEach(id => {
+                const el = document.getElementById(id);
+                if(el) {
+                    if(id === navId) {
+                        el.classList.remove('text-gray-600', 'dark:text-gray-300');
+                        el.classList.add('bg-purple-100', 'dark:bg-purple-900/50', 'text-purple-800', 'dark:text-white', 'border', 'border-purple-300', 'dark:border-purple-700/50');
+                    } else {
+                        el.classList.remove('bg-purple-100', 'dark:bg-purple-900/50', 'text-purple-800', 'dark:text-white', 'border', 'border-purple-300', 'dark:border-purple-700/50');
+                        el.classList.add('text-gray-600', 'dark:text-gray-300');
+                    }
+                }
+            });
+
+            // Mobile update (čistý text bez rámčeka, len fialová farba pre aktívnu položku)
+            ['m-nav-about', 'm-nav-blogs', 'm-nav-projects', 'm-nav-skills', 'm-nav-hobbies', 'm-nav-contact'].forEach(id => {
+                const el = document.getElementById(id);
+                if(el) {
+                    if(id === mNavId) {
+                        el.classList.remove('text-gray-300', 'hover:text-white');
+                        el.classList.add('text-purple-400', 'font-semibold');
+                    } else {
+                        el.classList.remove('text-purple-400', 'font-semibold');
+                        el.classList.add('text-gray-300', 'hover:text-white');
+                    }
+                }
+            });
+        }
+
+        window.addEventListener('scroll', () => {
+            const btn = document.getElementById('backToTopBtn');
+            if (window.scrollY > 400) {
+                btn.classList.remove('opacity-0', 'pointer-events-none'); btn.classList.add('opacity-100');
+            } else {
+                btn.classList.add('opacity-0', 'pointer-events-none'); btn.classList.remove('opacity-100');
+            }
+        });
+        function scrollToTop() { window.scrollTo({ top: 0, behavior: 'smooth' }); }
+
+        document.addEventListener('DOMContentLoaded', updateThemeUI);
+    </script>
 </body>
-
 </html>

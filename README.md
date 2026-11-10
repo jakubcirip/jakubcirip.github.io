@@ -2,6 +2,9 @@
 
 This is a personal website hosted via GitHub Pages.
 
+## Portfolio v2.0 - 10.11.2026
+### v2.0 Redesign (Major Portfolio Visual Update)
+
 ## Sections
 
 - **About Me** – Introduction and education/professional background.

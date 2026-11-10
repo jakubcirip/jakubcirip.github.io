@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="sk" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio Website - Jakub Čirip</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>tailwind.config = { darkMode: 'class' }</script>
+    <style>
+        body { background-color: #f8fafc; color: #0f172a; font-family: ui-sans-serif, system-ui, sans-serif; }
+        body.dark { background: #0b0f19; color: #f3f4f6; }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between selection:bg-purple-600 selection:text-white">
+    <header class="sticky top-0 z-50 bg-white/80 dark:bg-[#0b0f19]/80 backdrop-blur-md border-b border-gray-200 dark:border-gray-800">
+        <div class="max-w-4xl mx-auto px-4 h-16 flex items-center justify-between">
+            <a href="../index.html" class="font-bold text-lg hover:text-purple-600 dark:hover:text-purple-400 transition">← Back to Portfolio</a>
+        </div>
+    </header>
+    <main class="flex-grow max-w-4xl mx-auto px-4 py-12 w-full">
+        <article class="bg-white dark:bg-[#111827] border border-slate-200 dark:border-gray-800 rounded-2xl p-6 sm:p-10 shadow-lg space-y-6">
+            <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight">Portfolio Website Project</h1>
+            <p class="text-gray-500 text-sm">Detailed overview of design, architecture, and implementation.</p>
+            <div class="prose dark:prose-invert space-y-4 text-gray-700 dark:text-gray-300 leading-relaxed">
+                <p>This project represents my personal portfolio website built with HTML, Tailwind CSS and modern layout principles.</p>
+            </div>
+            <div class="pt-6 border-t border-slate-200 dark:border-gray-800">
+                <a href="../index.html" class="text-purple-600 dark:text-purple-400 hover:underline font-medium text-sm">← Back to Home</a>
+            </div>
+        </article>
+    </main>
+    <footer class="border-t border-slate-200 dark:border-gray-800 bg-slate-50 dark:bg-[#070a12] py-8 text-center text-sm text-gray-500">
+        © 2026 Jakub Čirip
+    </footer>
+</body>
+</html>

@@ -1,56 +1,144 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="sk" class="scroll-smooth">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Kubo Kombo</title>
-    <link rel="stylesheet" href="../css/style.css" />
-    <link rel="stylesheet" href="blog-style.css" />
-    <link rel="icon" type="image/jpeg" href="../icon1.jpg">
-    <script src="js/kombo-gallery.js" defer></script>
-    <link rel="stylesheet" href="../css/float-button.css" />
-    <script src="js/scroll-top.js" defer></script>
-    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/jpeg" href="../icon2.jpg">
+    <title>Kubo Kombo - Jakub Čirip</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: { 
+                extend: { 
+                    colors: { 
+                        darkBg: '#0b0f19', 
+                        cardBgDark: '#111827', 
+                        cardBgLight: '#ffffff' 
+                    } 
+                } 
+            }
+        }
+    </script>
+    <!-- MathJax for rendering formulas -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <!-- Okamžité aplikovanie triedy dark na html, aby sa zabránilo prebliknutiu -->
+    <script>
+        const savedTheme = localStorage.getItem('theme');
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+        }
+    </script>
+    <style>
+        body { 
+            font-family: ui-sans-serif, system-ui, sans-serif; 
+        }
+        /* Minimalistické štýly pre galériu */
+        .blog-gallery__viewport { overflow: hidden; width: 100%; border-radius: 0.75rem; }
+        .blog-gallery__track { display: flex; transition: transform 0.3s ease; }
+        .blog-gallery__track img { min-width: 100%; height: auto; object-fit: cover; }
+    </style>
 </head>
+<body class="min-h-screen flex flex-col justify-between bg-[#f8fafc] text-[#0f172a] dark:bg-[#0b0f19] dark:text-[#f3f4f6] selection:bg-purple-600 selection:text-white transition-colors duration-300">
 
-<body>
-
-    <header>
-        <h1>Kubo Kombo</h1>
-        <nav class="footer-nav">
-            <a href="../../index.html">← Back to Main Page</a>
-            <a href="../../blogs.html">Blogs Home →</a>
-        </nav>
+    <!-- HEADER / NAVIGATION -->
+    <header class="sticky top-0 z-50 bg-white/80 dark:bg-[#0b0f19]/80 backdrop-blur-md border-b border-gray-200 dark:border-gray-800 transition-colors">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <div class="font-bold text-lg tracking-wide">
+                <a href="../index.html" class="hover:text-purple-600 dark:hover:text-purple-400 transition">Jakub Čirip</a>
+            </div>
+            <nav class="hidden md:flex items-center space-x-2 text-sm">
+                <a href="../index.html#about" class="px-3 py-1.5 rounded-lg transition text-gray-600 dark:text-gray-300 hover:text-purple-600 dark:hover:text-white">ABOUT</a>
+                <a href="../blogs.html" class="px-3 py-1.5 rounded-lg transition bg-purple-100 dark:bg-purple-900/50 text-purple-800 dark:text-white border border-purple-300 dark:border-purple-700/50">BLOG</a>
+                <a href="../projects.html" class="px-3 py-1.5 rounded-lg transition text-gray-600 dark:text-gray-300 hover:text-purple-600 dark:hover:text-white">PROJECTS</a>
+                <a href="../index.html#skills" class="px-3 py-1.5 rounded-lg transition text-gray-600 dark:text-gray-300 hover:text-purple-600 dark:hover:text-white">SKILLS</a>
+                <a href="../index.html#hobbies-section" class="px-3 py-1.5 rounded-lg transition text-gray-600 dark:text-gray-300 hover:text-purple-600 dark:hover:text-white">HOBBIES</a>
+                <a href="../index.html#contact" class="px-3 py-1.5 rounded-lg transition text-gray-600 dark:text-gray-300 hover:text-purple-600 dark:hover:text-white">CONTACT</a>
+            </nav>
+            <div class="flex items-center space-x-3">
+                <button onclick="toggleTheme()" id="themeToggleBtn" aria-label="Toggle Theme" class="p-2 rounded-xl bg-slate-100 dark:bg-gray-800 text-purple-700 dark:text-purple-300 hover:bg-slate-200 dark:hover:bg-gray-700 transition flex items-center space-x-2 text-xs font-semibold shadow-sm">
+                    <svg id="sunIcon" class="w-4 h-4 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
+                    <svg id="moonIcon" class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg>
+                    <span id="themeBtnText">Dark Mode</span>
+                </button>
+                <!-- Mobile Menu Button -->
+                <button onclick="toggleMobileMenu()" aria-label="Mobile Menu" class="md:hidden p-2 rounded-xl bg-slate-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+                </button>
+            </div>
+        </div>
     </header>
 
-    <section class="blog-post">
-        <div class="blog-content">
-            <div>
-                <h1>Welcome!</h1>
-                <p>I'm thrilled that you want to learn more about this project. <br>
-                <div class="blog-preview">
-                    <img src="images/3-kombo/kombo-intro.png" alt="Kubo Kombo">
+    <!-- MOBILE FULLSCREEN MENU -->
+    <div id="mobile-menu" class="fixed inset-0 z-50 bg-[#0b0f19] text-[#f3f4f6] flex-col justify-start items-center pt-24 space-y-6 text-xl hidden">
+        <button onclick="toggleMobileMenu()" aria-label="Close Menu" class="absolute top-6 right-6 p-2 text-gray-400 hover:text-white transition">
+            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+        </button>
+        <a href="../index.html#about" onclick="toggleMobileMenu()" class="transition text-gray-300 hover:text-white">ABOUT</a>
+        <a href="../blogs.html" onclick="toggleMobileMenu()" class="transition text-purple-400 font-semibold">BLOG</a>
+        <a href="../projects.html" onclick="toggleMobileMenu()" class="transition text-gray-300 hover:text-white">PROJECTS</a>
+        <a href="../index.html#skills" onclick="toggleMobileMenu()" class="transition text-gray-300 hover:text-white">SKILLS</a>
+        <a href="../index.html#hobbies-section" onclick="toggleMobileMenu()" class="transition text-gray-300 hover:text-white">HOBBIES</a>
+        <a href="../index.html#contact" onclick="toggleMobileMenu()" class="transition text-gray-300 hover:text-white">CONTACT</a>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <main class="flex-grow max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 w-full space-y-8">
+        
+        <!-- Article Header -->
+        <div class="space-y-3 bg-white dark:bg-[#111827] border border-slate-200 dark:border-gray-800 p-6 sm:p-8 rounded-2xl shadow-sm transition-colors">
+            <p class="text-xs text-purple-600 dark:text-purple-400 font-semibold uppercase tracking-wider">January 7, 2026</p>
+            <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight text-gray-900 dark:text-white">Kubo Kombo</h1>
+        </div>
+
+        <!-- Article Sections as Cards -->
+        <div class="space-y-6">
+            
+            <!-- Welcome Section -->
+            <section class="bg-white dark:bg-[#111827] border border-slate-200 dark:border-gray-800 p-6 sm:p-8 rounded-2xl space-y-4 shadow-sm transition-colors">
+                <h2 class="text-2xl font-bold text-purple-700 dark:text-purple-300">Welcome!</h2>
+                <p class="text-gray-700 dark:text-gray-300 text-sm sm:text-base leading-relaxed">
+                    I'm thrilled that you want to learn more about this project.
+                </p>
+                <div class="overflow-hidden rounded-xl bg-gray-900 my-4 border border-gray-800">
+                    <img src="images/3-kombo/kombo-intro.png" alt="Kubo Kombo" class="w-full h-auto object-cover">
                 </div>
-                Let's get started!<br><br></p>
-            </div>
-            <div>
-                <h3>Motivation and Idea</h3>
-                <p>First of all, I would like to offer you an insight into what motivated me for this project.</p>
-                <p>Why would someone want a guitar combo?<br>
+                <p class="text-gray-700 dark:text-gray-300 text-sm sm:text-base leading-relaxed">
+                    Let's get started!
+                </p>
+            </section>
+
+            <!-- Motivation and Idea -->
+            <section class="bg-white dark:bg-[#111827] border border-slate-200 dark:border-gray-800 p-6 sm:p-8 rounded-2xl space-y-4 shadow-sm transition-colors">
+                <h3 class="text-xl sm:text-2xl font-bold text-purple-700 dark:text-purple-300">Motivation and Idea</h3>
+                <p class="text-gray-700 dark:text-gray-300 text-sm sm:text-base leading-relaxed">
+                    First of all, I would like to offer you an insight into what motivated me for this project.
+                </p>
+                <p class="text-gray-700 dark:text-gray-300 text-sm sm:text-base leading-relaxed">
+                    Why would someone want a guitar combo?<br>
                     The answer is simple, they want to play their guitar with a decent sound.<br>
                     But why not just buy one, but make one? - I like to make simple things more complicated;)<br>
-                    I also like to do something new, create new things, and it's more interesting to me than just buying
-                    something.<br><br>
+                    I also like to do something new, create new things, and it's more interesting to me than just buying something.
+                </p>
+                <p class="text-gray-700 dark:text-gray-300 text-sm sm:text-base leading-relaxed">
                     The basic idea was to use 2 45W speakers that I had left over from the original setup.<br>
-                    I felt sorry for them because the old repros broke, so I thought I'd use them for this
-                    project.<br><br>
-                    In the next section we will see the assembly of components for the project. <br><br></p>
-            </div>
-            <div>
-                <h3>List of compoments</h3>
-                <p>
-                <ul style="list-style-type:disc; padding-left: 1rem; list-style-position: inside;">
+                    I felt sorry for them because the old repros broke, so I thought I'd use them for this project.
+                </p>
+                <p class="text-gray-700 dark:text-gray-300 text-sm sm:text-base leading-relaxed">
+                    In the next section we will see the assembly of components for the project.
+                </p>
+            </section>
+
+            <!-- List of Components -->
+            <section class="bg-white dark:bg-[#111827] border border-slate-200 dark:border-gray-800 p-6 sm:p-8 rounded-2xl space-y-4 shadow-sm transition-colors">
+                <h3 class="text-xl sm:text-2xl font-bold text-purple-700 dark:text-purple-300">List of components</h3>
+                <ul class="list-disc list-inside space-y-2 text-gray-700 dark:text-gray-300 text-sm sm:text-base pl-2">
                     <li>2x 45W 8Ω reproductors</li>
                     <li>MeanWell LRS-150-24, Power supply 24V, 6.5A, 150W</li>
                     <li>2x Preamplifier Tone Board, Hi-Fi Audio Amplifier Module DC 12–24V</li>
@@ -58,184 +146,265 @@
                     <li>2x JFET buffer</li>
                     <li>Combo case made of plastic, wood and damping material</li>
                 </ul>
+            </section>
+
+            <!-- Combo Design -->
+            <section class="bg-white dark:bg-[#111827] border border-slate-200 dark:border-gray-800 p-6 sm:p-8 rounded-2xl space-y-6 shadow-sm transition-colors">
+                <h3 class="text-xl sm:text-2xl font-bold text-purple-700 dark:text-purple-300">Combo Design - proposal and solution</h3>
+                <p class="text-gray-700 dark:text-gray-300 text-sm sm:text-base leading-relaxed">
+                    The dimensions must be designed so that all the modules of the combo are placed inside it and are easily accessible for assembly and serviceability.
                 </p>
-            </div>
-            <div>
-                <h3>Combo Design - proposal and solution</h3>
-                <p>The dimensions must be designed so that all the modules of the combo are placed inside it and are
-                    easily accessible for assembly and serviceability.<br>
 
-                <div class="blog-media">
-                    <div class="blog-media__text">
-                        <p>
-                            The dimensions of the box are: <br>
-                            420 x 320 x 230 <br>
-                            The 420 width is sufficient to comfortably place two 185 diameter speakers side by side.
-                            <br>
-                            In the middle of the box and on the sides I designed various points for attaching all the
-                            components and
-                            modules.
-                        </p>
-                    </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
+                    <p class="text-gray-700 dark:text-gray-300 text-sm sm:text-base leading-relaxed">
+                        The dimensions of the box are:<br>
+                        <strong class="text-gray-900 dark:text-white">420 x 320 x 230</strong><br>
+                        The 420 width is sufficient to comfortably place two 185 diameter speakers side by side.<br><br>
+                        In the middle of the box and on the sides I designed various points for attaching all the components and modules.
+                    </p>
 
-                    <div class="blog-media__gallery">
-                        <div class="blog-gallery__slider">
-                            <button class="blog-gallery__btn blog-gallery__btn--prev">
-                                &#10094;
-                            </button>
-
-                            <div class="blog-gallery__viewport">
-                                <div class="blog-gallery__track">
-                                    <img src="images/3-kombo/kombo1.jpeg" alt="1">
-                                    <img src="images/3-kombo/kombo2.jpeg" alt="2">
-                                    <img src="images/3-kombo/kombo3.jpeg" alt="3">
-                                    <img src="images/3-kombo/kombo4.jpeg" alt="4">
-                                    <img src="images/3-kombo/kombo5.jpeg" alt="5">
-                                    <img src="images/3-kombo/kombo6.jpeg" alt="6">
+                    <!-- Gallery Widget -->
+                    <div class="blog-media bg-slate-50 dark:bg-gray-900 p-4 rounded-xl border border-slate-200 dark:border-gray-800">
+                        <div class="blog-gallery__slider relative flex items-center">
+                            <button class="blog-gallery__btn blog-gallery__btn--prev absolute left-2 z-10 bg-black/50 text-white px-2.5 py-1 rounded-full text-sm hover:bg-black/70 transition">&#10094;</button>
+                            <div class="blog-gallery__viewport overflow-hidden w-full rounded-lg">
+                                <div class="blog-gallery__track flex transition-transform duration-300">
+                                    <img src="images/3-kombo/kombo1.jpeg" alt="1" class="w-full shrink-0 object-cover h-56">
+                                    <img src="images/3-kombo/kombo2.jpeg" alt="2" class="w-full shrink-0 object-cover h-56">
+                                    <img src="images/3-kombo/kombo3.jpeg" alt="3" class="w-full shrink-0 object-cover h-56">
+                                    <img src="images/3-kombo/kombo4.jpeg" alt="4" class="w-full shrink-0 object-cover h-56">
+                                    <img src="images/3-kombo/kombo5.jpeg" alt="5" class="w-full shrink-0 object-cover h-56">
+                                    <img src="images/3-kombo/kombo6.jpeg" alt="6" class="w-full shrink-0 object-cover h-56">
                                 </div>
                             </div>
-                            <button class="blog-gallery__btn blog-gallery__btn--next">
-                                &#10095;
-                            </button>
+                            <button class="blog-gallery__btn blog-gallery__btn--next absolute right-2 z-10 bg-black/50 text-white px-2.5 py-1 rounded-full text-sm hover:bg-black/70 transition">&#10095;</button>
                         </div>
-                        <p class="blog-gallery__caption">Combo case manufacturing</p>
+                        <p class="blog-gallery__caption text-center text-xs text-gray-500 dark:text-gray-400 mt-2 italic">Combo case manufacturing</p>
                     </div>
                 </div>
-                </p>
 
-                <h4>Proposal of the inner wall</h4>
-                <p>For better sound properties, my friend, an expert in the field of audio equipment, recommended that I
-                    insert an inner wall that will separate the speakers from the electrical equipment and at the same
-                    time place damping material on it (on the side near the speakers) so that the sound spreads better
-                    outwards from the combo. <br>
-                    This wall will also be useful for placing electrical component (preamps, buffers, aplifier and DC
-                    conventor). <br> <br>
-                    In the next picture you can see how it looks inside with this wall (without all components).<br>
-                <div class="img-wrapper">
-                    <img src="images/3-kombo/kombo7.jpeg" alt="7">
-                </div>
-                <br>
-                </p>
-
-            </div>
-            <div>
-                <h3>JFET Buffer</h3><br>
-                <h4>Impedance Buffer</h4>
-                <p>
-                    A buffer is a circuit that isolates one part of a system from another, often acting as a bridge
-                    between a high impedance source and a low impedance load.<br>
-                    It ensures signal integrity by preventing loading, distortion, or signal loss, while usually
-                    providing current gain.<br>
-                    For the purpose of our combo, it separates the guitar from the preamp module, providing a high input
-                    impedance at the input of the preamp module.
-                </p><br>
-                <h4>Main Characteristic of JFET buffer:</h4>
-                <ul style="list-style-type:disc; padding-left: 1rem; list-style-position: inside;">
-                    <li>It preserved the signal from the guitar without losing quality. It shapes the tone without
-                        change.</li>
-                    <li>Matches the impedance of the guitar and the preamp input.</li>
-                    <li>Amplifies current, not voltage.</li>
-                    <li>Separates the guitar from the preamp – the preamp circuit does not affect the guitar pickup.
-                    </li>
-                    <li>Preserves the dynamics and natural tone of the guitar.</li>
-                </ul><br>
-                <h4>Buffer manufacturing</h4>
-                <p>
-                    Buffer components: J201 transistor, 2x capacitor, 3x resistor, PCB board <br>
-                </p><br>
-                <h4>Buffer Scheme</h4>
-                <p>In this phase, the first step was design of buffer and scheme drawing. The testing program also
-                    helped me with simulation of buffer and measurement the values of voltage. For JFET 'follower'
-                    buffer is really important to set up the right operating point of JFET transistor.<br>
-                    The DC operating point is the voltage and current in transistor without input signal.<br>
-                    It defines transistor behaviour during signal processing.<br>
-                    If the operating point is set up incorrectly it can cause, <br> that transistor will be 'close' ->
-                    means doesn't work, <br> or will be overloaded -> which leads to signal distortion, noise or
-                    overheating<br> On the first picture we can see the simple buffer with voltage divider for
-                    transistor Gate (this voltage help us to set the right operating point). The buffer is without input
-                    and output signals and capacitors.</p>
-                <div class="img-wrapper">
-                    <img src="images/3-kombo/kombo8-buffer1.png" alt="8">
-                </div>
-                <p class="img-comment" style="text-align:center; font-style:italic; color:#000000; margin-top:0.5rem">
-                    Buffer schematic — without input/output capacitors
-                </p>
-                <br>
-                <p>On the second picture I added an input source (AC) (which represents the source from the guitar)
-                    trought a 1uF input capacitor and an output signal from a transistor Source going trought 4,7uF
-                    output capacitor. Using simulation mode we can see the voltage readings on the voltmeters.</p>
-                <div class="img-wrapper">
-                    <img src="images/3-kombo/kombo9-buffer2.png" alt="9">
-                </div>
-                <p class="img-comment" style="text-align:center; font-style:italic; color:#000000; margin-top:0.5rem">
-                    Buffer schematic — with AC input and input/output capacitors
-                </p>
-
-                <br><br>
-
-                <h4>Calculation of operating point</h4>
-                <p>Variable definition for operating point:
-                    Vs - Source Voltage<br>
-                    Id - Transformator current<br></p>
-                    Calculation procedure:</p>
-                <ul style="list-style-type:disc; padding-left: 1rem; list-style-position: inside;">
-                    <li style="font-weight: bold;">1. Find the DC voltage at the transistor gate:</li>
-                    <p> \[Vg = {R3 \over R1 + R2 }. Vcc\]
+                <div class="space-y-4 pt-4 border-t border-slate-100 dark:border-gray-800">
+                    <h4 class="font-bold text-gray-900 dark:text-white text-lg">Proposal of the inner wall</h4>
+                    <p class="text-gray-700 dark:text-gray-300 text-sm sm:text-base leading-relaxed">
+                        For better sound properties, my friend, an expert in the field of audio equipment, recommended that I insert an inner wall that will separate the speakers from the electrical equipment and at the same time place damping material on it (on the side near the speakers) so that the sound spreads better outwards from the combo.<br>
+                        This wall will also be useful for placing electrical component (preamps, buffers, amplifier and DC convertor).
                     </p>
-                    <li style="font-weight: bold;">2. We assume that the source stabilizes so that:</li>
-                    <p> \[Id = {Vs \over Rs }\] <br>
-                        Values from my measurements:
-                        \[Id = {2.09V \over 1000Ω } = 2.09mA\]
+                    <p class="text-gray-700 dark:text-gray-300 text-sm sm:text-base leading-relaxed">
+                        In the next picture you can see how it looks inside with this wall (without all components).
                     </p>
-                    <li style="font-weight: bold;">3. Count Vgs</li>
-                    <p> \[Vgs = {Vg - Vs }\] <br>
-                        Values from my measurements:
-                        \[Vgs = {2.62V - 2.09V = 0.53V }\]
-                    </p>
-                    <li style="font-weight: bold;">4. Check if this fits with the JFET equation</li>
-                    <p>Insert values to: <br>
-                        \[Id = Idss (1 - {Vgs \over Vgs(off) })^2 \]
-                    </p>
-                </ul>
-                <h4>Soldering the buffer</h4>
-                <div class="img-wrapper">
-                    <img src="images/3-kombo/kombo10-buffer3.jpeg" alt="10">
+                    <div class="overflow-hidden rounded-xl bg-gray-900 border border-gray-800 max-w-lg mx-auto">
+                        <img src="images/3-kombo/kombo7.jpeg" alt="7" class="w-full h-auto object-cover">
+                    </div>
                 </div>
-                <p class="img-comment" style="text-align:center; font-style:italic; color:#000000; margin-top:0.5rem">
-                    For an unnamed person, what soldering looks like:)
-                </p>
-                <div class="img-wrapper">
-                    <img src="images/3-kombo/kombo11-buffer4.jpeg" alt="10">
-                </div>
+            </section>
 
-            </div>
-
-            <br>
-            <br>
-            <div>
+            <!-- JFET Buffer Section -->
+            <section class="bg-white dark:bg-[#111827] border border-slate-200 dark:border-gray-800 p-6 sm:p-8 rounded-2xl space-y-6 shadow-sm transition-colors">
+                <h3 class="text-xl sm:text-2xl font-bold text-purple-700 dark:text-purple-300">JFET Buffer</h3>
+                
                 <div>
-                    <h3>More coming soon :)</h3>
-                    <p>
-                    <h4>...</h4>
+                    <h4 class="font-bold text-gray-900 dark:text-white text-lg mb-2">Impedance Buffer</h4>
+                    <p class="text-gray-700 dark:text-gray-300 text-sm sm:text-base leading-relaxed">
+                        A buffer is a circuit that isolates one part of a system from another, often acting as a bridge between a high impedance source and a low impedance load.<br>
+                        It ensures signal integrity by preventing loading, distortion, or signal loss, while usually providing current gain.<br>
+                        For the purpose of our combo, it separates the guitar from the preamp module, providing a high input impedance at the input of the preamp module.
                     </p>
                 </div>
-            </div>
-    </section>
 
-<footer>
-    <nav class="footer-nav">
-      <a href="../../index.html">← Back to Main Page</a>
-      <a href="../../blogs.html">Blogs Home →</a>
-    </nav><br>
-    <p>&copy; 2025 Jakub Cirip</p>
-  </footer>
+                <div>
+                    <h4 class="font-bold text-gray-900 dark:text-white text-lg mb-2">Main Characteristic of JFET buffer:</h4>
+                    <ul class="list-disc list-inside space-y-1 text-gray-700 dark:text-gray-300 text-sm sm:text-base pl-2">
+                        <li>It preserved the signal from the guitar without losing quality. It shapes the tone without change.</li>
+                        <li>Matches the impedance of the guitar and the preamp input.</li>
+                        <li>Amplifies current, not voltage.</li>
+                        <li>Separates the guitar from the preamp – the preamp circuit does not affect the guitar pickup.</li>
+                        <li>Preserves the dynamics and natural tone of the guitar.</li>
+                    </ul>
+                </div>
 
-<!-- Scroll-to-top button -->
-  <button id="scrollTopBtn" class="scroll-top" aria-label="Scroll to top" title="Back to top">
-    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
-      <path fill="white" d="M12 4l-8 8h5v8h6v-8h5z" />
-    </svg>
-  </button>
+                <div>
+                    <h4 class="font-bold text-gray-900 dark:text-white text-lg mb-2">Buffer manufacturing</h4>
+                    <p class="text-gray-700 dark:text-gray-300 text-sm sm:text-base leading-relaxed">
+                        Buffer components: J201 transistor, 2x capacitor, 3x resistor, PCB board
+                    </p>
+                </div>
 
+                <div>
+                    <h4 class="font-bold text-gray-900 dark:text-white text-lg mb-2">Buffer Scheme</h4>
+                    <p class="text-gray-700 dark:text-gray-300 text-sm sm:text-base leading-relaxed mb-4">
+                        In this phase, the first step was design of buffer and scheme drawing. The testing program also helped me with simulation of buffer and measurement the values of voltage. For JFET 'follower' buffer is really important to set up the right operating point of JFET transistor.<br>
+                        The DC operating point is the voltage and current in transistor without input signal.<br>
+                        It defines transistor behaviour during signal processing.<br>
+                        If the operating point is set up incorrectly it can cause, that transistor will be 'close' -> means doesn't work, or will be overloaded -> which leads to signal distortion, noise or overheating.<br>
+                        On the first picture we can see the simple buffer with voltage divider for transistor Gate (this voltage help us to set the right operating point). The buffer is without input and output signals and capacitors.
+                    </p>
+
+                    <div class="overflow-hidden rounded-xl bg-gray-900 border border-gray-800 max-w-lg mx-auto mb-2">
+                        <img src="images/3-kombo/kombo8-buffer1.png" alt="8" class="w-full h-auto object-cover">
+                    </div>
+                    <p class="text-center italic text-xs text-gray-500 dark:text-gray-400 mb-6">Buffer schematic — without input/output capacitors</p>
+
+                    <p class="text-gray-700 dark:text-gray-300 text-sm sm:text-base leading-relaxed mb-4">
+                        On the second picture I added an input source (AC) (which represents the source from the guitar) trought a 1uF input capacitor and an output signal from a transistor Source going trought 4,7uF output capacitor. Using simulation mode we can see the voltage readings on the voltmeters.
+                    </p>
+
+                    <div class="overflow-hidden rounded-xl bg-gray-900 border border-gray-800 max-w-lg mx-auto mb-2">
+                        <img src="images/3-kombo/kombo9-buffer2.png" alt="9" class="w-full h-auto object-cover">
+                    </div>
+                    <p class="text-center italic text-xs text-gray-500 dark:text-gray-400">Buffer schematic — with AC input and input/output capacitors</p>
+                </div>
+
+                <!-- Calculation of operating point -->
+                <div class="pt-4 border-t border-slate-100 dark:border-gray-800 space-y-4">
+                    <h4 class="font-bold text-gray-900 dark:text-white text-lg">Calculation of operating point</h4>
+                    <p class="text-gray-700 dark:text-gray-300 text-sm sm:text-base">
+                        Variable definition for operating point:<br>
+                        <strong class="text-gray-900 dark:text-white">Vs</strong> - Source Voltage<br>
+                        <strong class="text-gray-900 dark:text-white">Id</strong> - Transformator current
+                    </p>
+                    <p class="text-gray-700 dark:text-gray-300 text-sm sm:text-base font-semibold">Calculation procedure:</p>
+                    
+                    <ul class="space-y-4 text-gray-700 dark:text-gray-300 text-sm sm:text-base pl-2">
+                        <li>
+                            <strong class="text-gray-900 dark:text-white">1. Find the DC voltage at the transistor gate:</strong>
+                            <div class="my-2 p-3 bg-slate-50 dark:bg-gray-900 rounded-lg text-center overflow-x-auto">
+                                $$Vg = {R3 \over R1 + R2 }. Vcc$$
+                            </div>
+                        </li>
+                        <li>
+                            <strong class="text-gray-900 dark:text-white">2. We assume that the source stabilizes so that:</strong>
+                            <div class="my-2 p-3 bg-slate-50 dark:bg-gray-900 rounded-lg text-center overflow-x-auto">
+                                $$Id = {Vs \over Rs }$$
+                            </div>
+                            <p class="text-xs text-gray-500 dark:text-gray-400 text-center mt-1">Values from my measurements: $$Id = {2.09V \over 1000\Omega } = 2.09mA$$</p>
+                        </li>
+                        <li>
+                            <strong class="text-gray-900 dark:text-white">3. Count Vgs</strong>
+                            <div class="my-2 p-3 bg-slate-50 dark:bg-gray-900 rounded-lg text-center overflow-x-auto">
+                                $$Vgs = {Vg - Vs }$$
+                            </div>
+                            <p class="text-xs text-gray-500 dark:text-gray-400 text-center mt-1">Values from my measurements: $$Vgs = {2.62V - 2.09V = 0.53V }$$</p>
+                        </li>
+                        <li>
+                            <strong class="text-gray-900 dark:text-white">4. Check if this fits with the JFET equation</strong>
+                            <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">Insert values to:</p>
+                            <div class="my-2 p-3 bg-slate-50 dark:bg-gray-900 rounded-lg text-center overflow-x-auto">
+                                $$Id = Idss (1 - {Vgs \over Vgs(off) })^2$$
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="font-bold text-gray-900 dark:text-white text-lg mb-2">Soldering the buffer</h4>
+                    <div class="overflow-hidden rounded-xl bg-gray-900 border border-gray-800 max-w-lg mx-auto mb-2">
+                        <img src="images/3-kombo/kombo10-buffer3.jpeg" alt="10" class="w-full h-auto object-cover">
+                    </div>
+                    <p class="text-center italic text-xs text-gray-500 dark:text-gray-400 mb-4">For an unnamed person, what soldering looks like:)</p>
+
+                    <div class="overflow-hidden rounded-xl bg-gray-900 border border-gray-800 max-w-lg mx-auto">
+                        <img src="images/3-kombo/kombo11-buffer4.jpeg" alt="11" class="w-full h-auto object-cover">
+                    </div>
+                </div>
+            </section>
+
+            <!-- More coming soon -->
+            <section class="bg-white dark:bg-[#111827] border border-slate-200 dark:border-gray-800 p-6 sm:p-8 rounded-2xl space-y-4 shadow-sm transition-colors text-center">
+                <h3 class="text-2xl font-bold text-purple-700 dark:text-purple-300">More coming soon :)</h3>
+                <p class="text-gray-500 font-mono text-xl">...</p>
+            </section>
+
+        </div>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="border-t border-slate-200 dark:border-gray-800 bg-slate-50 dark:bg-[#070a12] py-8 text-center text-sm text-gray-500 mt-20 transition-colors">
+        <div class="max-w-4xl mx-auto px-4 space-y-3">
+            <p>&copy; 2026 Jakub Čirip</p>
+        </div>
+    </footer>
+
+    <!-- BACK TO TOP BUTTON -->
+    <button id="backToTopBtn" onclick="scrollToTop()" aria-label="Back to top" class="fixed bottom-6 right-6 z-50 bg-purple-600 text-white p-3 rounded-full shadow-lg opacity-0 pointer-events-none transition-all duration-300 hover:bg-purple-700">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"></path></svg>
+    </button>
+
+    <!-- SCRIPT FOR THEME, GALLERY & SCROLL -->
+    <script>
+        function updateThemeUI() {
+            const isDark = document.documentElement.classList.contains('dark');
+            const sunIcon = document.getElementById('sunIcon');
+            const moonIcon = document.getElementById('moonIcon');
+            const themeBtnText = document.getElementById('themeBtnText');
+            if (isDark) {
+                if (sunIcon) sunIcon.classList.remove('hidden');
+                if (moonIcon) moonIcon.classList.add('hidden');
+                if (themeBtnText) themeBtnText.innerText = 'Light Mode';
+            } else {
+                if (sunIcon) sunIcon.classList.add('hidden');
+                if (moonIcon) moonIcon.classList.remove('hidden');
+                if (themeBtnText) themeBtnText.innerText = 'Dark Mode';
+            }
+        }
+
+        function toggleTheme() {
+            const isDark = document.documentElement.classList.toggle('dark');
+            localStorage.setItem('theme', isDark ? 'dark' : 'light');
+            updateThemeUI();
+        }
+
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            if (menu.classList.contains('hidden')) {
+                menu.classList.remove('hidden');
+                menu.classList.add('flex');
+            } else {
+                menu.classList.remove('flex');
+                menu.classList.add('hidden');
+            }
+        }
+
+        // Gallery script logic
+        document.addEventListener('DOMContentLoaded', () => {
+            updateThemeUI();
+            
+            const track = document.querySelector('.blog-gallery__track');
+            if (track) {
+                const slides = Array.from(track.children);
+                const nextBtn = document.querySelector('.blog-gallery__btn--next');
+                const prevBtn = document.querySelector('.blog-gallery__btn--prev');
+                let currentIndex = 0;
+
+                function updateSlidePosition() {
+                    track.style.transform = `translateX(-${currentIndex * 100}%)`;
+                }
+
+                if (nextBtn) {
+                    nextBtn.addEventListener('click', () => {
+                        currentIndex = (currentIndex + 1) % slides.length;
+                        updateSlidePosition();
+                    });
+                }
+
+                if (prevBtn) {
+                    prevBtn.addEventListener('click', () => {
+                        currentIndex = (currentIndex - 1 + slides.length) % slides.length;
+                        updateSlidePosition();
+                    });
+                }
+            }
+        });
+
+        window.addEventListener('scroll', () => {
+            const btn = document.getElementById('backToTopBtn');
+            if (window.scrollY > 400) {
+                btn.classList.remove('opacity-0', 'pointer-events-none'); btn.classList.add('opacity-100');
+            } else {
+                btn.classList.add('opacity-0', 'pointer-events-none'); btn.classList.remove('opacity-100');
+            }
+        });
+        function scrollToTop() { window.scrollTo({ top: 0, behavior: 'smooth' }); }
+    </script>
 </body>
 </html>

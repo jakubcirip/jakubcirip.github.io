@@ -1,231 +1,308 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="sk" class="scroll-smooth">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Linux Kernel Intro</title>
-  <link rel="stylesheet" href="../css/style.css">
-  <link rel="stylesheet" href="blog-style.css">
-  <link rel="stylesheet" href="../css/float-button.css" />
-  <script src="js/scroll-top.js" defer></script>
-  <link rel="icon" type="image/jpeg" href="../icon1.jpg">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/jpeg" href="../icon2.jpg">
+    <title>Linux Kernel Intro - Jakub Čirip</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: { 
+                extend: { 
+                    colors: { 
+                        darkBg: '#0b0f19', 
+                        cardBgDark: '#111827', 
+                        cardBgLight: '#ffffff' 
+                    } 
+                } 
+            }
+        }
+    </script>
+    <!-- Okamžité aplikovanie triedy dark na html, aby sa zabránilo prebliknutiu -->
+    <script>
+        const savedTheme = localStorage.getItem('theme');
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+        }
+    </script>
+    <style>
+        body { 
+            font-family: ui-sans-serif, system-ui, sans-serif; 
+        }
+    </style>
 </head>
-<body>
-  <header>
-    <h1>Linux Kernel Intro</h1>
-    <nav class="footer-nav">
-      <a href="../../index.html">← Back to Main Page</a>
-      <a href="../../blogs.html">Blogs Home →</a>
-    </nav>
-  </header>
+<body class="min-h-screen flex flex-col justify-between bg-[#f8fafc] text-[#0f172a] dark:bg-[#0b0f19] dark:text-[#f3f4f6] selection:bg-purple-600 selection:text-white transition-colors duration-300">
 
-  <section class="blog-post">
-  <div class="blog-content">
-    <h3>Content</h3><br>
-    <p>
-      The Linux kernel is the core component of the Linux operating system. It acts as the bridge between hardware and
-      software, managing system resources such as CPU time, memory, storage devices, networking, and hardware
-      communication. Every application running on a Linux system ultimately relies on the kernel to perform operations
-      that require direct interaction with the hardware.
-    </p><br>
-    <p>
-      Unlike regular applications, the kernel operates with the highest level of privileges on the processor. This
-      allows it to safely coordinate multiple processes, enforce security boundaries, and ensure that applications
-      cannot interfere with one another or damage the operating system.
-    </p><br>
-    <p>
-      In this introductory article, we'll explore the role of the Linux kernel, explain the difference between
-      user space and kernel space, and introduce some of the most important operating system concepts that every Linux
-      developer should understand.
-    </p>
-    <p>
-      We'll also look at different kernel architectures, how memory is organized, and provide guidance for anyone
-      interested in starting their journey into Linux kernel development.
-    </p><br>
-  </div>
-  <div class="blog-preview">
-    <img src="images/2-kernel-intro/kernel-intro.jpg" alt="Kernel Intro">
-  </div>
-</section>
+    <!-- HEADER / NAVIGATION -->
+    <header class="sticky top-0 z-50 bg-white/80 dark:bg-[#0b0f19]/80 backdrop-blur-md border-b border-gray-200 dark:border-gray-800 transition-colors">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <div class="font-bold text-lg tracking-wide">
+                <a href="../index.html" class="hover:text-purple-600 dark:hover:text-purple-400 transition">Jakub Čirip</a>
+            </div>
+            <nav class="hidden md:flex items-center space-x-2 text-sm">
+                <a href="../index.html#about" class="px-3 py-1.5 rounded-lg transition text-gray-600 dark:text-gray-300 hover:text-purple-600 dark:hover:text-white">ABOUT</a>
+                <a href="../blogs.html" class="px-3 py-1.5 rounded-lg transition bg-purple-100 dark:bg-purple-900/50 text-purple-800 dark:text-white border border-purple-300 dark:border-purple-700/50">BLOG</a>
+                <a href="../projects.html" class="px-3 py-1.5 rounded-lg transition text-gray-600 dark:text-gray-300 hover:text-purple-600 dark:hover:text-white">PROJECTS</a>
+                <a href="../index.html#skills" class="px-3 py-1.5 rounded-lg transition text-gray-600 dark:text-gray-300 hover:text-purple-600 dark:hover:text-white">SKILLS</a>
+                <a href="../index.html#hobbies-section" class="px-3 py-1.5 rounded-lg transition text-gray-600 dark:text-gray-300 hover:text-purple-600 dark:hover:text-white">HOBBIES</a>
+                <a href="../index.html#contact" class="px-3 py-1.5 rounded-lg transition text-gray-600 dark:text-gray-300 hover:text-purple-600 dark:hover:text-white">CONTACT</a>
+            </nav>
+            <div class="flex items-center space-x-3">
+                <button onclick="toggleTheme()" id="themeToggleBtn" aria-label="Toggle Theme" class="p-2 rounded-xl bg-slate-100 dark:bg-gray-800 text-purple-700 dark:text-purple-300 hover:bg-slate-200 dark:hover:bg-gray-700 transition flex items-center space-x-2 text-xs font-semibold shadow-sm">
+                    <svg id="sunIcon" class="w-4 h-4 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
+                    <svg id="moonIcon" class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg>
+                    <span id="themeBtnText">Dark Mode</span>
+                </button>
+                <!-- Mobile Menu Button -->
+                <button onclick="toggleMobileMenu()" aria-label="Mobile Menu" class="md:hidden p-2 rounded-xl bg-slate-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+                </button>
+            </div>
+        </div>
+    </header>
 
-<section class="blog-post">
-  <div class="blog-content">
-    <h3>Basic Operating System (OS) Concepts</h3><br>
-    <p>
-      Before diving into kernel programming, it's important to understand several core concepts used throughout modern
-      operating systems. These terms appear frequently in Linux documentation and source code.
-    </p><br>
-    <ul style="list-style-type:disc; padding-left:1rem; list-style-position:inside;">
-      <li>
-        <h4 class="li-inline">Kernel</h4>
-        <p>
-          The kernel is the privileged part of the operating system responsible for managing hardware resources,
-          scheduling processes, handling interrupts, managing memory, and providing services to user applications
-          through system calls.
-        </p>
-      </li>
-      <li>
-        <h4 class="li-inline">User</h4>
-        <p>
-          User applications run with limited privileges. They cannot directly access hardware or protected memory,
-          making the system more secure and stable.
-        </p>
-      </li>
-      <li>
-        <h4 class="li-inline">Kernel Mode</h4>
-        <p>
-          Kernel mode is a privileged CPU execution mode that gives code unrestricted access to hardware resources.
-          Operations such as configuring devices, managing page tables, or disabling interrupts can only be performed
-          while running in kernel mode.
-        </p>
-      </li>
-      <li>
-        <h4 class="li-inline">User Mode</h4>
-        <p>
-          Most software executes in user mode, where access to hardware and critical system resources is restricted.
-          Whenever an application attempts to perform a privileged operation, control is transferred to the kernel
-          through a system call or an exception.
-        </p>
-      </li>
-      <li>
-        <h4 class="li-inline">Kernel Space</h4>
-        <p>
-          Kernel space is the protected region of virtual memory where the kernel and device drivers execute.
-          Applications cannot directly read or modify this memory, preventing accidental or malicious corruption of the
-          operating system.
-        </p>
-      </li>
-      <li>
-        <h4 class="li-inline">User Space</h4>
-        <p>
-          User space contains the memory allocated to individual processes. Every process has its own isolated virtual
-          address space, allowing multiple applications to run simultaneously without affecting one another.
-        </p>
-      </li>
-      <li>
-        <h4 class="li-inline">System Calls</h4>
-        <p>
-          System calls provide the interface between user applications and the kernel. Functions such as
-          <code>open()</code>, <code>read()</code>, <code>write()</code>, and <code>fork()</code> allow programs to
-          request services from the operating system while maintaining system security. Linux maintains a stable system
-          call interface to preserve compatibility across kernel versions.
-        </p>
-      </li>
-    </ul>
-  </div>
-</section>
+    <!-- MOBILE FULLSCREEN MENU -->
+    <div id="mobile-menu" class="fixed inset-0 z-50 bg-[#0b0f19] text-[#f3f4f6] flex-col justify-start items-center pt-24 space-y-6 text-xl hidden">
+        <button onclick="toggleMobileMenu()" aria-label="Close Menu" class="absolute top-6 right-6 p-2 text-gray-400 hover:text-white transition">
+            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+        </button>
+        <a href="../index.html#about" onclick="toggleMobileMenu()" class="transition text-gray-300 hover:text-white">ABOUT</a>
+        <a href="../blogs.html" onclick="toggleMobileMenu()" class="transition text-purple-400 font-semibold">BLOG</a>
+        <a href="../projects.html" onclick="toggleMobileMenu()" class="transition text-gray-300 hover:text-white">PROJECTS</a>
+        <a href="../index.html#skills" onclick="toggleMobileMenu()" class="transition text-gray-300 hover:text-white">SKILLS</a>
+        <a href="../index.html#hobbies-section" onclick="toggleMobileMenu()" class="transition text-gray-300 hover:text-white">HOBBIES</a>
+        <a href="../index.html#contact" onclick="toggleMobileMenu()" class="transition text-gray-300 hover:text-white">CONTACT</a>
+    </div>
 
-<section class="blog-post">
-  <div class="blog-content">
-    <h3>Kernel Architectures</h3><br>
-    <p>
-      Not every operating system organizes its kernel in the same way. Different kernel architectures prioritize
-      performance, security, maintainability, or fault isolation depending on their design goals.
-    </p><br>
-    <ul style="list-style-type:disc; padding-left:1rem; list-style-position:inside;">
-      <li>
-        <h4 class="li-inline">Monolithic Kernel</h4>
-        <p>
-          Linux uses a monolithic kernel architecture. Most operating system services—including memory management,
-          process scheduling, networking, and device drivers—run together in kernel space and communicate through
-          direct function calls.
-        </p>
-        <p>
-          Although Linux is considered monolithic, it supports dynamically loadable kernel modules, allowing many
-          drivers and subsystems to be loaded or unloaded at runtime without recompiling the kernel.
-        </p>
-      </li>
-      <li>
-        <h4 class="li-inline">Microkernel</h4>
-        <p>
-          A microkernel keeps only the most fundamental functionality inside kernel mode, typically the scheduler,
-          basic memory management, and inter-process communication (IPC). Services such as file systems, networking,
-          and drivers execute as separate user-space processes.
-        </p>
-        <ul style="list-style-type:disc; padding-left:1rem; list-style-position:inside;">
-          <li>
-            <h4 class="li-inline">Advantages</h4>
-            <p>
-              Because services are isolated, a crash in one component usually does not bring down the entire operating
-              system. This architecture also improves security and maintainability.
-            </p>
-          </li>
-          <li>
-            <h4 class="li-inline">Disadvantages</h4>
-            <p>
-              Communication between services requires IPC instead of direct function calls. This introduces additional
-              context switches and generally results in lower performance compared to monolithic kernels.
-            </p>
-          </li>
-        </ul>
-      </li>
-      <li>
-        <h4 class="li-inline">Hybrid Kernels</h4>
-        <p>
-          Hybrid kernels attempt to combine aspects of both architectures. Operating systems such as Windows NT and
-          Apple's XNU kernel are commonly described as hybrid because they incorporate microkernel concepts while still
-          executing many traditional operating system services in kernel mode for performance reasons.
-        </p>
-      </li>
-    </ul>
-  </div>
-</section>
+    <!-- MAIN CONTENT -->
+    <main class="flex-grow max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 w-full space-y-8">
+        
+        <!-- Article Header -->
+        <div class="space-y-3 bg-white dark:bg-[#111827] border border-slate-200 dark:border-gray-800 p-6 sm:p-8 rounded-2xl shadow-sm transition-colors">
+            <p class="text-xs text-purple-600 dark:text-purple-400 font-semibold uppercase tracking-wider">May 13, 2025</p>
+            <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight text-gray-900 dark:text-white">Linux Kernel Intro</h1>
+        </div>
 
-<section class="blog-post">
-  <div class="blog-content">
-    <h3>Memory Management and Address Space</h3><br>
-    <p>
-      One of the kernel's primary responsibilities is memory management. Modern operating systems use virtual memory
-      to provide each process with its own isolated address space while efficiently utilizing the available physical
-      RAM.
-    </p><br>
-    <ul style="list-style-type:disc; padding-left:1rem; list-style-position:inside;">
-      <li>
-        <h4 class="li-inline">Physical Address Space</h4>
-        <p>
-          Physical memory refers to the actual RAM installed in the computer. Every memory location has a unique
-          physical address that the processor can access. The kernel manages which portions of physical memory are
-          allocated to different processes and kernel subsystems.
-        </p>
-      </li>
-      <li>
-        <h4 class="li-inline">Virtual Address Space</h4>
-        <p>
-          Applications do not normally work with physical addresses. Instead, each process receives its own virtual
-          address space, giving the illusion that it owns a continuous block of memory. The Memory Management Unit
-          (MMU) translates virtual addresses into physical addresses using page tables maintained by the kernel.
-        </p>
-      </li>
-      <li>
-        <h4 class="li-inline">Virtual Address Space Sharing</h4>
-        <p>
-          Although processes have separate address spaces, the kernel can intentionally share selected memory regions.
-          Shared libraries, shared memory segments, and memory-mapped files allow multiple processes to access the same
-          physical memory while still maintaining isolation for the rest of their address space.
-        </p>
-        <p>
-          This mechanism improves performance by reducing memory usage and enabling efficient communication between
-          processes.
-        </p>
-      </li>
-    </ul>
-  </div>
-</section>
-  
-  <footer>
-    <nav class="footer-nav">
-      <a href="../../index.html">← Back to Main Page</a>
-      <a href="../../blogs.html">Blogs Home →</a>
-    </nav><br>
-    <p>&copy; 2025 Jakub Cirip</p>
-  </footer>
+        <!-- Article Sections as Cards -->
+        <div class="space-y-6">
+            <!-- Section 1 -->
+            <section class="bg-white dark:bg-[#111827] border border-slate-200 dark:border-gray-800 p-6 sm:p-8 rounded-2xl space-y-4 shadow-sm transition-colors">
+                <h3 class="text-xl sm:text-2xl font-bold text-purple-700 dark:text-purple-300">Content</h3>
+                
+                <div class="overflow-hidden rounded-xl bg-gray-900 mb-6 border border-gray-800">
+                    <img src="images/2-kernel-intro/kernel-intro.jpg" alt="Kernel Intro" class="w-full h-auto object-cover">
+                </div>
 
-  <!-- Scroll-to-top button -->
-  <button id="scrollTopBtn" class="scroll-top" aria-label="Scroll to top" title="Back to top">
-    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
-      <path fill="white" d="M12 4l-8 8h5v8h6v-8h5z" />
-    </svg>
-  </button>
+                <p class="text-gray-700 dark:text-gray-300 text-sm sm:text-base leading-relaxed text-justify">
+                    The Linux kernel is the core component of the Linux operating system. It acts as the bridge between hardware and software, managing system resources such as CPU time, memory, storage devices, networking, and hardware communication. Every application running on a Linux system ultimately relies on the kernel to perform operations that require direct interaction with the hardware.
+                </p>
+                <p class="text-gray-700 dark:text-gray-300 text-sm sm:text-base leading-relaxed text-justify">
+                    Unlike regular applications, the kernel operates with the highest level of privileges on the processor. This allows it to safely coordinate multiple processes, enforce security boundaries, and ensure that applications cannot interfere with one another or damage the operating system.
+                </p>
+                <p class="text-gray-700 dark:text-gray-300 text-sm sm:text-base leading-relaxed text-justify">
+                    In this introductory article, we'll explore the role of the Linux kernel, explain the difference between user space and kernel space, and introduce some of the most important operating system concepts that every Linux developer should understand.
+                </p>
+                <p class="text-gray-700 dark:text-gray-300 text-sm sm:text-base leading-relaxed text-justify">
+                    We'll also look at different kernel architectures, how memory is organized, and provide guidance for anyone interested in starting their journey into Linux kernel development.
+                </p>
+            </section>
 
+            <!-- Section 2: OS Concepts -->
+            <section class="bg-white dark:bg-[#111827] border border-slate-200 dark:border-gray-800 p-6 sm:p-8 rounded-2xl space-y-6 shadow-sm transition-colors">
+                <h3 class="text-xl sm:text-2xl font-bold text-purple-700 dark:text-purple-300">Basic Operating System (OS) Concepts</h3>
+                <p class="text-gray-700 dark:text-gray-300 text-sm sm:text-base leading-relaxed text-justify">
+                    Before diving into kernel programming, it's important to understand several core concepts used throughout modern operating systems. These terms appear frequently in Linux documentation and source code.
+                </p>
+
+                <ul class="space-y-4 text-gray-700 dark:text-gray-300 text-sm sm:text-base">
+                    <li class="border-b border-slate-100 dark:border-gray-800 pb-4">
+                        <h4 class="font-bold text-gray-900 dark:text-white text-base mb-1">Kernel</h4>
+                        <p class="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">
+                            The kernel is the privileged part of the operating system responsible for managing hardware resources, scheduling processes, handling interrupts, managing memory, and providing services to user applications through system calls.
+                        </p>
+                    </li>
+                    <li class="border-b border-slate-100 dark:border-gray-800 pb-4">
+                        <h4 class="font-bold text-gray-900 dark:text-white text-base mb-1">User</h4>
+                        <p class="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">
+                            User applications run with limited privileges. They cannot directly access hardware or protected memory, making the system more secure and stable.
+                        </p>
+                    </li>
+                    <li class="border-b border-slate-100 dark:border-gray-800 pb-4">
+                        <h4 class="font-bold text-gray-900 dark:text-white text-base mb-1">Kernel Mode</h4>
+                        <p class="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">
+                            Kernel mode is a privileged CPU execution mode that gives code unrestricted access to hardware resources. Operations such as configuring devices, managing page tables, or disabling interrupts can only be performed while running in kernel mode.
+                        </p>
+                    </li>
+                    <li class="border-b border-slate-100 dark:border-gray-800 pb-4">
+                        <h4 class="font-bold text-gray-900 dark:text-white text-base mb-1">User Mode</h4>
+                        <p class="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">
+                            Most software executes in user mode, where access to hardware and critical system resources is restricted. Whenever an application attempts to perform a privileged operation, control is transferred to the kernel through a system call or an exception.
+                        </p>
+                    </li>
+                    <li class="border-b border-slate-100 dark:border-gray-800 pb-4">
+                        <h4 class="font-bold text-gray-900 dark:text-white text-base mb-1">Kernel Space</h4>
+                        <p class="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">
+                            Kernel space is the protected region of virtual memory where the kernel and device drivers execute. Applications cannot directly read or modify this memory, preventing accidental or malicious corruption of the operating system.
+                        </p>
+                    </li>
+                    <li class="border-b border-slate-100 dark:border-gray-800 pb-4">
+                        <h4 class="font-bold text-gray-900 dark:text-white text-base mb-1">User Space</h4>
+                        <p class="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">
+                            User space contains the memory allocated to individual processes. Every process has its own isolated virtual address space, allowing multiple applications to run simultaneously without affecting one another.
+                        </p>
+                    </li>
+                    <li>
+                        <h4 class="font-bold text-gray-900 dark:text-white text-base mb-1">System Calls</h4>
+                        <p class="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">
+                            System calls provide the interface between user applications and the kernel. Functions such as <code class="bg-slate-100 dark:bg-gray-800 px-1.5 py-0.5 rounded text-purple-600 dark:text-purple-300">open()</code>, <code class="bg-slate-100 dark:bg-gray-800 px-1.5 py-0.5 rounded text-purple-600 dark:text-purple-300">read()</code>, <code class="bg-slate-100 dark:bg-gray-800 px-1.5 py-0.5 rounded text-purple-600 dark:text-purple-300">write()</code>, and <code class="bg-slate-100 dark:bg-gray-800 px-1.5 py-0.5 rounded text-purple-600 dark:text-purple-300">fork()</code> allow programs to request services from the operating system while maintaining system security. Linux maintains a stable system call interface to preserve compatibility across kernel versions.
+                        </p>
+                    </li>
+                </ul>
+            </section>
+
+            <!-- Section 3: Kernel Architectures -->
+            <section class="bg-white dark:bg-[#111827] border border-slate-200 dark:border-gray-800 p-6 sm:p-8 rounded-2xl space-y-6 shadow-sm transition-colors">
+                <h3 class="text-xl sm:text-2xl font-bold text-purple-700 dark:text-purple-300">Kernel Architectures</h3>
+                <p class="text-gray-700 dark:text-gray-300 text-sm sm:text-base leading-relaxed text-justify">
+                    Not every operating system organizes its kernel in the same way. Different kernel architectures prioritize performance, security, maintainability, or fault isolation depending on their design goals.
+                </p>
+
+                <div class="space-y-6 pt-2">
+                    <div class="border-l-4 border-purple-500 pl-4 space-y-2">
+                        <h4 class="font-bold text-gray-900 dark:text-white text-lg">Monolithic Kernel</h4>
+                        <p class="text-gray-700 dark:text-gray-300 text-sm leading-relaxed">
+                            Linux uses a monolithic kernel architecture. Most operating system services—including memory management, process scheduling, networking, and device drivers—run together in kernel space and communicate through direct function calls.
+                        </p>
+                        <p class="text-gray-700 dark:text-gray-300 text-sm leading-relaxed">
+                            Although Linux is considered monolithic, it supports dynamically loadable kernel modules, allowing many drivers and subsystems to be loaded or unloaded at runtime without recompiling the kernel.
+                        </p>
+                    </div>
+
+                    <div class="border-l-4 border-purple-500 pl-4 space-y-3">
+                        <h4 class="font-bold text-gray-900 dark:text-white text-lg">Microkernel</h4>
+                        <p class="text-gray-700 dark:text-gray-300 text-sm leading-relaxed">
+                            A microkernel keeps only the most fundamental functionality inside kernel mode, typically the scheduler, basic memory management, and inter-process communication (IPC). Services such as file systems, networking, and drivers execute as separate user-space processes.
+                        </p>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
+                            <div class="bg-slate-50 dark:bg-gray-900/60 p-4 rounded-xl border border-slate-200 dark:border-gray-800">
+                                <h5 class="font-bold text-purple-600 dark:text-purple-400 text-sm mb-1">Advantages</h5>
+                                <p class="text-gray-600 dark:text-gray-400 text-xs leading-relaxed">Because services are isolated, a crash in one component usually does not bring down the entire operating system. This architecture also improves security and maintainability.</p>
+                            </div>
+                            <div class="bg-slate-50 dark:bg-gray-900/60 p-4 rounded-xl border border-slate-200 dark:border-gray-800">
+                                <h5 class="font-bold text-purple-600 dark:text-purple-400 text-sm mb-1">Disadvantages</h5>
+                                <p class="text-gray-600 dark:text-gray-400 text-xs leading-relaxed">Communication between services requires IPC instead of direct function calls. This introduces additional context switches and generally results in lower performance compared to monolithic kernels.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="border-l-4 border-purple-500 pl-4 space-y-2">
+                        <h4 class="font-bold text-gray-900 dark:text-white text-lg">Hybrid Kernels</h4>
+                        <p class="text-gray-700 dark:text-gray-300 text-sm leading-relaxed">
+                            Hybrid kernels attempt to combine aspects of both architectures. Operating systems such as Windows NT and Apple's XNU kernel are commonly described as hybrid because they incorporate microkernel concepts while still executing many traditional operating system services in kernel mode for performance reasons.
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 4: Memory Management -->
+            <section class="bg-white dark:bg-[#111827] border border-slate-200 dark:border-gray-800 p-6 sm:p-8 rounded-2xl space-y-6 shadow-sm transition-colors">
+                <h3 class="text-xl sm:text-2xl font-bold text-purple-700 dark:text-purple-300">Memory Management and Address Space</h3>
+                <p class="text-gray-700 dark:text-gray-300 text-sm sm:text-base leading-relaxed text-justify">
+                    One of the kernel's primary responsibilities is memory management. Modern operating systems use virtual memory to provide each process with its own isolated address space while efficiently utilizing the available physical RAM.
+                </p>
+
+                <ul class="space-y-4 text-gray-700 dark:text-gray-300 text-sm sm:text-base">
+                    <li class="border-b border-slate-100 dark:border-gray-800 pb-4">
+                        <h4 class="font-bold text-gray-900 dark:text-white text-base mb-1">Physical Address Space</h4>
+                        <p class="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">
+                            Physical memory refers to the actual RAM installed in the computer. Every memory location has a unique physical address that the processor can access. The kernel manages which portions of physical memory are allocated to different processes and kernel subsystems.
+                        </p>
+                    </li>
+                    <li class="border-b border-slate-100 dark:border-gray-800 pb-4">
+                        <h4 class="font-bold text-gray-900 dark:text-white text-base mb-1">Virtual Address Space</h4>
+                        <p class="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">
+                            Applications do not normally work with physical addresses. Instead, each process receives its own virtual address space, giving the illusion that it owns a continuous block of memory. The Memory Management Unit (MMU) translates virtual addresses into physical addresses using page tables maintained by the kernel.
+                        </p>
+                    </li>
+                    <li>
+                        <h4 class="font-bold text-gray-900 dark:text-white text-base mb-1">Virtual Address Space Sharing</h4>
+                        <p class="text-gray-600 dark:text-gray-400 text-sm leading-relaxed mb-2">
+                            Although processes have separate address spaces, the kernel can intentionally share selected memory regions. Shared libraries, shared memory segments, and memory-mapped files allow multiple processes to access the same physical memory while still maintaining isolation for the rest of their address space.
+                        </p>
+                        <p class="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">
+                            This mechanism improves performance by reducing memory usage and enabling efficient communication between processes.
+                        </p>
+                    </li>
+                </ul>
+            </section>
+        </div>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="border-t border-slate-200 dark:border-gray-800 bg-slate-50 dark:bg-[#070a12] py-8 text-center text-sm text-gray-500 mt-20 transition-colors">
+        <div class="max-w-4xl mx-auto px-4 space-y-3">
+            <p>&copy; 2026 Jakub Čirip</p>
+        </div>
+    </footer>
+
+    <!-- BACK TO TOP BUTTON -->
+    <button id="backToTopBtn" onclick="scrollToTop()" aria-label="Back to top" class="fixed bottom-6 right-6 z-50 bg-purple-600 text-white p-3 rounded-full shadow-lg opacity-0 pointer-events-none transition-all duration-300 hover:bg-purple-700">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"></path></svg>
+    </button>
+
+    <!-- SCRIPT FOR THEME & SCROLL -->
+    <script>
+        function updateThemeUI() {
+            const isDark = document.documentElement.classList.contains('dark');
+            const sunIcon = document.getElementById('sunIcon');
+            const moonIcon = document.getElementById('moonIcon');
+            const themeBtnText = document.getElementById('themeBtnText');
+            if (isDark) {
+                if (sunIcon) sunIcon.classList.remove('hidden');
+                if (moonIcon) moonIcon.classList.add('hidden');
+                if (themeBtnText) themeBtnText.innerText = 'Light Mode';
+            } else {
+                if (sunIcon) sunIcon.classList.add('hidden');
+                if (moonIcon) moonIcon.classList.remove('hidden');
+                if (themeBtnText) themeBtnText.innerText = 'Dark Mode';
+            }
+        }
+
+        function toggleTheme() {
+            const isDark = document.documentElement.classList.toggle('dark');
+            localStorage.setItem('theme', isDark ? 'dark' : 'light');
+            updateThemeUI();
+        }
+
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            if (menu.classList.contains('hidden')) {
+                menu.classList.remove('hidden');
+                menu.classList.add('flex');
+            } else {
+                menu.classList.remove('flex');
+                menu.classList.add('hidden');
+            }
+        }
+
+        window.addEventListener('scroll', () => {
+            const btn = document.getElementById('backToTopBtn');
+            if (window.scrollY > 400) {
+                btn.classList.remove('opacity-0', 'pointer-events-none'); btn.classList.add('opacity-100');
+            } else {
+                btn.classList.add('opacity-0', 'pointer-events-none'); btn.classList.remove('opacity-100');
+            }
+        });
+        function scrollToTop() { window.scrollTo({ top: 0, behavior: 'smooth' }); }
+
+        document.addEventListener('DOMContentLoaded', updateThemeUI);
+    </script>
 </body>
 </html>
