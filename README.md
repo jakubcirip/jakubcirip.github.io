@@ -4,6 +4,8 @@ This is a personal website hosted via GitHub Pages.
 
 ## Portfolio v2.0 - 10.11.2026
 ### v2.0 Redesign (Major Portfolio Visual Update)
+Feat: major UI overhaul, Tailwind migration, and responsive overlay menu \
+A modern, fully responsive personal portfolio and technical blog built with HTML5 and Tailwind CSS, featuring seamless dark/light mode integration, a clean fullscreen mobile navigation, and optimized articles on embedded systems, Linux, and software development.
 
 ## Sections
 
