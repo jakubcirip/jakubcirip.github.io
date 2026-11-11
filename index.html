@@ -32,7 +32,8 @@
             background-color: #0b0f19 !important;
             color: #f3f4f6 !important;
         }
-        section[id], div[id] {
+        /* Zabezpečí, že sekcie sa pod hlavičkou zobrazia presne zarovnané */
+        section {
             scroll-margin-top: 5rem;
         }
     </style>
@@ -338,11 +339,26 @@
             }
         }
 
+        let isScrollingProgrammatically = false;
+
         function navigateToSection(sectionId, event) {
             if (event) event.preventDefault();
             const targetElement = document.getElementById(sectionId);
             if (targetElement) {
+                isScrollingProgrammatically = true;
+                
+                // Okamžite nastavíme správnu položku v menu podľa kliknutia, aby nečakalo
+                if (sectionId === 'about') setActiveNav('nav-about', 'm-nav-about');
+                else if (sectionId === 'skills') setActiveNav('nav-skills', 'm-nav-skills');
+                else if (sectionId === 'hobbies-section') setActiveNav('nav-hobbies', 'm-nav-hobbies');
+                else if (sectionId === 'contact') setActiveNav('nav-contact', 'm-nav-contact');
+
                 targetElement.scrollIntoView({ behavior: 'smooth' });
+
+                // Zastavíme programovateľný zámok po dobehnutí skrolovania
+                setTimeout(() => {
+                    isScrollingProgrammatically = false;
+                }, 800);
             }
             const mobileMenu = document.getElementById('mobile-menu');
             if (mobileMenu && !mobileMenu.classList.contains('hidden')) {
@@ -351,9 +367,11 @@
             }
         }
 
-        // ScrollSpy Intersection Observer + poistka pre úplný spodok stránky
-        const observerOptions = { root: null, rootMargin: '-10px 0px -30% 0px', threshold: 0 };
+        // ScrollSpy Intersection Observer
+        const observerOptions = { root: null, rootMargin: '-30% 0px -50% 0px', threshold: 0 };
         const observer = new IntersectionObserver((entries) => {
+            if (isScrollingProgrammatically) return; // Ignorujeme, ak práve prebieha animované skrolovanie po kliknutí
+            
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     const id = entry.target.id;
@@ -387,7 +405,7 @@
                 btn.classList.add('opacity-0', 'pointer-events-none'); btn.classList.remove('opacity-100');
             }
 
-            // POISTKA: Ak je užívateľ úplne na spodku stránky, vynúti sa aktivácia CONTACT
+            // Poistka pre úplný spodok stránky
             if ((window.innerHeight + window.scrollY) >= document.documentElement.scrollHeight - 30) {
                 setActiveNav('nav-contact', 'm-nav-contact');
             }
