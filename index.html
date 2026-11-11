@@ -364,35 +364,8 @@
             }
         }
 
-        // Vylepšený Intersection Observer s vyváženým rootMargin pre plynulý prechod Hobbies <-> Contact
-        const observerOptions = { root: null, rootMargin: '-20% 0px -40% 0px', threshold: 0 };
-        const observer = new IntersectionObserver((entries) => {
-            if (isScrollingProgrammatically) return;
-            
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const id = entry.target.id;
-                    updateActiveNavById(id);
-                }
-            });
-        }, observerOptions);
-
-        ['about', 'blogs-section', 'projects-section', 'skills', 'hobbies-section', 'contact'].forEach(secId => {
-            const el = document.getElementById(secId);
-            if (el) observer.observe(el);
-        });
-
-        function updateActiveNavById(id) {
-            let navId = 'nav-about';
-            let mNavId = 'm-nav-about';
-            if (id === 'blogs-section') { navId = 'nav-blogs'; mNavId = 'm-nav-blogs'; }
-            else if (id === 'projects-section') { navId = 'nav-projects'; mNavId = 'm-nav-projects'; }
-            else if (id === 'skills') { navId = 'nav-skills'; mNavId = 'm-nav-skills'; }
-            else if (id === 'hobbies-section') { navId = 'nav-hobbies'; mNavId = 'm-nav-hobbies'; }
-            else if (id === 'contact') { navId = 'nav-contact'; mNavId = 'm-nav-contact'; }
-            else if (id === 'about') { navId = 'nav-about'; mNavId = 'm-nav-about'; }
-            setActiveNav(navId, mNavId);
-        }
+        // ÚPLNE SPOĽAHLIVÁ DETEKCIA PODĽA AKTUÁLNEJ POZÍCIE SCROLLU
+        const sections = ['about', 'blogs-section', 'projects-section', 'skills', 'hobbies-section', 'contact'];
 
         window.addEventListener('scroll', () => {
             const btn = document.getElementById('backToTopBtn');
@@ -402,9 +375,40 @@
                 btn.classList.add('opacity-0', 'pointer-events-none'); btn.classList.remove('opacity-100');
             }
 
-            // Poistka pre úplný spodok stránky
-            if ((window.innerHeight + window.scrollY) >= document.documentElement.scrollHeight - 30) {
+            if (isScrollingProgrammatically) return;
+
+            // Zistíme presnú pozíciu scrollovania (s ohľadom na výšku hlavičky)
+            const scrollPos = window.scrollY + 150;
+            const documentHeight = document.documentElement.scrollHeight;
+            const windowHeight = window.innerHeight;
+
+            // Špeciálna poistka pre úplný spodok stránky
+            if ((windowHeight + window.scrollY) >= documentHeight - 30) {
                 setActiveNav('nav-contact', 'm-nav-contact');
+                return;
+            }
+
+            // Prejdeme všetky sekcie a zistíme, v ktorej sa nachádzame
+            for (let i = 0; i < sections.length; i++) {
+                const section = document.getElementById(sections[i]);
+                if (section) {
+                    const top = section.offsetTop;
+                    const height = section.offsetHeight;
+
+                    if (scrollPos >= top && scrollPos < (top + height)) {
+                        let navId = 'nav-about';
+                        let mNavId = 'm-nav-about';
+
+                        if (sections[i] === 'blogs-section') { navId = 'nav-blogs'; mNavId = 'm-nav-blogs'; }
+                        else if (sections[i] === 'projects-section') { navId = 'nav-projects'; mNavId = 'm-nav-projects'; }
+                        else if (sections[i] === 'skills') { navId = 'nav-skills'; mNavId = 'm-nav-skills'; }
+                        else if (sections[i] === 'hobbies-section') { navId = 'nav-hobbies'; mNavId = 'm-nav-hobbies'; }
+                        else if (sections[i] === 'contact') { navId = 'nav-contact'; mNavId = 'm-nav-contact'; }
+
+                        setActiveNav(navId, mNavId);
+                        break;
+                    }
+                }
             }
         });
 
@@ -440,7 +444,11 @@
             });
         }
 
-        document.addEventListener('DOMContentLoaded', updateThemeUI);
+        document.addEventListener('DOMContentLoaded', () => {
+            updateThemeUI();
+            // Nastavenie počiatočného stavu menu pri načítaní stránky
+            setActiveNav('nav-about', 'm-nav-about');
+        });
     </script>
 </body>
 </html>
