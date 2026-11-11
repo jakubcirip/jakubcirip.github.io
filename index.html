@@ -81,7 +81,7 @@
         </div>
     </header>
 
-    <!-- MOBILE FULLSCREEN MENU (Minimalistický štýl bez rámčeka) -->
+    <!-- MOBILE FULLSCREEN MENU -->
     <div id="mobile-menu" class="fixed inset-0 z-50 bg-[#0b0f19] text-[#f3f4f6] flex-col justify-start items-center pt-24 space-y-6 text-xl hidden">
         <button onclick="toggleMobileMenu()" aria-label="Close Menu" class="absolute top-6 right-6 p-2 text-gray-400 hover:text-white transition">
             <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
@@ -351,21 +351,13 @@
             }
         }
 
-        // ScrollSpy Intersection Observer
-        const observerOptions = { root: null, rootMargin: '-20% 0px -60% 0px', threshold: 0 };
+        // ScrollSpy Intersection Observer + poistka pre úplný spodok stránky
+        const observerOptions = { root: null, rootMargin: '-10px 0px -30% 0px', threshold: 0 };
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     const id = entry.target.id;
-                    let navId = 'nav-about';
-                    let mNavId = 'm-nav-about';
-                    if (id === 'blogs-section') { navId = 'nav-blogs'; mNavId = 'm-nav-blogs'; }
-                    else if (id === 'projects-section') { navId = 'nav-projects'; mNavId = 'm-nav-projects'; }
-                    else if (id === 'skills') { navId = 'nav-skills'; mNavId = 'm-nav-skills'; }
-                    else if (id === 'hobbies-section') { navId = 'nav-hobbies'; mNavId = 'm-nav-hobbies'; }
-                    else if (id === 'contact') { navId = 'nav-contact'; mNavId = 'm-nav-contact'; }
-                    else if (id === 'about') { navId = 'nav-about'; mNavId = 'm-nav-about'; }
-                    setActiveNav(navId, mNavId);
+                    updateActiveNavById(id);
                 }
             });
         }, observerOptions);
@@ -375,8 +367,36 @@
             if (el) observer.observe(el);
         });
 
+        function updateActiveNavById(id) {
+            let navId = 'nav-about';
+            let mNavId = 'm-nav-about';
+            if (id === 'blogs-section') { navId = 'nav-blogs'; mNavId = 'm-nav-blogs'; }
+            else if (id === 'projects-section') { navId = 'nav-projects'; mNavId = 'm-nav-projects'; }
+            else if (id === 'skills') { navId = 'nav-skills'; mNavId = 'm-nav-skills'; }
+            else if (id === 'hobbies-section') { navId = 'nav-hobbies'; mNavId = 'm-nav-hobbies'; }
+            else if (id === 'contact') { navId = 'nav-contact'; mNavId = 'm-nav-contact'; }
+            else if (id === 'about') { navId = 'nav-about'; mNavId = 'm-nav-about'; }
+            setActiveNav(navId, mNavId);
+        }
+
+        window.addEventListener('scroll', () => {
+            const btn = document.getElementById('backToTopBtn');
+            if (window.scrollY > 400) {
+                btn.classList.remove('opacity-0', 'pointer-events-none'); btn.classList.add('opacity-100');
+            } else {
+                btn.classList.add('opacity-0', 'pointer-events-none'); btn.classList.remove('opacity-100');
+            }
+
+            // POISTKA: Ak je užívateľ úplne na spodku stránky, vynúti sa aktivácia CONTACT
+            if ((window.innerHeight + window.scrollY) >= document.documentElement.scrollHeight - 30) {
+                setActiveNav('nav-contact', 'm-nav-contact');
+            }
+        });
+
+        function scrollToTop() { window.scrollTo({ top: 0, behavior: 'smooth' }); }
+
         function setActiveNav(navId, mNavId) {
-            // Desktop update (ponecháva rámček pre desktop, ak chceš)
+            // Desktop update
             ['nav-about', 'nav-blogs', 'nav-projects', 'nav-skills', 'nav-hobbies', 'nav-contact'].forEach(id => {
                 const el = document.getElementById(id);
                 if(el) {
@@ -390,7 +410,7 @@
                 }
             });
 
-            // Mobile update (čistý text bez rámčeka, len fialová farba pre aktívnu položku)
+            // Mobile update
             ['m-nav-about', 'm-nav-blogs', 'm-nav-projects', 'm-nav-skills', 'm-nav-hobbies', 'm-nav-contact'].forEach(id => {
                 const el = document.getElementById(id);
                 if(el) {
@@ -404,16 +424,6 @@
                 }
             });
         }
-
-        window.addEventListener('scroll', () => {
-            const btn = document.getElementById('backToTopBtn');
-            if (window.scrollY > 400) {
-                btn.classList.remove('opacity-0', 'pointer-events-none'); btn.classList.add('opacity-100');
-            } else {
-                btn.classList.add('opacity-0', 'pointer-events-none'); btn.classList.remove('opacity-100');
-            }
-        });
-        function scrollToTop() { window.scrollTo({ top: 0, behavior: 'smooth' }); }
 
         document.addEventListener('DOMContentLoaded', updateThemeUI);
     </script>
