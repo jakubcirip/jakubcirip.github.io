@@ -32,7 +32,6 @@
             background-color: #0b0f19 !important;
             color: #f3f4f6 !important;
         }
-        /* Zabezpečí, že sekcie sa pod hlavičkou zobrazia presne zarovnané */
         section {
             scroll-margin-top: 5rem;
         }
@@ -347,7 +346,6 @@
             if (targetElement) {
                 isScrollingProgrammatically = true;
                 
-                // Okamžite nastavíme správnu položku v menu podľa kliknutia, aby nečakalo
                 if (sectionId === 'about') setActiveNav('nav-about', 'm-nav-about');
                 else if (sectionId === 'skills') setActiveNav('nav-skills', 'm-nav-skills');
                 else if (sectionId === 'hobbies-section') setActiveNav('nav-hobbies', 'm-nav-hobbies');
@@ -355,7 +353,6 @@
 
                 targetElement.scrollIntoView({ behavior: 'smooth' });
 
-                // Zastavíme programovateľný zámok po dobehnutí skrolovania
                 setTimeout(() => {
                     isScrollingProgrammatically = false;
                 }, 800);
@@ -367,10 +364,10 @@
             }
         }
 
-        // ScrollSpy Intersection Observer
-        const observerOptions = { root: null, rootMargin: '-30% 0px -50% 0px', threshold: 0 };
+        // Vylepšený Intersection Observer s vyváženým rootMargin pre plynulý prechod Hobbies <-> Contact
+        const observerOptions = { root: null, rootMargin: '-20% 0px -40% 0px', threshold: 0 };
         const observer = new IntersectionObserver((entries) => {
-            if (isScrollingProgrammatically) return; // Ignorujeme, ak práve prebieha animované skrolovanie po kliknutí
+            if (isScrollingProgrammatically) return;
             
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
