@@ -55,35 +55,51 @@
     </style>
 </head>
 
-<body class="min-h-screen flex flex-col justify-between bg-[#f8fafc] text-[#0f172a] dark:bg-[#0b0f19] dark:text-[#f3f4f6] selection:bg-purple-600 selection:text-white transition-colors duration-300">
+<body
+    class="min-h-screen flex flex-col justify-between bg-[#f8fafc] text-[#0f172a] dark:bg-[#0b0f19] dark:text-[#f3f4f6] selection:bg-purple-600 selection:text-white transition-colors duration-300">
     <!-- HEADER / NAVIGATION -->
-    <header class="sticky top-0 z-50 bg-white/80 dark:bg-[#0b0f19]/80 backdrop-blur-md border-b border-gray-200 dark:border-gray-800 transition-colors">
+    <header
+        class="sticky top-0 z-50 bg-white/80 dark:bg-[#0b0f19]/80 backdrop-blur-md border-b border-gray-200 dark:border-gray-800 transition-colors">
         <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
             <div class="font-bold text-lg tracking-wide">
-                <a href="../index.html" class="hover:text-purple-600 dark:hover:text-purple-400 transition">Jakub Čirip</a>
+                <a href="../index.html" class="hover:text-purple-600 dark:hover:text-purple-400 transition">Jakub
+                    Čirip</a>
             </div>
             <nav class="hidden md:flex items-center space-x-2 text-sm">
-                <a href="../index.html#about" class="px-3 py-1.5 rounded-lg transition text-gray-600 dark:text-gray-300 hover:text-purple-600 dark:hover:text-white">ABOUT</a>
-                <a href="../blogs.html" class="px-3 py-1.5 rounded-lg transition bg-purple-100 dark:bg-purple-900/50 text-purple-800 dark:text-white border border-purple-300 dark:border-purple-700/50">BLOG</a>
-                <a href="../projects.html" class="px-3 py-1.5 rounded-lg transition text-gray-600 dark:text-gray-300 hover:text-purple-600 dark:hover:text-white">PROJECTS</a>
-                <a href="../index.html#skills" class="px-3 py-1.5 rounded-lg transition text-gray-600 dark:text-gray-300 hover:text-purple-600 dark:hover:text-white">SKILLS</a>
-                <a href="../index.html#hobbies-section" class="px-3 py-1.5 rounded-lg transition text-gray-600 dark:text-gray-300 hover:text-purple-600 dark:hover:text-white">HOBBIES</a>
-                <a href="../index.html#contact" class="px-3 py-1.5 rounded-lg transition text-gray-600 dark:text-gray-300 hover:text-purple-600 dark:hover:text-white">CONTACT</a>
+                <a href="../index.html#about"
+                    class="px-3 py-1.5 rounded-lg transition text-gray-600 dark:text-gray-300 hover:text-purple-600 dark:hover:text-white">ABOUT</a>
+                <a href="../blogs.html"
+                    class="px-3 py-1.5 rounded-lg transition bg-purple-100 dark:bg-purple-900/50 text-purple-800 dark:text-white border border-purple-300 dark:border-purple-700/50">BLOG</a>
+                <a href="../projects.html"
+                    class="px-3 py-1.5 rounded-lg transition text-gray-600 dark:text-gray-300 hover:text-purple-600 dark:hover:text-white">PROJECTS</a>
+                <a href="../index.html#skills"
+                    class="px-3 py-1.5 rounded-lg transition text-gray-600 dark:text-gray-300 hover:text-purple-600 dark:hover:text-white">SKILLS</a>
+                <a href="../index.html#hobbies-section"
+                    class="px-3 py-1.5 rounded-lg transition text-gray-600 dark:text-gray-300 hover:text-purple-600 dark:hover:text-white">HOBBIES</a>
+                <a href="../index.html#contact"
+                    class="px-3 py-1.5 rounded-lg transition text-gray-600 dark:text-gray-300 hover:text-purple-600 dark:hover:text-white">CONTACT</a>
             </nav>
             <div class="flex items-center space-x-3">
-                <button onclick="toggleTheme()" id="themeToggleBtn" aria-label="Toggle Theme" class="p-2 rounded-xl bg-slate-100 dark:bg-gray-800 text-purple-700 dark:text-purple-300 hover:bg-slate-200 dark:hover:bg-gray-700 transition flex items-center space-x-2 text-xs font-semibold shadow-sm">
+                <button onclick="toggleTheme()" id="themeToggleBtn" aria-label="Toggle Theme"
+                    class="p-2 rounded-xl bg-slate-100 dark:bg-gray-800 text-purple-700 dark:text-purple-300 hover:bg-slate-200 dark:hover:bg-gray-700 transition flex items-center space-x-2 text-xs font-semibold shadow-sm">
                     <svg id="sunIcon" class="w-4 h-4 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path>
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z">
+                        </path>
                     </svg>
                     <svg id="moonIcon" class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z">
+                        </path>
                     </svg>
                     <span id="themeBtnText">Dark Mode</span>
                 </button>
                 <!-- Mobile Menu Button -->
-                <button onclick="toggleMobileMenu()" aria-label="Mobile Menu" class="md:hidden p-2 rounded-xl bg-slate-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300">
+                <button onclick="toggleMobileMenu()" aria-label="Mobile Menu"
+                    class="md:hidden p-2 rounded-xl bg-slate-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M4 6h16M4 12h16M4 18h16"></path>
                     </svg>
                 </button>
             </div>
@@ -91,31 +107,41 @@
     </header>
 
     <!-- MOBILE FULLSCREEN MENU -->
-    <div id="mobile-menu" class="fixed inset-0 z-50 bg-[#0b0f19] text-[#f3f4f6] flex-col justify-start items-center pt-24 space-y-6 text-xl hidden">
-        <button onclick="toggleMobileMenu()" aria-label="Close Menu" class="absolute top-6 right-6 p-2 text-gray-400 hover:text-white transition">
+    <div id="mobile-menu"
+        class="fixed inset-0 z-50 bg-[#0b0f19] text-[#f3f4f6] flex-col justify-start items-center pt-24 space-y-6 text-xl hidden">
+        <button onclick="toggleMobileMenu()" aria-label="Close Menu"
+            class="absolute top-6 right-6 p-2 text-gray-400 hover:text-white transition">
             <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
             </svg>
         </button>
-        <a href="../index.html#about" onclick="toggleMobileMenu()" class="transition text-gray-300 hover:text-white">ABOUT</a>
+        <a href="../index.html#about" onclick="toggleMobileMenu()"
+            class="transition text-gray-300 hover:text-white">ABOUT</a>
         <a href="../blogs.html" onclick="toggleMobileMenu()" class="transition text-purple-400 font-semibold">BLOG</a>
-        <a href="../projects.html" onclick="toggleMobileMenu()" class="transition text-gray-300 hover:text-white">PROJECTS</a>
-        <a href="../index.html#skills" onclick="toggleMobileMenu()" class="transition text-gray-300 hover:text-white">SKILLS</a>
-        <a href="../index.html#hobbies-section" onclick="toggleMobileMenu()" class="transition text-gray-300 hover:text-white">HOBBIES</a>
-        <a href="../index.html#contact" onclick="toggleMobileMenu()" class="transition text-gray-300 hover:text-white">CONTACT</a>
+        <a href="../projects.html" onclick="toggleMobileMenu()"
+            class="transition text-gray-300 hover:text-white">PROJECTS</a>
+        <a href="../index.html#skills" onclick="toggleMobileMenu()"
+            class="transition text-gray-300 hover:text-white">SKILLS</a>
+        <a href="../index.html#hobbies-section" onclick="toggleMobileMenu()"
+            class="transition text-gray-300 hover:text-white">HOBBIES</a>
+        <a href="../index.html#contact" onclick="toggleMobileMenu()"
+            class="transition text-gray-300 hover:text-white">CONTACT</a>
     </div>
 
     <!-- MAIN CONTENT -->
     <main class="flex-grow max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 w-full space-y-8">
         <!-- Article Header -->
-        <div class="space-y-3 bg-white dark:bg-[#111827] border border-slate-200 dark:border-gray-800 p-6 sm:p-8 rounded-2xl shadow-sm transition-colors">
-            <p class="text-xs text-purple-600 dark:text-purple-400 font-semibold uppercase tracking-wider">January 7, 2026</p>
+        <div
+            class="space-y-3 bg-white dark:bg-[#111827] border border-slate-200 dark:border-gray-800 p-6 sm:p-8 rounded-2xl shadow-sm transition-colors">
+            <p class="text-xs text-purple-600 dark:text-purple-400 font-semibold uppercase tracking-wider">January 7,
+                2026</p>
             <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight text-gray-900 dark:text-white">Kubo Kombo</h1>
         </div>
         <!-- Article Sections as Cards -->
         <div class="space-y-6">
             <!-- Welcome Section -->
-            <section class="bg-white dark:bg-[#111827] border border-slate-200 dark:border-gray-800 p-6 sm:p-8 rounded-2xl space-y-4 shadow-sm transition-colors">
+            <section
+                class="bg-white dark:bg-[#111827] border border-slate-200 dark:border-gray-800 p-6 sm:p-8 rounded-2xl space-y-4 shadow-sm transition-colors">
                 <h2 class="text-2xl font-bold text-purple-700 dark:text-purple-300">Welcome!</h2>
                 <p class="text-gray-700 dark:text-gray-300 text-sm sm:text-base leading-relaxed">
                     I'm thrilled that you want to learn more about this project.
@@ -128,7 +154,8 @@
                 </p>
             </section>
             <!-- Motivation and Idea -->
-            <section class="bg-white dark:bg-[#111827] border border-slate-200 dark:border-gray-800 p-6 sm:p-8 rounded-2xl space-y-4 shadow-sm transition-colors">
+            <section
+                class="bg-white dark:bg-[#111827] border border-slate-200 dark:border-gray-800 p-6 sm:p-8 rounded-2xl space-y-4 shadow-sm transition-colors">
                 <h3 class="text-xl sm:text-2xl font-bold text-purple-700 dark:text-purple-300">Motivation and Idea</h3>
                 <p class="text-gray-700 dark:text-gray-300 text-sm sm:text-base leading-relaxed">
                     First of all, I would like to offer you an insight into what motivated me for this project.
@@ -137,7 +164,8 @@
                     Why would someone want a guitar combo?<br>
                     The answer is simple, they want to play their guitar with a decent sound.<br>
                     But why not just buy one, but make one? - I like to make simple things more complicated;)<br>
-                    I also like to do something new, create new things, and it's more interesting to me than just buying something.
+                    I also like to do something new, create new things, and it's more interesting to me than just buying
+                    something.
                 </p>
                 <p class="text-gray-700 dark:text-gray-300 text-sm sm:text-base leading-relaxed">
                     The basic idea was to use 2 45W speakers that I had left over from the original setup.<br>
@@ -148,7 +176,8 @@
                 </p>
             </section>
             <!-- List of Components -->
-            <section class="bg-white dark:bg-[#111827] border border-slate-200 dark:border-gray-800 p-6 sm:p-8 rounded-2xl space-y-4 shadow-sm transition-colors">
+            <section
+                class="bg-white dark:bg-[#111827] border border-slate-200 dark:border-gray-800 p-6 sm:p-8 rounded-2xl space-y-4 shadow-sm transition-colors">
                 <h3 class="text-xl sm:text-2xl font-bold text-purple-700 dark:text-purple-300">List of components</h3>
                 <ul class="list-disc list-inside space-y-2 text-gray-700 dark:text-gray-300 text-sm sm:text-base pl-2">
                     <li>2x 45W 8Ω reproductors</li>
@@ -160,47 +189,62 @@
                 </ul>
             </section>
             <!-- Combo Design -->
-            <section class="bg-white dark:bg-[#111827] border border-slate-200 dark:border-gray-800 p-6 sm:p-8 rounded-2xl space-y-6 shadow-sm transition-colors">
-                <h3 class="text-xl sm:text-2xl font-bold text-purple-700 dark:text-purple-300">Combo Design - proposal and solution</h3>
+            <section
+                class="bg-white dark:bg-[#111827] border border-slate-200 dark:border-gray-800 p-6 sm:p-8 rounded-2xl space-y-6 shadow-sm transition-colors">
+                <h3 class="text-xl sm:text-2xl font-bold text-purple-700 dark:text-purple-300">Combo Design - proposal
+                    and solution</h3>
                 <p class="text-gray-700 dark:text-gray-300 text-sm sm:text-base leading-relaxed">
-                    The dimensions must be designed so that all the modules of the combo are placed inside it and are easily accessible for assembly and serviceability.
+                    The dimensions must be designed so that all the modules of the combo are placed inside it and are
+                    easily accessible for assembly and serviceability.
                 </p>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
                     <p class="text-gray-700 dark:text-gray-300 text-sm sm:text-base leading-relaxed">
                         The dimensions of the box are:<br>
                         <strong class="text-gray-900 dark:text-white">420 x 320 x 230</strong><br>
                         The 420 width is sufficient to comfortably place two 185 diameter speakers side by side.<br><br>
-                        In the middle of the box and on the sides I designed various points for attaching all the components and modules.
+                        In the middle of the box and on the sides I designed various points for attaching all the
+                        components and modules.
                     </p>
                     <!-- Gallery Widget -->
-                    <div class="blog-media bg-slate-50 dark:bg-gray-900 p-4 rounded-xl border border-slate-200 dark:border-gray-800">
+                    <div
+                        class="blog-media bg-slate-50 dark:bg-gray-900 p-4 rounded-xl border border-slate-200 dark:border-gray-800">
                         <div class="blog-gallery__slider relative flex items-center">
-                            <button class="blog-gallery__btn blog-gallery__btn--prev absolute left-2 z-10 bg-black/60 text-white w-8 h-8 rounded-full flex items-center justify-center text-sm hover:bg-black/80 transition">&#10094;</button>
-                            <div class="blog-gallery__viewport overflow-hidden w-full rounded-lg bg-black/40 flex items-center justify-center">
+                            <button
+                                class="blog-gallery__btn blog-gallery__btn--prev absolute left-2 z-10 bg-black/60 text-white w-8 h-8 rounded-full flex items-center justify-center text-sm hover:bg-black/80 transition">&#10094;</button>
+                            <div
+                                class="blog-gallery__viewport overflow-hidden w-full rounded-lg bg-black/40 flex items-center justify-center">
                                 <div class="blog-gallery__track flex transition-transform duration-300 w-full">
                                     <div class="w-full shrink-0 flex items-center justify-center p-2">
-                                        <img src="images/3-kombo/kombo1.jpeg" alt="1" class="max-h-[320px] w-auto h-auto object-contain rounded">
+                                        <img src="images/3-kombo/kombo1.jpeg" alt="1"
+                                            class="max-h-[320px] w-auto h-auto object-contain rounded">
                                     </div>
                                     <div class="w-full shrink-0 flex items-center justify-center p-2">
-                                        <img src="images/3-kombo/kombo2.jpeg" alt="2" class="max-h-[320px] w-auto h-auto object-contain rounded">
+                                        <img src="images/3-kombo/kombo2.jpeg" alt="2"
+                                            class="max-h-[320px] w-auto h-auto object-contain rounded">
                                     </div>
                                     <div class="w-full shrink-0 flex items-center justify-center p-2">
-                                        <img src="images/3-kombo/kombo3.jpeg" alt="3" class="max-h-[320px] w-auto h-auto object-contain rounded">
+                                        <img src="images/3-kombo/kombo3.jpeg" alt="3"
+                                            class="max-h-[320px] w-auto h-auto object-contain rounded">
                                     </div>
                                     <div class="w-full shrink-0 flex items-center justify-center p-2">
-                                        <img src="images/3-kombo/kombo4.jpeg" alt="4" class="max-h-[320px] w-auto h-auto object-contain rounded">
+                                        <img src="images/3-kombo/kombo4.jpeg" alt="4"
+                                            class="max-h-[320px] w-auto h-auto object-contain rounded">
                                     </div>
                                     <div class="w-full shrink-0 flex items-center justify-center p-2">
-                                        <img src="images/3-kombo/kombo5.jpeg" alt="5" class="max-h-[320px] w-auto h-auto object-contain rounded">
+                                        <img src="images/3-kombo/kombo5.jpeg" alt="5"
+                                            class="max-h-[320px] w-auto h-auto object-contain rounded">
                                     </div>
                                     <div class="w-full shrink-0 flex items-center justify-center p-2">
-                                        <img src="images/3-kombo/kombo6.jpeg" alt="6" class="max-h-[320px] w-auto h-auto object-contain rounded">
+                                        <img src="images/3-kombo/kombo6.jpeg" alt="6"
+                                            class="max-h-[320px] w-auto h-auto object-contain rounded">
                                     </div>
                                 </div>
                             </div>
-                            <button class="blog-gallery__btn blog-gallery__btn--next absolute right-2 z-10 bg-black/60 text-white w-8 h-8 rounded-full flex items-center justify-center text-sm hover:bg-black/80 transition">&#10095;</button>
+                            <button
+                                class="blog-gallery__btn blog-gallery__btn--next absolute right-2 z-10 bg-black/60 text-white w-8 h-8 rounded-full flex items-center justify-center text-sm hover:bg-black/80 transition">&#10095;</button>
                         </div>
-                        <p class="blog-gallery__caption text-center text-xs text-gray-500 dark:text-gray-400 mt-2 italic">
+                        <p
+                            class="blog-gallery__caption text-center text-xs text-gray-500 dark:text-gray-400 mt-2 italic">
                             Combo case manufacturing
                         </p>
                     </div>
@@ -208,38 +252,52 @@
                 <div class="space-y-4 pt-4 border-t border-slate-100 dark:border-gray-800">
                     <h4 class="font-bold text-gray-900 dark:text-white text-lg">Proposal of the inner wall</h4>
                     <p class="text-gray-700 dark:text-gray-300 text-sm sm:text-base leading-relaxed">
-                        For better sound properties, my friend, an expert in the field of audio equipment, recommended that I insert an inner wall that will separate the speakers from the electrical equipment and at the same time place damping material on it (on the side near the speakers) so that the sound spreads better outwards from the combo.<br>
-                        This wall will also be useful for placing electrical component (preamps, buffers, amplifier and DC convertor).
+                        For better sound properties, my friend, an expert in the field of audio equipment, recommended
+                        that I insert an inner wall that will separate the speakers from the electrical equipment and at
+                        the same time place damping material on it (on the side near the speakers) so that the sound
+                        spreads better outwards from the combo.<br>
+                        This wall will also be useful for placing electrical component (preamps, buffers, amplifier and
+                        DC convertor).
                     </p>
                     <p class="text-gray-700 dark:text-gray-300 text-sm sm:text-base leading-relaxed">
                         In the next picture you can see how it looks inside with this wall (without all components).
                     </p>
-                    <div class="overflow-hidden rounded-xl bg-gray-900 border border-gray-800 max-w-lg mx-auto p-2 flex items-center justify-center">
-                        <img src="images/3-kombo/kombo7.jpeg" alt="7" class="max-h-[320px] w-auto h-auto object-contain rounded">
+                    <div
+                        class="overflow-hidden rounded-xl bg-gray-900 border border-gray-800 max-w-lg mx-auto p-2 flex items-center justify-center">
+                        <img src="images/3-kombo/kombo7.jpeg" alt="7"
+                            class="max-h-[320px] w-auto h-auto object-contain rounded">
                     </div>
                 </div>
             </section>
 
             <!-- JFET Buffer Section -->
-            <section class="bg-white dark:bg-[#111827] border border-slate-200 dark:border-gray-800 p-6 sm:p-8 rounded-2xl space-y-6 shadow-sm transition-colors">
+            <section
+                class="bg-white dark:bg-[#111827] border border-slate-200 dark:border-gray-800 p-6 sm:p-8 rounded-2xl space-y-6 shadow-sm transition-colors">
                 <h3 class="text-xl sm:text-2xl font-bold text-purple-700 dark:text-purple-300">JFET Buffer</h3>
 
                 <div>
                     <h4 class="font-bold text-gray-900 dark:text-white text-lg mb-2">Impedance Buffer</h4>
                     <p class="text-gray-700 dark:text-gray-300 text-sm sm:text-base leading-relaxed">
-                        A buffer is a circuit that isolates one part of a system from another, often acting as a bridge between a high impedance source and a low impedance load.<br>
-                        It ensures signal integrity by preventing loading, distortion, or signal loss, while usually providing current gain.<br>
-                        For the purpose of our combo, it separates the guitar from the preamp module, providing a high input impedance at the input of the preamp module.
+                        A buffer is a circuit that isolates one part of a system from another, often acting as a bridge
+                        between a high impedance source and a low impedance load.<br>
+                        It ensures signal integrity by preventing loading, distortion, or signal loss, while usually
+                        providing current gain.<br>
+                        For the purpose of our combo, it separates the guitar from the preamp module, providing a high
+                        input impedance at the input of the preamp module.
                     </p>
                 </div>
 
                 <div>
-                    <h4 class="font-bold text-gray-900 dark:text-white text-lg mb-2">Main Characteristic of JFET buffer:</h4>
-                    <ul class="list-disc list-inside space-y-1 text-gray-700 dark:text-gray-300 text-sm sm:text-base pl-2">
-                        <li>It preserved the signal from the guitar without losing quality. It shapes the tone without change.</li>
+                    <h4 class="font-bold text-gray-900 dark:text-white text-lg mb-2">Main Characteristic of JFET buffer:
+                    </h4>
+                    <ul
+                        class="list-disc list-inside space-y-1 text-gray-700 dark:text-gray-300 text-sm sm:text-base pl-2">
+                        <li>It preserved the signal from the guitar without losing quality. It shapes the tone without
+                            change.</li>
                         <li>Matches the impedance of the guitar and the preamp input.</li>
                         <li>Amplifies current, not voltage.</li>
-                        <li>Separates the guitar from the preamp – the preamp circuit does not affect the guitar pickup.</li>
+                        <li>Separates the guitar from the preamp – the preamp circuit does not affect the guitar pickup.
+                        </li>
                         <li>Preserves the dynamics and natural tone of the guitar.</li>
                     </ul>
                 </div>
@@ -254,26 +312,40 @@
                 <div>
                     <h4 class="font-bold text-gray-900 dark:text-white text-lg mb-2">Buffer Scheme</h4>
                     <p class="text-gray-700 dark:text-gray-300 text-sm sm:text-base leading-relaxed mb-4">
-                        In this phase, the first step was design of buffer and scheme drawing. The testing program also helped me with simulation of buffer and measurement the values of voltage. For JFET 'follower' buffer is really important to set up the right operating point of JFET transistor.<br>
+                        In this phase, the first step was design of buffer and scheme drawing. The testing program also
+                        helped me with simulation of buffer and measurement the values of voltage. For JFET 'follower'
+                        buffer is really important to set up the right operating point of JFET transistor.<br>
                         The DC operating point is the voltage and current in transistor without input signal.<br>
                         It defines transistor behaviour during signal processing.<br>
-                        If the operating point is set up incorrectly it can cause, that transistor will be 'close' -> means doesn't work, or will be overloaded -> which leads to signal distortion, noise or overheating.<br>
-                        On the first picture we can see the simple buffer with voltage divider for transistor Gate (this voltage help us to set the right operating point). The buffer is without input and output signals and capacitors.
+                        If the operating point is set up incorrectly it can cause, that transistor will be 'close' ->
+                        means doesn't work, or will be overloaded -> which leads to signal distortion, noise or
+                        overheating.<br>
+                        On the first picture we can see the simple buffer with voltage divider for transistor Gate (this
+                        voltage help us to set the right operating point). The buffer is without input and output
+                        signals and capacitors.
                     </p>
 
-                    <div class="overflow-hidden rounded-xl bg-gray-900 border border-gray-800 max-w-lg mx-auto mb-2 p-2 flex items-center justify-center">
-                        <img src="images/3-kombo/kombo8-buffer1.png" alt="8" class="max-h-[320px] w-auto h-auto object-contain rounded">
+                    <div
+                        class="overflow-hidden rounded-xl bg-gray-900 border border-gray-800 max-w-lg mx-auto mb-2 p-2 flex items-center justify-center">
+                        <img src="images/3-kombo/kombo8-buffer1.png" alt="8"
+                            class="max-h-[320px] w-auto h-auto object-contain rounded">
                     </div>
-                    <p class="text-center italic text-xs text-gray-500 dark:text-gray-400 mb-6">Buffer schematic — without input/output capacitors</p>
+                    <p class="text-center italic text-xs text-gray-500 dark:text-gray-400 mb-6">Buffer schematic —
+                        without input/output capacitors</p>
 
                     <p class="text-gray-700 dark:text-gray-300 text-sm sm:text-base leading-relaxed mb-4">
-                        On the second picture I added an input source (AC) (which represents the source from the guitar) trought a 1uF input capacitor and an output signal from a transistor Source going trought 4,7uF output capacitor. Using simulation mode we can see the voltage readings on the voltmeters.
+                        On the second picture I added an input source (AC) (which represents the source from the guitar)
+                        trought a 1uF input capacitor and an output signal from a transistor Source going trought 4,7uF
+                        output capacitor. Using simulation mode we can see the voltage readings on the voltmeters.
                     </p>
 
-                    <div class="overflow-hidden rounded-xl bg-gray-900 border border-gray-800 max-w-lg mx-auto mb-2 p-2 flex items-center justify-center">
-                        <img src="images/3-kombo/kombo9-buffer2.png" alt="9" class="max-h-[320px] w-auto h-auto object-contain rounded">
+                    <div
+                        class="overflow-hidden rounded-xl bg-gray-900 border border-gray-800 max-w-lg mx-auto mb-2 p-2 flex items-center justify-center">
+                        <img src="images/3-kombo/kombo9-buffer2.png" alt="9"
+                            class="max-h-[320px] w-auto h-auto object-contain rounded">
                     </div>
-                    <p class="text-center italic text-xs text-gray-500 dark:text-gray-400">Buffer schematic — with AC input and input/output capacitors</p>
+                    <p class="text-center italic text-xs text-gray-500 dark:text-gray-400">Buffer schematic — with AC
+                        input and input/output capacitors</p>
                 </div>
 
                 <!-- Calculation of operating point -->
@@ -284,31 +356,37 @@
                         <strong class="text-gray-900 dark:text-white">Vs</strong> - Source Voltage<br>
                         <strong class="text-gray-900 dark:text-white">Id</strong> - Transformator current
                     </p>
-                    <p class="text-gray-700 dark:text-gray-300 text-sm sm:text-base font-semibold">Calculation procedure:</p>
+                    <p class="text-gray-700 dark:text-gray-300 text-sm sm:text-base font-semibold">Calculation
+                        procedure:</p>
 
                     <ul class="space-y-4 text-gray-700 dark:text-gray-300 text-sm sm:text-base pl-2">
                         <li>
-                            <strong class="text-gray-900 dark:text-white">1. Find the DC voltage at the transistor gate:</strong>
+                            <strong class="text-gray-900 dark:text-white">1. Find the DC voltage at the transistor
+                                gate:</strong>
                             <div class="my-2 p-3 bg-slate-50 dark:bg-gray-900 rounded-lg text-center overflow-x-auto">
                                 $$Vg = {R3 \over R1 + R2 }. Vcc$$
                             </div>
                         </li>
                         <li>
-                            <strong class="text-gray-900 dark:text-white">2. We assume that the source stabilizes so that:</strong>
+                            <strong class="text-gray-900 dark:text-white">2. We assume that the source stabilizes so
+                                that:</strong>
                             <div class="my-2 p-3 bg-slate-50 dark:bg-gray-900 rounded-lg text-center overflow-x-auto">
                                 $$Id = {Vs \over Rs }$$
                             </div>
-                            <p class="text-xs text-gray-500 dark:text-gray-400 text-center mt-1">Values from my measurements: $$Id = {2.09V \over 1000\Omega } = 2.09mA$$</p>
+                            <p class="text-xs text-gray-500 dark:text-gray-400 text-center mt-1">Values from my
+                                measurements: $$Id = {2.09V \over 1000\Omega } = 2.09mA$$</p>
                         </li>
                         <li>
                             <strong class="text-gray-900 dark:text-white">3. Count Vgs</strong>
                             <div class="my-2 p-3 bg-slate-50 dark:bg-gray-900 rounded-lg text-center overflow-x-auto">
                                 $$Vgs = {Vg - Vs }$$
                             </div>
-                            <p class="text-xs text-gray-500 dark:text-gray-400 text-center mt-1">Values from my measurements: $$Vgs = {2.62V - 2.09V = 0.53V }$$</p>
+                            <p class="text-xs text-gray-500 dark:text-gray-400 text-center mt-1">Values from my
+                                measurements: $$Vgs = {2.62V - 2.09V = 0.53V }$$</p>
                         </li>
                         <li>
-                            <strong class="text-gray-900 dark:text-white">4. Check if this fits with the JFET equation</strong>
+                            <strong class="text-gray-900 dark:text-white">4. Check if this fits with the JFET
+                                equation</strong>
                             <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">Insert values to:</p>
                             <div class="my-2 p-3 bg-slate-50 dark:bg-gray-900 rounded-lg text-center overflow-x-auto">
                                 $$Id = Idss (1 - {Vgs \over Vgs(off) })^2$$
@@ -319,60 +397,194 @@
 
                 <div>
                     <h4 class="font-bold text-gray-900 dark:text-white text-lg mb-2">Soldering the buffer</h4>
-                    <div class="overflow-hidden rounded-xl bg-gray-900 border border-gray-800 max-w-lg mx-auto mb-2 p-2 flex items-center justify-center">
-                        <img src="images/3-kombo/kombo10-buffer3.jpeg" alt="10" class="max-h-[320px] w-auto h-auto object-contain rounded">
+                    <div
+                        class="overflow-hidden rounded-xl bg-gray-900 border border-gray-800 max-w-lg mx-auto mb-2 p-2 flex items-center justify-center">
+                        <img src="images/3-kombo/kombo10-buffer3.jpeg" alt="10"
+                            class="max-h-[320px] w-auto h-auto object-contain rounded">
                     </div>
-                    <p class="text-center italic text-xs text-gray-500 dark:text-gray-400 mb-4">For an unnamed person, what soldering looks like:)</p>
+                    <p class="text-center italic text-xs text-gray-500 dark:text-gray-400 mb-4">For an unnamed person,
+                        what soldering looks like:)</p>
 
-                    <div class="overflow-hidden rounded-xl bg-gray-900 border border-gray-800 max-w-lg mx-auto p-2 flex items-center justify-center">
-                        <img src="images/3-kombo/kombo11-buffer4.jpeg" alt="11" class="max-h-[320px] w-auto h-auto object-contain rounded">
+                    <div
+                        class="overflow-hidden rounded-xl bg-gray-900 border border-gray-800 max-w-lg mx-auto p-2 flex items-center justify-center">
+                        <img src="images/3-kombo/kombo11-buffer4.jpeg" alt="11"
+                            class="max-h-[320px] w-auto h-auto object-contain rounded">
                     </div>
                 </div>
             </section>
 
             <!-- List of Controls Layout -->
-            <section class="bg-white dark:bg-[#111827] border border-slate-200 dark:border-gray-800 p-6 sm:p-8 rounded-2xl space-y-4 shadow-sm transition-colors">
-                <h3 class="text-xl sm:text-2xl font-bold text-purple-700 dark:text-purple-300">Layout design of controls on the top panel</h3>
+            <section
+                class="bg-white dark:bg-[#111827] border border-slate-200 dark:border-gray-800 p-6 sm:p-8 rounded-2xl space-y-4 shadow-sm transition-colors">
+                <h3 class="text-xl sm:text-2xl font-bold text-purple-700 dark:text-purple-300">Layout design of controls
+                    on the top panel</h3>
                 <div>
                     <h4 class="font-bold text-gray-900 dark:text-white text-lg mb-2">Problem</h4>
                     <p class="text-gray-700 dark:text-gray-300 text-sm sm:text-base leading-relaxed mb-4">
-                        To ensure that the amplifier controls—volume, as well as bass, mid, and treble adjustments—remained compact and simple, the layout of these controls had to be carefully considered and designed.
-                        This design also had to account for the internal cabling (located beneath the top panel) that connects the various components. <br>
-                        Since the inputs for Channel 1 and Channel 2 are also situated on the top panel, it was necessary to position the respective preamps and volume controls in alignment with their corresponding channels.
+                        To ensure that the amplifier controls—volume, as well as bass, mid, and treble
+                        adjustments—remained compact and simple, the layout of these controls had to be carefully
+                        considered and designed.
+                        This design also had to account for the internal cabling (located beneath the top panel) that
+                        connects the various components. <br>
+                        Since the inputs for Channel 1 and Channel 2 are also situated on the top panel, it was
+                        necessary to position the respective preamps and volume controls in alignment with their
+                        corresponding channels.
                     </p>
                     <h4 class="font-bold text-gray-900 dark:text-white text-lg mb-2">Solution</h4>
                     <p class="text-gray-700 dark:text-gray-300 text-sm sm:text-base leading-relaxed mb-4">
-                        I therefore designed the controls so that the left side serves Channel 1, and the right side serves Channel 2. On the far left is the input for Channel 1, followed to its right by a preamp module with volume, treble, mid, and bass controls for Channel 1. On the far right is the input for Channel 2, with volume, treble, mid, and bass controls for Channel 2 located to its left.
+                        I therefore designed the controls so that the left side serves Channel 1, and the right side
+                        serves Channel 2. On the far left is the input for Channel 1, followed to its right by a preamp
+                        module with volume, treble, mid, and bass controls for Channel 1. On the far right is the input
+                        for Channel 2, with volume, treble, mid, and bass controls for Channel 2 located to its left.
                         The master volume control is positioned exactly in the center.
                     </p>
                     <!-- Gallery Widget -->
-                    <div class="blog-media bg-slate-50 dark:bg-gray-900 p-4 rounded-xl border border-slate-200 dark:border-gray-800">
+                    <div
+                        class="blog-media bg-slate-50 dark:bg-gray-900 p-4 rounded-xl border border-slate-200 dark:border-gray-800">
                         <div class="blog-gallery__slider relative flex items-center">
-                            <button class="blog-gallery__btn blog-gallery__btn--prev absolute left-2 z-10 bg-black/60 text-white w-8 h-8 rounded-full flex items-center justify-center text-sm hover:bg-black/80 transition">&#10094;</button>
-                            <div class="blog-gallery__viewport overflow-hidden w-full rounded-lg bg-black/40 flex items-center justify-center">
+                            <button
+                                class="blog-gallery__btn blog-gallery__btn--prev absolute left-2 z-10 bg-black/60 text-white w-8 h-8 rounded-full flex items-center justify-center text-sm hover:bg-black/80 transition">&#10094;</button>
+                            <div
+                                class="blog-gallery__viewport overflow-hidden w-full rounded-lg bg-black/40 flex items-center justify-center">
                                 <div class="blog-gallery__track flex transition-transform duration-300 w-full">
                                     <div class="w-full shrink-0 flex items-center justify-center p-2">
-                                        <img src="images/3-kombo/kombo12-top-side1.jpeg" alt="1" class="max-h-[320px] w-auto h-auto object-contain rounded">
+                                        <img src="images/3-kombo/kombo12-top-side1.jpeg" alt="1"
+                                            class="max-h-[320px] w-auto h-auto object-contain rounded">
                                     </div>
                                     <div class="w-full shrink-0 flex items-center justify-center p-2">
-                                        <img src="images/3-kombo/kombo13-top-side2.jpeg" alt="2" class="max-h-[320px] w-auto h-auto object-contain rounded">
+                                        <img src="images/3-kombo/kombo13-top-side2.jpeg" alt="2"
+                                            class="max-h-[320px] w-auto h-auto object-contain rounded">
                                     </div>
                                     <div class="w-full shrink-0 flex items-center justify-center p-2">
-                                        <img src="images/3-kombo/kombo14-top-side3.jpeg" alt="3" class="max-h-[320px] w-auto h-auto object-contain rounded">
+                                        <img src="images/3-kombo/kombo14-top-side3.jpeg" alt="3"
+                                            class="max-h-[320px] w-auto h-auto object-contain rounded">
                                     </div>
                                 </div>
                             </div>
-                            <button class="blog-gallery__btn blog-gallery__btn--next absolute right-2 z-10 bg-black/60 text-white w-8 h-8 rounded-full flex items-center justify-center text-sm hover:bg-black/80 transition">&#10095;</button>
+                            <button
+                                class="blog-gallery__btn blog-gallery__btn--next absolute right-2 z-10 bg-black/60 text-white w-8 h-8 rounded-full flex items-center justify-center text-sm hover:bg-black/80 transition">&#10095;</button>
                         </div>
-                        <p class="blog-gallery__caption text-center text-xs text-gray-500 dark:text-gray-400 mt-2 italic">
+                        <p
+                            class="blog-gallery__caption text-center text-xs text-gray-500 dark:text-gray-400 mt-2 italic">
                             Layout of controls
                         </p>
                     </div>
                 </div>
             </section>
 
+            <!-- Combo case asssembly  -->
+            <section
+                class="bg-white dark:bg-[#111827] border border-slate-200 dark:border-gray-800 p-6 sm:p-8 rounded-2xl space-y-4 shadow-sm transition-colors">
+                <h3 class="text-xl sm:text-2xl font-bold text-purple-700 dark:text-purple-300">Combo case assembly</h3>
+                <p>After I had prepared everything and purchased all the components, the assembly of the combo's
+                    interior followed.</p>
+                <div>
+                    <h4 class="font-bold text-gray-900 dark:text-white text-lg mb-2">Component layout and wiring design
+                    </h4>
+                    <p class="text-gray-700 dark:text-gray-300 text-sm sm:text-base leading-relaxed mb-4">
+                        Proper placement of components inside the combo amp is essential for ensuring that everything
+                        can be interconnected and wired correctly. The components must be organized into distinct
+                        sections: the power/output section and the audio processing section. An internal partition—which
+                        I mentioned in previous parts—proved very useful for this purpose. It serves as a mounting
+                        surface for sound-dampening material on the front side (directly behind the speakers), and I
+                        also used it to map out the placement of the various components. The rear side of this partition
+                        is divided by two horizontal 10 cm-wide ribs, which hold the individual components. On the lower
+                        rib, the HX-M189 audio amplifier is positioned in the center, with a DC/DC step-down converter
+                        located off to the side. This arrangement is intentional because the power supply (24 V), along
+                        with a fuse and a power switch, is located at the very bottom of the combo amp. From there, the
+                        24 V power supply line runs directly upward to the audio amplifier and the step-down converter.
+                        The converter steps the 24 V down to 12 V, which is required to power the buffers and preamp
+                        modules—all of which I mounted on the upper horizontal rib. In this configuration, the ribs
+                        effectively serve as a physical barrier between the power section and the signal section. The
+                        wiring is routed from the bottom upwards along the sides, while the signal is channeled through
+                        the center from the preamp modules to the amplifier.
+
+                    </p>
+                    <h4 class="font-bold text-gray-900 dark:text-white text-lg mb-2">Speaker installation</h4>
+                    <p class="text-gray-700 dark:text-gray-300 text-sm sm:text-base leading-relaxed mb-4">
+                        At this stage, I moved on to positioning the speakers on the front panel of the combo amp. Since
+                        an internal partition would be placed behind them, this had to be the first step. I also needed
+                        to solder the cables to the speakers and drill a hole in the internal partition so that the
+                        speaker cables could be connected to the amplifier. The speakers were inserted from the outside
+                        of the front panel, with the cables routed through the aforementioned hole in the internal
+                        partition.
+                    </p>
+                    <h4 class="font-bold text-gray-900 dark:text-white text-lg mb-2">Applying damping material</h4>
+                    <p class="text-gray-700 dark:text-gray-300 text-sm sm:text-base leading-relaxed mb-4">
+                        Before installing the internal partition into the combo amp itself, I had to attach the damping
+                        material. This serves to prevent sound from the speakers from causing vibrations inside the
+                        enclosure, while also ensuring the sound is directed outward. I applied the damping material
+                        across the entire front face of this internal partition.
+                    </p>
+                    <h4 class="font-bold text-gray-900 dark:text-white text-lg mb-2">Installing the inner wall</h4>
+                    <p class="text-gray-700 dark:text-gray-300 text-sm sm:text-base leading-relaxed mb-4">
+                        Once the inner wall was fully prepared—complete with structural ribs, cutouts, and
+                        damping material—it was time to install it into the center of the combo cabinet. I designed this
+                        partition to be non-removable; while this slightly reduces compatibility and access to internal
+                        components, it results in a more stable structure. It can still be removed if absolutely
+                        necessary, but doing so requires cutting away the plastic welds that secure it along the sides.
+                    </p>
+                    <h4 class="font-bold text-gray-900 dark:text-white text-lg mb-2">Installing the top panel</h4>
+                    <p class="text-gray-700 dark:text-gray-300 text-sm sm:text-base leading-relaxed mb-4">
+                        Once the internal panel was positioned inside the combo unit, I could install the top panel;
+                        this was necessary because the components mounted on it had to be connected to the components on
+                        the central panel in the next step.
+                    </p>
+                    <h4 class="font-bold text-gray-900 dark:text-white text-lg mb-2">Mounting internal components onto
+                        the inner wall</h4>
+                    <p class="text-gray-700 dark:text-gray-300 text-sm sm:text-base leading-relaxed mb-4">
+                        Once the internal panel was positioned inside the combo unit, I could install the top panel;
+                        this was necessary because the components mounted on it had to be connected to the components on
+                        the central panel in the next step.
+                    </p>
+                    <h4 class="font-bold text-gray-900 dark:text-white text-lg mb-2">Wiring the internal components</h4>
+                    <p class="text-gray-700 dark:text-gray-300 text-sm sm:text-base leading-relaxed mb-4">
+                        With the components in place, it was time for the wiring. I had already prepped some of the
+                        cables while installing the individual components, but others had to be soldered directly inside
+                        the unit. Since I’m not exactly a master at soldering, it was a bit of a struggle in places :D.
+                        But after hours of grueling battle with the soldering iron, I managed to get it done ;)
+                    </p>
+                    <!-- Gallery Widget -->
+                    <div
+                        class="blog-media bg-slate-50 dark:bg-gray-900 p-4 rounded-xl border border-slate-200 dark:border-gray-800">
+                        <div class="blog-gallery__slider relative flex items-center">
+                            <button
+                                class="blog-gallery__btn blog-gallery__btn--prev absolute left-2 z-10 bg-black/60 text-white w-8 h-8 rounded-full flex items-center justify-center text-sm hover:bg-black/80 transition">&#10094;</button>
+                            <div
+                                class="blog-gallery__viewport overflow-hidden w-full rounded-lg bg-black/40 flex items-center justify-center">
+                                <div class="blog-gallery__track flex transition-transform duration-300 w-full">
+                                    <div class="w-full shrink-0 flex items-center justify-center p-2">
+                                        <img src="images/3-kombo/kombo17-speaker-installation1.jpeg" alt="1"
+                                            class="max-h-[320px] w-auto h-auto object-contain rounded">
+                                    </div>
+                                    <div class="w-full shrink-0 flex items-center justify-center p-2">
+                                        <img src="images/3-kombo/kombo18-speaker-installation2.jpeg" alt="2"
+                                            class="max-h-[320px] w-auto h-auto object-contain rounded">
+                                    </div>
+                                    <div class="w-full shrink-0 flex items-center justify-center p-2">
+                                        <img src="images/3-kombo/kombo19-inner-wall-implementation.jpeg" alt="3"
+                                            class="max-h-[320px] w-auto h-auto object-contain rounded">
+                                    </div>
+                                    <div class="w-full shrink-0 flex items-center justify-center p-2">
+                                        <img src="images/3-kombo/kombo15-broken-potentiometer.jpeg" alt="3"
+                                            class="max-h-[320px] w-auto h-auto object-contain rounded">
+                                    </div>
+                                </div>
+                            </div>
+                            <button
+                                class="blog-gallery__btn blog-gallery__btn--next absolute right-2 z-10 bg-black/60 text-white w-8 h-8 rounded-full flex items-center justify-center text-sm hover:bg-black/80 transition">&#10095;</button>
+                        </div>
+                        <p
+                            class="blog-gallery__caption text-center text-xs text-gray-500 dark:text-gray-400 mt-2 italic">
+                            Combo assembling
+                        </p>
+                    </div>
+                </div>
+            </section>
+
             <!-- More coming soon -->
-            <section class="bg-white dark:bg-[#111827] border border-slate-200 dark:border-gray-800 p-6 sm:p-8 rounded-2xl space-y-4 shadow-sm transition-colors text-center">
+            <section
+                class="bg-white dark:bg-[#111827] border border-slate-200 dark:border-gray-800 p-6 sm:p-8 rounded-2xl space-y-4 shadow-sm transition-colors text-center">
                 <h3 class="text-2xl font-bold text-purple-700 dark:text-purple-300">More coming soon :)</h3>
                 <p class="text-gray-500 font-mono text-xl">...</p>
             </section>
@@ -382,14 +594,16 @@
     </main>
 
     <!-- FOOTER -->
-    <footer class="border-t border-slate-200 dark:border-gray-800 bg-slate-50 dark:bg-[#070a12] py-8 text-center text-sm text-gray-500 mt-20 transition-colors">
+    <footer
+        class="border-t border-slate-200 dark:border-gray-800 bg-slate-50 dark:bg-[#070a12] py-8 text-center text-sm text-gray-500 mt-20 transition-colors">
         <div class="max-w-4xl mx-auto px-4 space-y-3">
             <p>&copy; 2026 Jakub Čirip</p>
         </div>
     </footer>
 
     <!-- BACK TO TOP BUTTON -->
-    <button id="backToTopBtn" onclick="scrollToTop()" aria-label="Back to top" class="fixed bottom-6 right-6 z-50 bg-purple-600 text-white p-3 rounded-full shadow-lg opacity-0 pointer-events-none transition-all duration-300 hover:bg-purple-700">
+    <button id="backToTopBtn" onclick="scrollToTop()" aria-label="Back to top"
+        class="fixed bottom-6 right-6 z-50 bg-purple-600 text-white p-3 rounded-full shadow-lg opacity-0 pointer-events-none transition-all duration-300 hover:bg-purple-700">
         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"></path>
         </svg>
@@ -435,13 +649,13 @@
             updateThemeUI();
 
             const galleries = document.querySelectorAll('.blog-media');
-            
+
             galleries.forEach(gallery => {
                 const track = gallery.querySelector('.blog-gallery__track');
                 const slides = track ? track.children : [];
                 const prevBtn = gallery.querySelector('.blog-gallery__btn--prev');
                 const nextBtn = gallery.querySelector('.blog-gallery__btn--next');
-                
+
                 if (!track || slides.length === 0) return;
 
                 let currentIndex = 0;
